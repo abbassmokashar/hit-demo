@@ -1,24 +1,24 @@
 # Helvetic Tech Static Prototype
 
-Interactive multi-page prototype for the “Precision in Motion” direction.
+Interactive multi-page prototype for a Swiss editorial technology-school direction.
 
 ## Included
 
 - Homepage.
 - Programs hub.
-- Bachelor in Artificial Intelligence detail page.
-- Admissions, Institute, Contact, and Career Outcomes pages.
-- Full-screen navigation covering the complete published Helvetic Tech information architecture; destinations without local templates continue to the corresponding official page.
+- Six local Bachelor and Master program pages.
+- Admissions, Institute, Governance, Student, Financing, Contact, and Career Impact pages.
+- Full-screen accordion navigation covering the complete published Helvetic Tech information architecture with local destinations throughout.
 - First-visit logo loader and animated logo curtain between internal pages.
 - Responsive program filters, accordions, and scroll reveals.
 - Scroll-linked floating chapter dock, cursor + magnetic hover interactions, and image parallax.
-- The interactive, scroll-reactive signal field with per-discipline modes and smooth mode blending.
+- Discipline-specific program identities and Swiss modular hero compositions.
 - A scroll-driven editorial story section built from the official Career Outcomes page.
 - Per-page compositions: split, editorial columns, pull quote, timeline, index list, card grid, media feature, policy index and an FAQ tab-and-accordion system.
-- Low-power tuning: the canvas, cursor and parallax drop quality or switch off on small or constrained devices.
+- Low-power tuning: cursor and parallax effects switch off on small or constrained devices.
 - Reduced-motion and no-JavaScript fallbacks.
 - Automated local-link and content checks.
-- Swiss editorial grid, registration marks, local-time signal, and animated discipline bands.
+- Swiss editorial grids, registration marks, local-time signals, and static discipline bands.
 - Student-focused hero actions with direct brochure, admissions, and program access.
 - Responsive field explorer that keeps program links usable on tablet and mobile.
 
@@ -40,6 +40,11 @@ Serve the `prototype` directory with any static web server. The HTML output is g
 - `/`
 - `/programs/`
 - `/programs/bachelor-in-artificial-intelligence/`
+- `/programs/bachelor-in-cybersecurity/`
+- `/programs/bachelor-in-blockchain/`
+- `/programs/master-in-artificial-intelligence/`
+- `/programs/master-in-cybersecurity/`
+- `/programs/master-in-blockchain/`
 - `/admissions/`
 - `/institute/`
 - `/campus-life/`
@@ -48,7 +53,15 @@ Serve the `prototype` directory with any static web server. The HTML output is g
 - `/faq/`
 - `/contact/`
 - `/career-impact/`
+- `/governance/`
+- `/job-vacancies/`
+- `/student-services/`
+- `/students/`
+- `/institutional-development/`
+- `/alumni/`
+- `/financing/fees-expenses/`
+- `/financing/scholarships/`
 
-The prototype currently contains 11 local routes. Other official navigation destinations continue to their published Helvetic Tech source pages until those local templates are built.
+The prototype currently contains 24 local routes. Every destination in the full-screen menu stays inside the prototype.
 
-Admissions, Institute, Campus, Faculty, Policies, FAQ and Insights omit time-sensitive and unconfirmed material (fees, deadlines, statistics, bios, portraits, partnerships) per `../planning/04-content-source-register.md`. The Faculty page carries only publicly published names and titles; individual biographies, portraits and the roster still require institutional confirmation.
+The prototype uses only material published on the current Helvetic Tech website. The Faculty page carries only publicly published names and titles; unconfirmed biographies and portraits remain excluded.
