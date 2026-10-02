@@ -297,6 +297,11 @@
     const nav = document.createElement('nav');
     nav.className = 'chapter-rail';
     nav.setAttribute('aria-label', 'Page sections');
+    const toggle = document.createElement('button');
+    toggle.className = 'chapter-rail__toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = '<span data-rail-current>01</span><strong data-rail-label>Introduction</strong><i>Sections</i>';
     const list = document.createElement('ol');
     const links = [];
 
@@ -306,10 +311,13 @@
       const link = document.createElement('a');
       link.href = `#${section.id}`;
       link.innerHTML = `<span class="chapter-rail__label">${escapeHtml(chapterLabel(section, index))}</span><span class="chapter-rail__num">${String(index + 1).padStart(2, '0')}</span>`;
+      link.setAttribute('aria-label', `Go to ${chapterLabel(section, index)}`);
       link.addEventListener('click', (event) => {
         event.preventDefault();
         section.scrollIntoView({ behavior: prefersReduced() ? 'auto' : 'smooth', block: 'start' });
         if (history.replaceState) history.replaceState(null, '', `#${section.id}`);
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
 
       const item = document.createElement('li');
@@ -318,7 +326,19 @@
       links.push({ link, section });
     });
 
-    nav.appendChild(list);
+    toggle.addEventListener('click', () => {
+      const open = !nav.classList.contains('is-open');
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    });
+
+    nav.append(toggle, list);
     document.body.appendChild(nav);
 
     onScroll(() => {
@@ -327,7 +347,44 @@
       sections.forEach((section, index) => {
         if (section.getBoundingClientRect().top <= line) active = index;
       });
-      links.forEach((entry, index) => entry.link.classList.toggle('is-active', index === active));
+      links.forEach((entry, index) => {
+        const current = index === active;
+        entry.link.classList.toggle('is-active', current);
+        if (current) entry.link.setAttribute('aria-current', 'true');
+        else entry.link.removeAttribute('aria-current');
+      });
+      const currentNumber = toggle.querySelector('[data-rail-current]');
+      const currentLabel = toggle.querySelector('[data-rail-label]');
+      if (currentNumber) currentNumber.textContent = `${String(active + 1).padStart(2, '0')} / ${String(sections.length).padStart(2, '0')}`;
+      if (currentLabel) currentLabel.textContent = chapterLabel(sections[active], active);
+    });
+  }
+
+  /* ----------------------------------------------------- expressive sections */
+
+  function initStudyDeck() {
+    const cards = Array.from(document.querySelectorAll('[data-study-project]'));
+    if (!cards.length) return;
+
+    const activate = (card) => cards.forEach((item) => item.classList.toggle('is-active', item === card));
+    activate(cards[0]);
+
+    cards.forEach((card) => {
+      card.addEventListener('pointerenter', () => activate(card));
+      card.addEventListener('focusin', () => activate(card));
+    });
+  }
+
+  function initProgressRows() {
+    const rows = Array.from(document.querySelectorAll('[data-progress-row]'));
+    if (!rows.length || prefersReduced()) return;
+
+    onScroll(() => {
+      rows.forEach((row) => {
+        const rect = row.getBoundingClientRect();
+        const progress = clamp((window.innerHeight * 0.88 - rect.top) / (window.innerHeight * 0.7), 0, 1);
+        row.style.setProperty('--row-progress', progress.toFixed(3));
+      });
     });
   }
 
@@ -903,6 +960,8 @@
     initMenu();
     initBackToTop();
     initChapterRail();
+    initStudyDeck();
+    initProgressRows();
     initStory();
     initTabs();
     initAccordions();

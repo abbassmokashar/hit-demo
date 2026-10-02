@@ -5,6 +5,7 @@ import { PAGES } from './data/pages.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const failures = [];
+const rasterUsage = new Map();
 
 for (const page of PAGES) {
   const output = page.route ? path.join(...page.route.split('/'), 'index.html') : 'index.html';
@@ -41,7 +42,17 @@ for (const page of PAGES) {
     const clean = src.split('?')[0];
     if (!/\.(webp|svg)$/i.test(clean)) failures.push(`${output}: non-WebP raster image ${src}`);
     try { await access(path.resolve(path.dirname(file), clean)); } catch { failures.push(`${output}: missing image ${src}`); }
+    if (/\.webp$/i.test(clean)) {
+      const name = path.basename(clean).toLowerCase();
+      const uses = rasterUsage.get(name) || [];
+      uses.push(output);
+      rasterUsage.set(name, uses);
+    }
   }
+}
+
+for (const [image, uses] of rasterUsage) {
+  if (uses.length > 1) failures.push(`assets/images/${image}: reused in ${uses.join(', ')}`);
 }
 
 for (const asset of ['assets/styles.css', 'assets/main.js']) {
@@ -57,5 +68,5 @@ if (failures.length) {
   console.error(failures.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`audit passed: ${PAGES.length} pages, source traces and disputed-content checks`);
+  console.log(`audit passed: ${PAGES.length} pages, unique raster usage, source traces and disputed-content checks`);
 }
