@@ -289,7 +289,9 @@
     const main = document.querySelector('main');
     if (!main) return;
 
-    const sections = Array.from(main.querySelectorAll(':scope > section'));
+    const allSections = Array.from(main.querySelectorAll(':scope > section'));
+    const markedSections = allSections.filter((section) => section.dataset.chapter);
+    const sections = markedSections.length >= 2 ? markedSections : allSections;
     if (sections.length < 2) return;
 
     const nav = document.createElement('nav');

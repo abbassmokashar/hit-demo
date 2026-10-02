@@ -1,4 +1,4 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PAGES } from './data/pages.mjs';
@@ -35,10 +35,22 @@ for (const page of PAGES) {
     if (clean.endsWith('/')) target = path.join(target, 'index.html');
     try { await access(target); } catch { failures.push(`${output}: broken local link ${href}`); }
   }
+
+  const images = [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map((match) => match[1]);
+  for (const src of images) {
+    const clean = src.split('?')[0];
+    if (!/\.(webp|svg)$/i.test(clean)) failures.push(`${output}: non-WebP raster image ${src}`);
+    try { await access(path.resolve(path.dirname(file), clean)); } catch { failures.push(`${output}: missing image ${src}`); }
+  }
 }
 
 for (const asset of ['assets/styles.css', 'assets/main.js']) {
   try { await access(path.join(root, asset)); } catch { failures.push(`missing ${asset}`); }
+}
+
+const imageFiles = await readdir(path.join(root, 'assets', 'images'));
+for (const file of imageFiles) {
+  if (!/\.(webp|svg)$/i.test(file)) failures.push(`assets/images/${file}: unsupported image format`);
 }
 
 if (failures.length) {
