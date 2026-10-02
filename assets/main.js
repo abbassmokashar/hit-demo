@@ -375,6 +375,27 @@
     });
   }
 
+  function initStudyScroll() {
+    const section = document.querySelector('[data-study-scroll]');
+    const deck = section && section.querySelector('[data-study-deck]');
+    if (!section || !deck) return;
+
+    const update = () => {
+      if (window.innerWidth <= 900 || prefersReduced()) {
+        deck.style.transform = '';
+        return;
+      }
+      const rect = section.getBoundingClientRect();
+      const range = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = clamp(-rect.top / range, 0, 1);
+      const inset = Math.max(48, (window.innerWidth - Math.min(1460, window.innerWidth - 112)) / 2);
+      const travel = Math.max(0, deck.scrollWidth - window.innerWidth + inset * 2);
+      deck.style.transform = `translate3d(${(-progress * travel).toFixed(2)}px,0,0)`;
+    };
+
+    onScroll(update);
+  }
+
   function initProgressRows() {
     const rows = Array.from(document.querySelectorAll('[data-progress-row]'));
     if (!rows.length || prefersReduced()) return;
@@ -1090,6 +1111,7 @@
     initBackToTop();
     initChapterRail();
     initStudyDeck();
+    initStudyScroll();
     initProgressRows();
     initStory();
     initTabs();

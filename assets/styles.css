@@ -1268,3 +1268,121 @@ body { background: var(--paper); }
 @media (prefers-reduced-motion: reduce) {
   .hero-content h1::after { transform: scaleX(1); animation: none; }
 }
+
+/* ======================================================== Visual direction 05
+   Same motion language as the supplied HTML, refined in scale and rhythm. */
+
+:root {
+  --flow-ease: cubic-bezier(.22,1,.36,1);
+  --flow-space: clamp(92px,8vw,138px);
+}
+
+.chapter { padding-block: var(--flow-space); }
+.js .reveal { transform: translateY(28px); transition-duration: .8s,.9s; transition-timing-function: var(--flow-ease); }
+.header-cta { background: var(--mint); border-color: var(--mint); color: var(--blue-ink); }
+.header-cta:hover { background: #fff; border-color: #fff; color: var(--blue-ink); }
+
+/* Smaller, calmer opening composition. */
+.hero-cross { top: 126px; width: 38px; height: 38px; }
+.hero-cross::before { width: 19px; height: 5px; }
+.hero-cross::after { width: 5px; height: 19px; }
+.hero-content { width: min(1000px,82%); padding-top: clamp(64px,8vh,92px); }
+.hero-content h1 { max-width: 990px; padding-bottom: 22px; }
+.hero-content h1::after { width: min(560px,64%); height: 4px; }
+.hero-content h1 span,.hero-content h1 em { font-size: clamp(3.35rem,6vw,6.8rem); letter-spacing: -.065em; line-height: .89; }
+.hero-intro { max-width: 520px; font-size: 1rem; }
+.hero-actions a { min-width: 168px; padding-block: 12px; }
+.hero-explorer { width: min(820px,72%); margin-top: clamp(38px,5vh,58px); }
+.field-explorer__tabs button { min-height: 64px; padding: 14px 16px; }
+.field-explorer__tabs button span { margin-bottom: 8px; }
+
+/* Continuous discipline strip, with red reduced to punctuation. */
+.signal-strip { background: var(--blue-ink); color: rgba(255,255,255,.82); }
+.signal-strip > .signal-track { display: flex; width: max-content; min-height: 48px; justify-content: flex-start; animation: signal-marquee 24s linear infinite; }
+.signal-group { display: flex; min-width: max-content; align-items: center; }
+.signal-group span { min-width: max-content; }
+.signal-group i { color: var(--red); opacity: .9; }
+@keyframes signal-marquee { to { transform: translateX(-50%); } }
+
+/* Consistent editorial scale across all sections and inner pages. */
+.chapter-heading { margin-bottom: clamp(64px,6vw,96px); }
+.chapter-heading h2 span { font-size: clamp(2.15rem,3.7vw,4.1rem); }
+.chapter-heading h2 em { font-size: clamp(2.8rem,4.8vw,5.25rem); }
+.projects-heading h2 span { font-size: clamp(2.3rem,4.1vw,4.6rem); }
+.projects-heading h2 em { font-size: clamp(2.9rem,5vw,5.45rem); }
+.why-manifesto__head h2 span { font-size: clamp(2rem,3.3vw,3.7rem); }
+.why-manifesto__head h2 em { font-size: clamp(2.65rem,4.5vw,4.9rem); }
+.why-orbit { width: min(23vw,315px); }
+.why-orbit > span { width: 34px; height: 34px; }
+.why-orbit i { width: 17%; }
+.why-line { min-height: 205px; padding-block: 32px 38px; }
+.why-line h3 { font-size: clamp(1.5rem,2.1vw,2.55rem); }
+.why-line::after { height: 2px; }
+
+.page-hero { min-height: 680px; }
+.hero-media__copy h1 span,.hero-compact h1 span,.hero-editorial h1 span,.hero-split h1 span,.program-hero h1 span { font-size: clamp(2.1rem,3.45vw,3.8rem); }
+.hero-media__copy h1 em,.hero-compact h1 em,.hero-editorial h1 em,.hero-split h1 em,.program-hero h1 em { font-size: clamp(2.65rem,4.65vw,5rem); }
+.source-hero__copy h1 { font-size: clamp(3.1rem,5.8vw,6.4rem); }
+.hero-media__figure,.source-hero__visual { min-height: 500px; }
+.program-hero { min-height: 740px; }
+.program-hero__content { padding-top: 112px; }
+.program-hero__graphic > span { font-size: clamp(7rem,14vw,16rem); }
+.program-hero__graphic i { width: 38%; }
+.program-hero__graphic i:nth-of-type(2) { width: 52%; }
+.program-hero__graphic i:nth-of-type(3) { width: 66%; }
+.source-hero__constellation { width: min(100%,500px); justify-self: end; }
+.source-hero__constellation span { font-size: clamp(5rem,10vw,10rem); }
+
+/* Pinned program journey from the supplied prototype, with compact cards. */
+.programs.chapter { min-height: 300vh; padding: 0; overflow: visible; }
+.programs-pin { position: sticky; top: 0; display: flex; height: 100vh; min-height: 720px; padding: clamp(92px,10vh,122px) 0 54px; overflow: hidden; flex-direction: column; }
+.programs .projects-heading { width: var(--shell); margin-bottom: 38px; }
+.study-deck { display: flex; width: max-content; margin: 0 0 0 max(56px,calc((100vw - min(1460px,calc(100vw - 112px))) / 2)); gap: 14px; will-change: transform; transition: transform .08s linear; }
+.study-project,.study-project.is-active { width: clamp(430px,52vw,640px); min-height: 455px; padding: 22px; flex: 0 0 clamp(430px,52vw,640px); transform: none; }
+.study-project.is-active { box-shadow: 0 24px 70px rgba(0,0,0,.2); transform: translateY(-4px); }
+.study-project--blockchain { background: #efe3d3; color: var(--ink); }
+.study-project--blockchain .study-project__top,.study-project--blockchain .study-project__body > div,.study-project--blockchain a { border-color: var(--line); }
+.study-project--blockchain .study-project__stage > div { border-color: currentColor; }
+.study-project__top { padding-bottom: 16px; }
+.study-project__stage { top: 78px; height: 176px; }
+.study-project__stage > span { font-size: clamp(4.6rem,7vw,7.8rem); }
+.study-project__stage > div { width: 150px; }
+.study-project__body { right: 22px; bottom: 22px; left: 22px; }
+.study-project h3 { margin-bottom: 17px; font-size: clamp(1.5rem,2.15vw,2.45rem); }
+.study-project a { min-height: 52px; }
+
+.impact-system { min-height: 480px; padding: 42px; }
+.impact-system span,.impact-system b { min-height: 88px; }
+.impact-system b { min-height: 120px; font-size: clamp(1.5rem,2.4vw,2.8rem); }
+.career-signal { max-width: 520px; }
+.career-signal > span { font-size: clamp(6rem,11vw,11rem); }
+
+@media (max-width: 900px) {
+  .programs.chapter { min-height: 0; padding-block: 86px; overflow: hidden; }
+  .programs-pin { position: relative; height: auto; min-height: 0; padding: 0; overflow: visible; }
+  .study-deck { display: grid; width: var(--shell); margin-inline: auto; transform: none !important; }
+  .study-project,.study-project.is-active { width: 100%; min-height: 470px; flex-basis: auto; transform: none; }
+  .why-orbit { width: min(72vw,300px); }
+}
+
+@media (max-width: 760px) {
+  :root { --flow-space: 78px; }
+  .hero-cross { top: 102px; width: 32px; height: 32px; }
+  .hero-content { width: 100%; padding-top: 86px; }
+  .hero-content h1 span,.hero-content h1 em { font-size: clamp(2.75rem,13vw,4rem); line-height: .91; }
+  .hero-content h1::after { width: 76%; height: 3px; }
+  .hero-intro { font-size: .96rem; }
+  .hero-actions { gap: 7px; }
+  .hero-actions a { min-width: 0; padding-inline: 12px; flex: 1; }
+  .hero-explorer { margin-top: 38px; }
+  .projects-heading h2 span { font-size: 2.35rem; }
+  .projects-heading h2 em { font-size: 3rem; }
+  .study-project,.study-project.is-active { min-height: 430px; }
+  .page-hero { min-height: 0; }
+  .source-hero__copy h1 { font-size: clamp(2.8rem,13vw,4.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-strip > .signal-track { animation: none; }
+  .study-deck { transform: none !important; transition: none; }
+}
