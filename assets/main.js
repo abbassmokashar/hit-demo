@@ -144,7 +144,7 @@
 
   function initHeroMotion() {
     const hero = document.querySelector('[data-hero]');
-    if (!hero || !finePointer || prefersReduced() || liteMotion) return;
+    if (!hero || prefersReduced() || liteMotion) return;
 
     hero.addEventListener('pointermove', (event) => {
       const rect = hero.getBoundingClientRect();
@@ -152,11 +152,13 @@
       const y = clamp((event.clientY - rect.top) / rect.height - 0.5, -0.5, 0.5);
       hero.style.setProperty('--hero-x', x.toFixed(3));
       hero.style.setProperty('--hero-y', y.toFixed(3));
+      hero.style.setProperty('--hero-active', '1');
     });
 
     hero.addEventListener('pointerleave', () => {
       hero.style.setProperty('--hero-x', '0');
       hero.style.setProperty('--hero-y', '0');
+      hero.style.setProperty('--hero-active', '0');
     });
   }
 
@@ -380,6 +382,19 @@
     const deck = section && section.querySelector('[data-study-deck]');
     if (!section || !deck) return;
 
+    let travel = 0;
+
+    const measure = () => {
+      if (window.innerWidth <= 900 || prefersReduced()) {
+        travel = 0;
+        section.style.height = '';
+        deck.style.transform = '';
+        return;
+      }
+      travel = Math.max(0, deck.scrollWidth - window.innerWidth);
+      section.style.height = `${Math.round(window.innerHeight + travel)}px`;
+    };
+
     const update = () => {
       if (window.innerWidth <= 900 || prefersReduced()) {
         deck.style.transform = '';
@@ -388,12 +403,15 @@
       const rect = section.getBoundingClientRect();
       const range = Math.max(1, section.offsetHeight - window.innerHeight);
       const progress = clamp(-rect.top / range, 0, 1);
-      const inset = Math.max(48, (window.innerWidth - Math.min(1460, window.innerWidth - 112)) / 2);
-      const travel = Math.max(0, deck.scrollWidth - window.innerWidth + inset * 2);
       deck.style.transform = `translate3d(${(-progress * travel).toFixed(2)}px,0,0)`;
     };
 
+    measure();
     onScroll(update);
+    window.addEventListener('resize', () => {
+      measure();
+      update();
+    }, { passive: true });
   }
 
   function initProgressRows() {
@@ -1015,7 +1033,7 @@
         if (prefersReduced()) this.render();
       });
       const area = this.canvas.parentElement || this.canvas;
-      if (finePointer && !prefersReduced()) {
+      if (!prefersReduced()) {
         area.addEventListener('pointermove', (event) => {
           const rect = area.getBoundingClientRect();
           this.pointer.x = event.clientX - rect.left;
@@ -1048,12 +1066,12 @@
     update() {
       for (const point of this.points) {
         if (this.pointer.active) {
-          const dx = point.x - this.pointer.x;
-          const dy = point.y - this.pointer.y;
+          const dx = this.pointer.x - point.x;
+          const dy = this.pointer.y - point.y;
           const distance = Math.hypot(dx, dy) || 1;
-          if (distance < 150) {
-            point.vx += (dx / distance) * 0.004;
-            point.vy += (dy / distance) * 0.004;
+          if (distance < 190) {
+            point.vx += (dx / distance) * 0.006;
+            point.vy += (dy / distance) * 0.006;
           }
         }
         point.vx = clamp(point.vx, -0.25, 0.25);
@@ -1084,9 +1102,31 @@
           ctx.lineWidth = 0.7;
           ctx.stroke();
         }
+        if (this.pointer.active) {
+          const pointerDistance = Math.hypot(point.x - this.pointer.x, point.y - this.pointer.y);
+          if (pointerDistance < 220) {
+            ctx.beginPath();
+            ctx.moveTo(point.x, point.y);
+            ctx.lineTo(this.pointer.x, this.pointer.y);
+            ctx.strokeStyle = `rgba(201,236,232,${(1 - pointerDistance / 220) * 0.48})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
         ctx.beginPath();
         ctx.arc(point.x, point.y, point.red ? point.radius + 1 : point.radius, 0, Math.PI * 2);
         ctx.fillStyle = point.red ? 'rgba(255,31,47,.95)' : 'rgba(255,255,255,.78)';
+        ctx.fill();
+      }
+      if (this.pointer.active) {
+        ctx.beginPath();
+        ctx.arc(this.pointer.x, this.pointer.y, 13, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(201,236,232,.5)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(this.pointer.x, this.pointer.y, 2.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,31,47,.95)';
         ctx.fill();
       }
     }

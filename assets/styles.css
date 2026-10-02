@@ -1386,3 +1386,84 @@ body { background: var(--paper); }
   .signal-strip > .signal-track { animation: none; }
   .study-deck { transform: none !important; transition: none; }
 }
+
+/* ===================================================== Interaction repair 06
+   Pointer feedback and a measured, reference-faithful horizontal journey. */
+
+.home-hero::before {
+  position: absolute;
+  inset: 88px 0 0;
+  z-index: 1;
+  background: radial-gradient(circle at calc(50% + var(--hero-x,0) * 100%) calc(50% + var(--hero-y,0) * 100%),rgba(201,236,232,.13),transparent 24%);
+  content: "";
+  opacity: var(--hero-active,0);
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.home-hero .hero-content {
+  transform: translate3d(calc(var(--hero-x,0) * -12px),calc(var(--hero-y,0) * -7px),0);
+  transition: transform .45s var(--flow-ease);
+}
+.home-hero .hero-explorer {
+  transform: translate3d(calc(var(--hero-x,0) * 7px),calc(var(--hero-y,0) * 4px),0);
+  transition: transform .5s var(--flow-ease);
+}
+.hero-cross {
+  transform: translate3d(calc(var(--hero-x,0) * 10px),calc(var(--hero-y,0) * 7px),0) rotate(calc(var(--hero-x,0) * 4deg));
+  transition: transform .5s var(--flow-ease);
+}
+
+.programs.chapter { min-height: 100vh; }
+.programs-pin { display: block; height: 100vh; min-height: 680px; padding: 0; }
+.study-deck {
+  height: 100vh;
+  min-height: 680px;
+  margin: 0;
+  padding-right: clamp(48px,6vw,108px);
+  align-items: center;
+  gap: clamp(14px,1.6vw,24px);
+}
+.study-deck::after { width: 1px; height: 1px; content: ""; flex: 0 0 1px; }
+.programs .study-intro {
+  display: flex;
+  width: auto;
+  margin: 0;
+  padding: 0 clamp(42px,4vw,70px) 0 max(56px,calc((100vw - min(1460px,calc(100vw - 112px))) / 2));
+  align-items: flex-start;
+  align-self: stretch;
+  justify-content: center;
+  flex: 0 0 min(42vw,560px);
+  flex-direction: column;
+}
+.programs .study-intro .label { grid-column: auto; }
+.programs .study-intro h2 { margin: 24px 0 36px; }
+.programs .study-intro .line-link { width: min(240px,100%); }
+.study-project,.study-project.is-active {
+  width: clamp(500px,58vw,720px);
+  min-height: min(62vh,570px);
+  flex: 0 0 clamp(500px,58vw,720px);
+}
+
+@media (max-width: 900px) {
+  .home-hero::before { display: none; }
+  .home-hero .hero-content,.home-hero .hero-explorer,.hero-cross { transform: none; }
+  .programs.chapter { min-height: 0; }
+  .programs-pin,.study-deck { height: auto; min-height: 0; }
+  .study-deck { padding-right: 0; }
+  .study-deck::after { display: none; }
+  .programs .study-intro {
+    display: block;
+    width: var(--shell);
+    margin: 0 auto 44px;
+    padding: 0;
+    align-self: auto;
+    justify-content: initial;
+  }
+  .programs .study-intro h2 { margin: 24px 0 30px; }
+  .programs .study-intro .line-link { display: flex; width: min(240px,100%); }
+  .study-project,.study-project.is-active { width: 100%; min-height: 470px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero .hero-content,.home-hero .hero-explorer,.hero-cross { transform: none; transition: none; }
+}
