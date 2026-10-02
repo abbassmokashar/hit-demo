@@ -11,14 +11,23 @@ Interactive multi-page prototype for a Swiss editorial technology-school directi
 - Full-screen accordion navigation covering the complete published Helvetic Tech information architecture with local destinations throughout.
 - First-visit logo loader and animated logo curtain between internal pages.
 - Responsive program filters, accordions, and scroll reveals.
+<<<<<<< HEAD
 - Minimal right-edge chapter progress rail, cursor + magnetic hover interactions, and restrained image motion.
 - Photography-led program identities for AI, cybersecurity, and blockchain.
+=======
+- Scroll-linked floating chapter dock, cursor + magnetic hover interactions, and image parallax.
+- Discipline-specific program identities and Swiss modular hero compositions.
+>>>>>>> 097f2ea82fdc4545b00cea6a19c97cdf2d163c0b
 - A scroll-driven editorial story section built from the official Career Outcomes page.
 - Per-page compositions: split, editorial columns, pull quote, timeline, index list, card grid, media feature, policy index and an FAQ tab-and-accordion system.
 - Low-power tuning: cursor and parallax effects switch off on small or constrained devices.
 - Reduced-motion and no-JavaScript fallbacks.
 - Automated local-link and content checks.
+<<<<<<< HEAD
 - Swiss editorial grids, local-time signals, generous spacing, and photographic Lake Geneva compositions.
+=======
+- Swiss editorial grids, registration marks, local-time signals, and static discipline bands.
+>>>>>>> 097f2ea82fdc4545b00cea6a19c97cdf2d163c0b
 - Student-focused hero actions with direct brochure, admissions, and program access.
 - Responsive field explorer that keeps program links usable on tablet and mobile.
 - Locally stored, optimized WebP imagery throughout; no JPEG, PNG, or AVIF page assets.
