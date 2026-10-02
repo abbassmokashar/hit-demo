@@ -948,6 +948,135 @@
     }
   }
 
+  /* ----------------------------------------------- interactive node network */
+
+  class NetworkField {
+    constructor(canvas) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext('2d');
+      if (!this.ctx) return;
+      this.points = [];
+      this.pointer = { x: 0, y: 0, active: false };
+      this.frame = null;
+      this.resize();
+      this.seed();
+      this.bind();
+      if (prefersReduced()) this.render();
+      else this.start();
+    }
+
+    resize() {
+      const rect = this.canvas.getBoundingClientRect();
+      this.width = rect.width;
+      this.height = rect.height;
+      const dpr = Math.min(window.devicePixelRatio || 1, liteMotion ? 1 : 1.6);
+      this.canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      this.canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    seed() {
+      const count = liteMotion ? 28 : Math.min(64, Math.max(42, Math.round(this.width / 22)));
+      this.points = Array.from({ length: count }, (_, index) => ({
+        x: Math.random() * this.width,
+        y: Math.random() * this.height,
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        red: index % 13 === 0,
+        radius: 1.2 + Math.random() * 1.5,
+      }));
+    }
+
+    bind() {
+      window.addEventListener('resize', () => {
+        this.resize();
+        this.seed();
+        if (prefersReduced()) this.render();
+      });
+      const area = this.canvas.parentElement || this.canvas;
+      if (finePointer && !prefersReduced()) {
+        area.addEventListener('pointermove', (event) => {
+          const rect = area.getBoundingClientRect();
+          this.pointer.x = event.clientX - rect.left;
+          this.pointer.y = event.clientY - rect.top;
+          this.pointer.active = true;
+        });
+        area.addEventListener('pointerleave', () => { this.pointer.active = false; });
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) this.stop();
+        else if (!prefersReduced()) this.start();
+      });
+    }
+
+    start() {
+      if (this.frame) return;
+      const loop = () => {
+        this.frame = window.requestAnimationFrame(loop);
+        this.update();
+        this.render();
+      };
+      this.frame = window.requestAnimationFrame(loop);
+    }
+
+    stop() {
+      if (this.frame) window.cancelAnimationFrame(this.frame);
+      this.frame = null;
+    }
+
+    update() {
+      for (const point of this.points) {
+        if (this.pointer.active) {
+          const dx = point.x - this.pointer.x;
+          const dy = point.y - this.pointer.y;
+          const distance = Math.hypot(dx, dy) || 1;
+          if (distance < 150) {
+            point.vx += (dx / distance) * 0.004;
+            point.vy += (dy / distance) * 0.004;
+          }
+        }
+        point.vx = clamp(point.vx, -0.25, 0.25);
+        point.vy = clamp(point.vy, -0.25, 0.25);
+        point.x += point.vx;
+        point.y += point.vy;
+        if (point.x < -10) point.x = this.width + 10;
+        if (point.x > this.width + 10) point.x = -10;
+        if (point.y < -10) point.y = this.height + 10;
+        if (point.y > this.height + 10) point.y = -10;
+      }
+    }
+
+    render() {
+      const { ctx, width, height } = this;
+      ctx.clearRect(0, 0, width, height);
+      const threshold = liteMotion ? 105 : 132;
+      for (let i = 0; i < this.points.length; i += 1) {
+        const point = this.points[i];
+        for (let j = i + 1; j < this.points.length; j += 1) {
+          const other = this.points[j];
+          const distance = Math.hypot(point.x - other.x, point.y - other.y);
+          if (distance > threshold) continue;
+          ctx.beginPath();
+          ctx.moveTo(point.x, point.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.strokeStyle = `rgba(201,236,232,${(1 - distance / threshold) * 0.22})`;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, point.red ? point.radius + 1 : point.radius, 0, Math.PI * 2);
+        ctx.fillStyle = point.red ? 'rgba(255,31,47,.95)' : 'rgba(255,255,255,.78)';
+        ctx.fill();
+      }
+    }
+  }
+
+  function initNetworkField() {
+    const canvas = document.querySelector('canvas[data-network]');
+    if (!canvas || !('getContext' in HTMLCanvasElement.prototype)) return;
+    try { new NetworkField(canvas); } catch (error) { /* Decorative canvas only. */ }
+  }
+
   /* ------------------------------------------------------------------- init */
 
   function init() {
@@ -971,6 +1100,7 @@
     initParallax();
     initPageTransition();
     initSignalField();
+    initNetworkField();
   }
 
   if (document.readyState === 'loading') {
