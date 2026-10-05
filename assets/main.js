@@ -303,7 +303,7 @@
     toggle.className = 'chapter-rail__toggle';
     toggle.type = 'button';
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.innerHTML = '<span data-rail-current>01</span><strong data-rail-label>Introduction</strong><i>Sections</i>';
+    toggle.innerHTML = '<span data-rail-current>01</span><strong data-rail-label>Introduction</strong><i>Sections</i><b class="chapter-rail__progress" aria-hidden="true"><u data-rail-progress></u></b>';
     const list = document.createElement('ol');
     const links = [];
 
@@ -342,6 +342,13 @@
 
     nav.append(toggle, list);
     document.body.appendChild(nav);
+    const railProgress = toggle.querySelector('[data-rail-progress]');
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!nav.classList.contains('is-open') || nav.contains(event.target)) return;
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
 
     onScroll(() => {
       const line = window.innerHeight * 0.38;
@@ -359,6 +366,12 @@
       const currentLabel = toggle.querySelector('[data-rail-label]');
       if (currentNumber) currentNumber.textContent = `${String(active + 1).padStart(2, '0')} / ${String(sections.length).padStart(2, '0')}`;
       if (currentLabel) currentLabel.textContent = chapterLabel(sections[active], active);
+      if (railProgress) {
+        const rect = sections[active].getBoundingClientRect();
+        const distance = Math.max(1, rect.height - window.innerHeight * 0.38);
+        const progress = clamp((line - rect.top) / distance, 0, 1);
+        railProgress.style.transform = `scaleX(${progress.toFixed(3)})`;
+      }
     });
   }
 
@@ -374,6 +387,18 @@
     cards.forEach((card) => {
       card.addEventListener('pointerenter', () => activate(card));
       card.addEventListener('focusin', () => activate(card));
+      card.addEventListener('pointermove', (event) => {
+        if (!finePointer || prefersReduced()) return;
+        const rect = card.getBoundingClientRect();
+        const x = clamp((event.clientX - rect.left) / rect.width - 0.5, -0.5, 0.5);
+        const y = clamp((event.clientY - rect.top) / rect.height - 0.5, -0.5, 0.5);
+        card.style.setProperty('--card-x', x.toFixed(3));
+        card.style.setProperty('--card-y', y.toFixed(3));
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.setProperty('--card-x', '0');
+        card.style.setProperty('--card-y', '0');
+      });
     });
   }
 
@@ -382,6 +407,9 @@
     const deck = section && section.querySelector('[data-study-deck]');
     if (!section || !deck) return;
 
+    const cards = Array.from(deck.querySelectorAll('[data-study-project]'));
+    const progressBar = section.querySelector('[data-study-progress]');
+    const progressCurrent = section.querySelector('[data-study-current]');
     let travel = 0;
 
     const measure = () => {
@@ -404,6 +432,23 @@
       const range = Math.max(1, section.offsetHeight - window.innerHeight);
       const progress = clamp(-rect.top / range, 0, 1);
       deck.style.transform = `translate3d(${(-progress * travel).toFixed(2)}px,0,0)`;
+      if (progressBar) progressBar.style.transform = `scaleX(${progress.toFixed(3)})`;
+
+      if (cards.length) {
+        const centre = window.innerWidth * 0.55;
+        let activeIndex = 0;
+        let nearest = Infinity;
+        cards.forEach((card, index) => {
+          const cardRect = card.getBoundingClientRect();
+          const distance = Math.abs(cardRect.left + cardRect.width / 2 - centre);
+          if (distance < nearest) {
+            nearest = distance;
+            activeIndex = index;
+          }
+        });
+        cards.forEach((card, index) => card.classList.toggle('is-active', index === activeIndex));
+        if (progressCurrent) progressCurrent.textContent = String(activeIndex + 1).padStart(2, '0');
+      }
     };
 
     measure();
@@ -645,6 +690,28 @@
         const offset = -progress * item.strength * 46;
         item.el.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
       }
+    });
+  }
+
+  /* -------------------------------------------------------- media response */
+
+  function initMediaHover() {
+    if (!finePointer || prefersReduced() || liteMotion) return;
+
+    document.querySelectorAll('[data-media-hover]').forEach((figure) => {
+      figure.addEventListener('pointermove', (event) => {
+        const rect = figure.getBoundingClientRect();
+        const x = clamp((event.clientX - rect.left) / rect.width - 0.5, -0.5, 0.5);
+        const y = clamp((event.clientY - rect.top) / rect.height - 0.5, -0.5, 0.5);
+        figure.style.setProperty('--media-x', `${(x * -12).toFixed(2)}px`);
+        figure.style.setProperty('--media-y', `${(y * -9).toFixed(2)}px`);
+        figure.style.setProperty('--media-active', '1');
+      });
+      figure.addEventListener('pointerleave', () => {
+        figure.style.setProperty('--media-x', '0px');
+        figure.style.setProperty('--media-y', '0px');
+        figure.style.setProperty('--media-active', '0');
+      });
     });
   }
 
@@ -1160,6 +1227,7 @@
     initCursor();
     initMagnetic();
     initParallax();
+    initMediaHover();
     initPageTransition();
     initSignalField();
     initNetworkField();
