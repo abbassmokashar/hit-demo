@@ -94,32 +94,6 @@
     }
   }
 
-  /* ------------------------------------------------------------ site loader */
-
-  function initSiteLoader() {
-    const loader = document.querySelector('[data-site-loader]');
-    if (!loader) return;
-
-    if (root.classList.contains('is-returning') || prefersReduced()) {
-      loader.remove();
-      return;
-    }
-
-    let finished = false;
-    const finish = () => {
-      if (finished) return;
-      finished = true;
-      try { window.sessionStorage.setItem('hit-loaded', '1'); } catch (error) { /* Storage may be unavailable. */ }
-      loader.classList.add('is-complete');
-      window.setTimeout(() => loader.remove(), 1300);
-    };
-
-    const afterLoad = () => window.setTimeout(finish, 650);
-    if (document.readyState === 'complete') afterLoad();
-    else window.addEventListener('load', afterLoad, { once: true });
-    window.setTimeout(finish, 4200);
-  }
-
   /* --------------------------------------------------------- Swiss signal */
 
   function initSwissTime() {
@@ -769,49 +743,6 @@
     });
   }
 
-  /* -------------------------------------------------------- page transition */
-
-  function initPageTransition() {
-    const overlay = document.querySelector('[data-transition]');
-    if (!overlay || prefersReduced()) return;
-
-    let navigating = false;
-
-    document.addEventListener('click', (event) => {
-      if (navigating || event.defaultPrevented || event.button !== 0) return;
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-
-      if (!(event.target instanceof Element)) return;
-      const anchor = event.target.closest('a[href]');
-      if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
-
-      const href = anchor.getAttribute('href');
-      if (!href || href.startsWith('#') || /^(mailto:|tel:|javascript:)/i.test(href)) return;
-
-      const url = new URL(anchor.href, window.location.href);
-      if (url.origin !== window.location.origin) return;
-      if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
-
-      event.preventDefault();
-      navigating = true;
-      overlay.classList.add('is-visible');
-
-      let done = false;
-      const go = () => {
-        if (done) return;
-        done = true;
-        window.location.assign(url.href);
-      };
-      const onEnd = (transitionEvent) => {
-        if (transitionEvent.propertyName !== 'clip-path') return;
-        overlay.removeEventListener('transitionend', onEnd);
-        go();
-      };
-      overlay.addEventListener('transitionend', onEnd);
-      window.setTimeout(go, 1050);
-    });
-  }
-
   /* ------------------------------------------------- signal field (canvas) */
 
   class SignalField {
@@ -1246,7 +1177,6 @@
   /* ------------------------------------------------------------------- init */
 
   function init() {
-    initSiteLoader();
     attachScroll();
     initReveals();
     initSwissTime();
@@ -1266,7 +1196,6 @@
     initMagnetic();
     initParallax();
     initMediaHover();
-    initPageTransition();
     initSignalField();
     initNetworkField();
   }

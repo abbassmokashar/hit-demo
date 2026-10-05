@@ -3,9 +3,15 @@ import { SOURCES } from './site.mjs';
 export const HOME = {
   route: '',
   kind: 'home',
-  title: 'Shaping the future in AI, Cybersecurity and Blockchain',
+  title: 'AI, Cybersecurity & Blockchain',
   description: 'Develop the expertise to pursue high-demand technology careers through a Swiss-based education.',
   future: 'You develop in-demand expertise through programs designed in close alignment with industry expectations. You benefit from a Swiss academic environment known for its excellence and innovation, while learning directly from professionals who bring real-world experience into the classroom.',
+  facts: [
+    { title: '6', text: 'Bachelor and Master programs' },
+    { title: '3', text: 'Intakes: January · April · September' },
+    { title: '180 ECTS', text: 'Bachelor programs · 3 years' },
+    { title: '120 ECTS', text: 'Master programs · 2 years' },
+  ],
   source: SOURCES.home,
 };
 
@@ -13,7 +19,7 @@ export const PROGRAMS_PAGE = {
   route: 'programs',
   kind: 'programs',
   title: 'Programs',
-  description: 'Explore your Dual Swiss and US Bachelor Degree & specializations. Explore your Dual Swiss and US Master Degree & specializations.',
+  description: 'Explore dual Swiss and US Bachelor and Master programs in artificial intelligence, cybersecurity, and blockchain.',
   source: SOURCES.programs,
 };
 
@@ -87,6 +93,10 @@ export const ADMISSIONS = {
     {
       title: 'Admission decision',
       text: 'You will receive a decision and, if successful, an offer with the next steps to confirm your place.',
+    },
+    {
+      title: 'Visa and arrival',
+      text: 'Students requiring a visa complete the process through their local Swiss embassy or consulate. Helvetic Tech provides guidance and supporting documentation.',
     },
   ],
   documents: [

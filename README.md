@@ -9,8 +9,8 @@ Interactive multi-page prototype for a Swiss editorial technology-school directi
 - Six local Bachelor and Master program pages.
 - Admissions, Institute, Governance, Student, Financing, Contact, and Career Impact pages.
 - Full-screen accordion navigation covering the complete published Helvetic Tech information architecture with local destinations throughout.
-- First-visit logo loader and animated logo curtain between internal pages.
-- Responsive program filters, accordions, and scroll reveals.
+- Immediate page rendering with no first-visit loader or page-transition curtain.
+- Responsive program filters, accordions, and restrained scroll reveals.
 - Expandable, accessible section navigator with live section context.
 - Unique photographic program identities for the Bachelor degrees and code-native animated identities for the Master degrees.
 - A scroll-driven editorial story section built from the official Career Outcomes page.
@@ -18,10 +18,10 @@ Interactive multi-page prototype for a Swiss editorial technology-school directi
 - Low-power tuning: cursor and parallax effects switch off on small or constrained devices.
 - Reduced-motion and no-JavaScript fallbacks.
 - Automated local-link and content checks.
-- Swiss editorial grids, local-time signals, generous spacing, and interactive program and learning systems.
+- Swiss editorial grids, generous spacing, and interactive program and learning systems.
 - No raster photograph is reused in a second placement anywhere in the generated site.
-- Student-focused hero actions with direct brochure, admissions, and program access.
-- Responsive field explorer that keeps program links usable on tablet and mobile.
+- A trust-led homepage with verified program facts, transparent fees, international-student support, admissions steps, and distinct Apply, brochure, and contact paths.
+- Visible desktop navigation backed by the full-screen mobile and expanded navigation.
 - Locally stored, optimized WebP imagery throughout; no JPEG, PNG, or AVIF page assets.
 
 ## Source rule
@@ -30,7 +30,7 @@ Institutional copy is sourced only from the current public pages on `helvetictec
 
 ## Image sources
 
-Official Helvetic Tech photography is paired with free-to-use stock photography. Stock visuals are decorative and do not make institutional claims. All raster files are converted to local WebP assets.
+Official Helvetic Tech photography is paired with free-to-use stock photography and clearly labelled editorial illustrations. Decorative visuals do not make institutional claims. All raster files are converted to local WebP assets.
 
 - Helvetic Tech official homepage photography: `helvetictech.ch`
 - Lake Geneva photography: Igor Vieira and Jean-Paul Wettstein on Pexels
@@ -77,3 +77,12 @@ Serve the `prototype` directory with any static web server. The HTML output is g
 The prototype currently contains 24 local routes. Every destination in the full-screen menu stays inside the prototype.
 
 The prototype uses only material published on the current Helvetic Tech website. The Faculty page carries only publicly published names and titles; unconfirmed biographies and portraits remain excluded.
+
+## Pre-launch checklist
+
+- Replace editorial illustrations with verified photography of the real campus, rooms, faculty, students, and alumni.
+- Obtain institutional approval for all recognition, accreditation, partnership, and outcome claims.
+- Separate and brand the hosted Apply, brochure, and contact forms.
+- Remove `noindex, nofollow` only when the production domain, canonical URLs, privacy controls, analytics, sitemap, and robots file are ready.
+- Complete keyboard, 200% text-resize, mobile-network, and target-country performance testing.
+- Review and sign off the claims in `CLAIMS-REGISTER.md`.

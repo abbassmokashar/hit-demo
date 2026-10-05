@@ -18,12 +18,21 @@ for (const page of PAGES) {
     ['main landmark', html.includes('<main id="main-content">')],
     ['skip link', html.includes('class="skip-link"')],
     ['source trace', html.includes('<!-- Content source: https://')],
+    ['canonical URL', html.includes('<link rel="canonical" href="https://')],
+    ['education organization schema', html.includes('"@type":"EducationalOrganization"')],
+    ['no blocking loader', !html.includes('data-site-loader')],
+    ['no page transition curtain', !html.includes('data-transition')],
+    ['no looping signal strip', !html.includes('class="signal-strip"')],
+    ['truthful accommodation wording', !html.includes('Guaranteed accommodation')],
+    ['privacy label matches destination', !html.includes('View Compliance Policy')],
     ['no placeholder testimonials', !html.includes('At AUS sustainability')],
     ['no disputed statistics', !html.includes('CHF 90') && !html.includes('+1M') && !html.includes('+15%')],
     ['no unsupported faculty entry', page.route !== 'faculty' || !html.includes('Dr. Kevin Koidl')],
     ['no unsupported policy inventory', !html.includes('Staff Disciplinary Policy') && !html.includes('Student Finance Policy')],
     ['no synthesized insights copy', !html.includes('Perspective from Helvetic Institute') && !html.includes('Learning built around how technology is actually used')],
     ['all menu destinations are local', !/href="https?:\/\/(?:www\.)?helvetictech\.ch/i.test(menuHtml)],
+    ['homepage trust facts', page.route !== '' || (html.includes('class="home-facts"') && html.includes('class="international chapter"'))],
+    ['desktop primary navigation', html.includes('class="desktop-nav"')],
   ];
   for (const [name, ok] of checks) if (!ok) failures.push(`${output}: ${name}`);
 
