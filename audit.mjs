@@ -28,7 +28,12 @@ for (const page of PAGES) {
     ['no placeholder testimonials', !html.includes('At AUS sustainability')],
     ['no disputed statistics', !html.includes('CHF 90') && !html.includes('+1M') && !html.includes('+15%')],
     ['no unsupported faculty entry', page.route !== 'faculty' || !html.includes('Dr. Kevin Koidl')],
-    ['no unsupported policy inventory', !html.includes('Staff Disciplinary Policy') && !html.includes('Student Finance Policy')],
+    // The policy inventory is scoped to the public privacy policy
+    // (helvetictech.ch/privacy), so it must appear on the policies route and
+    // nowhere else. Items from the separate policies index are not used.
+    ['policy inventory scoped to policies page', page.route === 'policies'
+      ? (html.includes('Rights of the data subjects') && html.includes('Website analytics'))
+      : (!html.includes('Rights of the data subjects') && !html.includes('Website analytics'))],
     ['no synthesized insights copy', !html.includes('Perspective from Helvetic Institute') && !html.includes('Learning built around how technology is actually used')],
     ['all menu destinations are local', !/href="https?:\/\/(?:www\.)?helvetictech\.ch/i.test(menuHtml)],
     ['homepage trust facts', page.route !== '' || (html.includes('class="home-facts"') && html.includes('class="international chapter"'))],

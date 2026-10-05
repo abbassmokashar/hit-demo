@@ -295,13 +295,52 @@ const FACULTY = {
   ],
 };
 
+// Scoped to the public privacy policy published at helvetictech.ch/privacy.
+// Nothing is carried over from the separate policies index page.
 export const POLICIES = {
   route: 'policies',
   kind: 'policies',
-  title: 'Policies',
-  description: 'Helvetic Institute of Technology complies with applicable global laws and regulations.',
-  source: SOURCES.policies,
+  title: 'Privacy Policy',
+  description: 'How the Helvetic Institute of Technology collects, processes, and protects personal data under the Swiss Federal Act on Data Protection and the EU GDPR.',
+  source: SOURCES.privacy,
   complianceUrl: 'https://www.helvetictech.ch/privacy',
+  intro: 'The Helvetic Institute of Technology creates, collects, processes, and retains information about its employees, students, clients, agents, and other individuals in order to manage student progress, administer staff, and comply with legal and statutory obligations. The institution is committed to protecting the rights and freedoms of the individuals whose personal information it processes.',
+  introMore: 'This policy sets out the responsibilities and actions the institution takes to meet that commitment, in accordance with the Swiss Federal Act on Data Protection (FADP) and the European General Data Protection Regulation (GDPR). AGSB S.A., Chemin du Levant 5, 1814 La Tour-de-Peilz, Switzerland, is the Data Controller of the personal data provided to the institution.',
+  policyGroups: [
+    {
+      title: 'Framework',
+      items: [
+        'Introduction',
+        'Data protection principles',
+        'Definitions',
+        'Roles and responsibilities',
+      ],
+    },
+    {
+      title: 'Personal data',
+      items: [
+        'The data we collect',
+        'Why we collect personal data',
+        'Storing personal data',
+        'Data sharing',
+      ],
+    },
+    {
+      title: 'Security & rights',
+      items: [
+        'Special rule on camera surveillance, photographs, and videos',
+        'Rights of the data subjects',
+        'Data security',
+        'Accountability and governance',
+      ],
+    },
+    {
+      title: 'Website',
+      items: [
+        'Website analytics',
+      ],
+    },
+  ],
 };
 
 export const FAQ = {
