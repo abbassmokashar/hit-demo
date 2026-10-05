@@ -328,15 +328,22 @@
       links.push({ link, section });
     });
 
-    toggle.addEventListener('click', () => {
-      const open = !nav.classList.contains('is-open');
+    let closeTimer = null;
+    const setOpen = (open) => {
+      window.clearTimeout(closeTimer);
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      nav.addEventListener('pointerenter', () => setOpen(true));
+      nav.addEventListener('pointerleave', () => {
+        closeTimer = window.setTimeout(() => setOpen(false), 140);
+      });
+    }
     nav.addEventListener('keydown', (event) => {
       if (event.key !== 'Escape') return;
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+      setOpen(false);
       toggle.focus();
     });
 
@@ -346,8 +353,7 @@
 
     document.addEventListener('pointerdown', (event) => {
       if (!nav.classList.contains('is-open') || nav.contains(event.target)) return;
-      nav.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
+      setOpen(false);
     });
 
     onScroll(() => {
@@ -494,7 +500,23 @@
       }
     }
 
-    if (tabset.hasAttribute('data-ribbon-tabs') && window.HIT_SIGNAL) window.HIT_SIGNAL.setMode(key);
+    if (tabset.hasAttribute('data-ribbon-tabs')) {
+      const activeTab = tabs.find((tab) => tab.dataset.tab === key);
+      const names = { ai: 'Artificial Intelligence', cyber: 'Cybersecurity', blockchain: 'Blockchain' };
+      const code = activeTab?.dataset.fieldCode || key.slice(0, 2).toUpperCase();
+      const codeNode = tabset.querySelector('[data-field-status-code]');
+      const nameNode = tabset.querySelector('[data-field-status-name]');
+      if (codeNode) codeNode.textContent = code;
+      if (nameNode) nameNode.textContent = names[key] || '';
+      if (window.HIT_NETWORK) window.HIT_NETWORK.setMode(key);
+    }
+    if (tabset.hasAttribute('data-location-tabs')) {
+      tabset.querySelectorAll('[data-location-image]').forEach((figure) => {
+        const active = figure.dataset.locationImage === key;
+        figure.hidden = !active;
+        figure.classList.toggle('is-active', active);
+      });
+    }
   }
 
   function initTabs() {
@@ -1062,6 +1084,7 @@
       this.ctx = canvas.getContext('2d');
       if (!this.ctx) return;
       this.points = [];
+      this.mode = 'ai';
       this.pointer = { x: 0, y: 0, active: false };
       this.frame = null;
       this.resize();
@@ -1069,6 +1092,15 @@
       this.bind();
       if (prefersReduced()) this.render();
       else this.start();
+    }
+
+    setMode(mode) {
+      this.mode = ['ai', 'cyber', 'blockchain'].includes(mode) ? mode : 'ai';
+      this.canvas.dataset.mode = this.mode;
+      this.points.forEach((point, index) => {
+        point.accent = index % (this.mode === 'ai' ? 13 : this.mode === 'cyber' ? 9 : 7) === 0;
+      });
+      this.render();
     }
 
     resize() {
@@ -1088,7 +1120,7 @@
         y: Math.random() * this.height,
         vx: (Math.random() - 0.5) * 0.16,
         vy: (Math.random() - 0.5) * 0.16,
-        red: index % 13 === 0,
+        accent: index % 13 === 0,
         radius: 1.2 + Math.random() * 1.5,
       }));
     }
@@ -1154,6 +1186,12 @@
 
     render() {
       const { ctx, width, height } = this;
+      const palettes = {
+        ai: { line: '201,236,232', point: '255,255,255', accent: '255,31,47' },
+        cyber: { line: '143,211,232', point: '222,244,249', accent: '89,191,219' },
+        blockchain: { line: '224,213,187', point: '251,246,235', accent: '229,168,76' },
+      };
+      const palette = palettes[this.mode] || palettes.ai;
       ctx.clearRect(0, 0, width, height);
       const threshold = liteMotion ? 105 : 132;
       for (let i = 0; i < this.points.length; i += 1) {
@@ -1165,7 +1203,7 @@
           ctx.beginPath();
           ctx.moveTo(point.x, point.y);
           ctx.lineTo(other.x, other.y);
-          ctx.strokeStyle = `rgba(201,236,232,${(1 - distance / threshold) * 0.22})`;
+          ctx.strokeStyle = `rgba(${palette.line},${(1 - distance / threshold) * 0.22})`;
           ctx.lineWidth = 0.7;
           ctx.stroke();
         }
@@ -1175,25 +1213,25 @@
             ctx.beginPath();
             ctx.moveTo(point.x, point.y);
             ctx.lineTo(this.pointer.x, this.pointer.y);
-            ctx.strokeStyle = `rgba(201,236,232,${(1 - pointerDistance / 220) * 0.48})`;
+            ctx.strokeStyle = `rgba(${palette.line},${(1 - pointerDistance / 220) * 0.48})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
         }
         ctx.beginPath();
-        ctx.arc(point.x, point.y, point.red ? point.radius + 1 : point.radius, 0, Math.PI * 2);
-        ctx.fillStyle = point.red ? 'rgba(255,31,47,.95)' : 'rgba(255,255,255,.78)';
+        ctx.arc(point.x, point.y, point.accent ? point.radius + 1 : point.radius, 0, Math.PI * 2);
+        ctx.fillStyle = point.accent ? `rgba(${palette.accent},.95)` : `rgba(${palette.point},.72)`;
         ctx.fill();
       }
       if (this.pointer.active) {
         ctx.beginPath();
         ctx.arc(this.pointer.x, this.pointer.y, 13, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(201,236,232,.5)';
+        ctx.strokeStyle = `rgba(${palette.line},.5)`;
         ctx.lineWidth = 1;
         ctx.stroke();
         ctx.beginPath();
         ctx.arc(this.pointer.x, this.pointer.y, 2.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,31,47,.95)';
+        ctx.fillStyle = `rgba(${palette.accent},.95)`;
         ctx.fill();
       }
     }
@@ -1202,7 +1240,7 @@
   function initNetworkField() {
     const canvas = document.querySelector('canvas[data-network]');
     if (!canvas || !('getContext' in HTMLCanvasElement.prototype)) return;
-    try { new NetworkField(canvas); } catch (error) { /* Decorative canvas only. */ }
+    try { window.HIT_NETWORK = new NetworkField(canvas); } catch (error) { /* Decorative canvas only. */ }
   }
 
   /* ------------------------------------------------------------------- init */
