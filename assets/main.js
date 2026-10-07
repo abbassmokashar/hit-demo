@@ -1286,6 +1286,147 @@
     try { window.HIT_NETWORK = new NetworkField(canvas); } catch (error) { /* Decorative canvas only. */ }
   }
 
+  /* --------------------------------------------------------- decision tools */
+
+  function initDecisionTools() {
+    const tool = document.querySelector('[data-hit-tool]');
+    const dataNode = document.querySelector('[data-hit-programs]');
+    if (!tool || !dataNode) return;
+
+    let programs = [];
+    try { programs = JSON.parse(dataNode.textContent || '[]'); } catch (_) { return; }
+    if (!programs.length) return;
+
+    const base = tool.dataset.base || '';
+    const money = (value) => new Intl.NumberFormat('en-CH', {
+      style: 'currency', currency: 'CHF', maximumFractionDigits: 0,
+    }).format(Math.round(value));
+    const programUrl = (program) => `${base}${program.href}/`;
+    const toolTitle = (eyebrow, title, text, status = '') => `<div class="hit-tool__heading"><div><p class="label">${escapeHtml(eyebrow)}</p><h2>${title}</h2></div><div class="hit-tool__heading-note">${status ? `<span>${escapeHtml(status)}</span>` : ''}<p>${escapeHtml(text)}</p></div></div>`;
+
+    const initSignal = () => {
+      const questions = [
+        {
+          key: 'level', title: 'Where are you in your academic journey?', note: 'Choose the level that matches your current qualification.',
+          options: [
+            ['Bachelor', 'Preparing for a first degree', 'I hold or am completing a recognized secondary-school qualification.'],
+            ['Master', 'Ready for advanced study', 'I hold or am completing a recognized undergraduate degree.'],
+          ],
+        },
+        {
+          key: 'focus', title: 'Which technology field holds your attention?', note: 'Choose the subject you would most like to study in depth.',
+          options: [
+            ['ai', 'Artificial Intelligence', 'Machine learning, neural networks, generative AI, and data-driven systems.'],
+            ['cyber', 'Cybersecurity', 'Digital systems, networks, data protection, threat analysis, and cyber defence.'],
+            ['blockchain', 'Blockchain', 'Distributed systems, cryptographic principles, smart contracts, and decentralized applications.'],
+          ],
+        },
+        {
+          key: 'work', title: 'What kind of technology problem would you rather solve?', note: 'This final signal helps rank related alternatives.',
+          options: [
+            ['ai', 'Build an intelligent system', 'Develop technology that learns from data and supports complex decisions.'],
+            ['cyber', 'Protect a digital environment', 'Identify vulnerabilities and respond to evolving security threats.'],
+            ['blockchain', 'Design a decentralized solution', 'Create secure systems without relying on a single central authority.'],
+          ],
+        },
+      ];
+      let step = 0;
+      const answers = {};
+
+      const drawQuestion = () => {
+        const question = questions[step];
+        tool.innerHTML = `<div class="signal-console"><div class="signal-console__top"><span>SIGNAL / ${String(step + 1).padStart(2, '0')}</span><div aria-label="Question progress">${questions.map((_, index) => `<i class="${index <= step ? 'is-active' : ''}"></i>`).join('')}</div><strong>${step + 1} / ${questions.length}</strong></div>${toolTitle('Program Signal', escapeHtml(question.title), question.note, `Input ${String(step + 1).padStart(2, '0')}`)}<div class="signal-options signal-options--${question.options.length}">${question.options.map(([value, title, text], index) => `<button type="button" data-signal-answer="${value}"><span>0${index + 1}</span><b>${escapeHtml(title)}</b><small>${escapeHtml(text)}</small><i aria-hidden="true">↗</i></button>`).join('')}</div>${step ? '<button class="tool-text-button" type="button" data-signal-back>← Previous input</button>' : ''}</div>`;
+        tool.querySelectorAll('[data-signal-answer]').forEach((button) => button.addEventListener('click', () => {
+          answers[question.key] = button.dataset.signalAnswer;
+          if (step < questions.length - 1) { step += 1; drawQuestion(); }
+          else drawResults();
+        }));
+        tool.querySelector('[data-signal-back]')?.addEventListener('click', () => { step -= 1; drawQuestion(); });
+      };
+
+      const drawResults = () => {
+        const ranked = programs.filter((program) => program.level === answers.level).map((program) => {
+          let score = 0;
+          if (program.discipline === answers.focus) score += 7;
+          if (program.discipline === answers.work) score += 4;
+          return { ...program, score };
+        }).sort((a, b) => b.score - a.score || Number(a.number) - Number(b.number)).slice(0, 3);
+        const ids = ranked.map((program) => program.id).join(',');
+        tool.innerHTML = `<div class="signal-result" aria-live="polite">${toolTitle('Signal resolved', `Your clearest direction is <em>${escapeHtml(ranked[0].field)}.</em>`, 'This result is a guided starting point. Review the program details and confirm entry requirements with Admissions.', answers.level)}<div class="signal-result__lead"><div><span>Primary match · ${escapeHtml(ranked[0].level)}</span><h3>${escapeHtml(ranked[0].award)}</h3><p>${escapeHtml(ranked[0].signal)}</p></div><dl><div><dt>Duration</dt><dd>${escapeHtml(ranked[0].duration)}</dd></div><div><dt>Credits</dt><dd>${escapeHtml(ranked[0].credits)}</dd></div><div><dt>Study mode</dt><dd>${escapeHtml(ranked[0].mode)}</dd></div></dl><a href="${programUrl(ranked[0])}">Explore primary match <span>↗</span></a></div><div class="signal-result__alternatives">${ranked.slice(1).map((program, index) => `<article><span>Related option 0${index + 2}</span><h3>${escapeHtml(program.award)}</h3><p>${escapeHtml(program.signal)}</p><a href="${programUrl(program)}">View program ↗</a></article>`).join('')}</div><div class="hit-tool__actions"><button class="button-secondary" type="button" data-signal-restart>Retake signal <span>↻</span></button><a class="button-primary" href="${base}tools/program-matrix/?programs=${encodeURIComponent(ids)}">Compare these programs <span>↗</span></a></div></div>`;
+        tool.querySelector('[data-signal-restart]').addEventListener('click', () => { step = 0; Object.keys(answers).forEach((key) => delete answers[key]); drawQuestion(); });
+      };
+      drawQuestion();
+    };
+
+    const initMatrix = () => {
+      const requested = new URLSearchParams(window.location.search).get('programs');
+      let selected = requested ? requested.split(',').filter((id) => programs.some((program) => program.id === id)).slice(0, 3) : ['bachelor-ai', 'master-ai'];
+      if (!selected.length) selected = ['bachelor-ai'];
+      const rows = [
+        ['Study level', 'level'], ['Technology field', 'field'], ['Award', 'award'], ['Duration', 'duration'],
+        ['Credits', 'credits'], ['Structure', 'terms'], ['Study mode', 'mode'], ['Location', 'location'],
+        ['Tuition per term', 'tuitionTerm'], ['Tuition per year', 'tuitionYear'], ['Available intakes', 'intakes'],
+      ];
+      const valueFor = (program, key) => key.startsWith('tuition') ? money(program[key]) : program[key];
+
+      const draw = () => {
+        const chosen = selected.map((id) => programs.find((program) => program.id === id)).filter(Boolean);
+        tool.innerHTML = `<div class="matrix-console">${toolTitle('Program Matrix', 'Compare the variables that shape your decision.', 'Choose up to three degrees. Rows that change between selections are marked for faster scanning.', `${selected.length} / 3 selected`)}<div class="matrix-picker" aria-label="Choose programs">${programs.map((program) => `<button type="button" data-matrix-program="${program.id}" class="${selected.includes(program.id) ? 'is-selected' : ''}" aria-pressed="${selected.includes(program.id)}"><span>${escapeHtml(program.level)} · ${escapeHtml(program.field)}</span><strong>${escapeHtml(program.title)}</strong><i aria-hidden="true">${selected.includes(program.id) ? '✓' : '+'}</i></button>`).join('')}</div>${chosen.length ? `<div class="matrix-table-wrap"><table class="matrix-table"><thead><tr><th scope="col">Variable</th>${chosen.map((program, index) => `<th scope="col"><span>Selection 0${index + 1}</span><strong>${escapeHtml(program.title)}</strong><button type="button" data-matrix-remove="${program.id}" aria-label="Remove ${escapeHtml(program.title)}">×</button></th>`).join('')}</tr></thead><tbody>${rows.map(([label, key]) => { const values = chosen.map((program) => valueFor(program, key)); const different = new Set(values).size > 1; return `<tr class="${different ? 'is-different' : ''}"><th scope="row">${escapeHtml(label)}${different ? '<small>Different</small>' : ''}</th>${values.map((value) => `<td>${escapeHtml(value)}</td>`).join('')}</tr>`; }).join('')}</tbody></table></div><div class="hit-tool__actions"><a class="button-secondary" href="${programUrl(chosen[0])}">Explore first selection <span>↗</span></a><a class="button-primary" href="${base}tools/study-cost-model/?program=${encodeURIComponent(chosen[0].id)}">Model study costs <span>↗</span></a></div>` : '<p class="tool-alert">Choose at least one program to begin the comparison.</p>'}</div>`;
+        tool.querySelectorAll('[data-matrix-program]').forEach((button) => button.addEventListener('click', () => {
+          const id = button.dataset.matrixProgram;
+          if (selected.includes(id)) selected = selected.filter((item) => item !== id);
+          else if (selected.length < 3) selected.push(id);
+          else {
+            button.classList.add('is-limit');
+            window.setTimeout(() => button.classList.remove('is-limit'), 360);
+            return;
+          }
+          draw();
+        }));
+        tool.querySelectorAll('[data-matrix-remove]').forEach((button) => button.addEventListener('click', () => {
+          selected = selected.filter((id) => id !== button.dataset.matrixRemove);
+          draw();
+        }));
+      };
+      draw();
+    };
+
+    const initCost = () => {
+      const requested = new URLSearchParams(window.location.search).get('program');
+      const initial = programs.some((program) => program.id === requested) ? requested : programs[0].id;
+      tool.innerHTML = `<div class="cost-console">${toolTitle('Study Cost Model', 'Build a transparent planning scenario in CHF.', 'Published HIT fees are fixed in the model. Living-cost controls remain editable so the assumptions are always visible.', 'Live estimate')}<div class="cost-layout"><form class="cost-controls" data-cost-form><fieldset><legend><span>01</span>Academic plan</legend><label>Program<select name="program">${programs.map((program) => `<option value="${program.id}" ${program.id === initial ? 'selected' : ''}>${escapeHtml(program.title)}</option>`).join('')}</select></label><div class="cost-fixed" data-cost-academic></div></fieldset><fieldset><legend><span>02</span>Monthly living scenario</legend><div class="cost-range"><label for="cost-housing">Accommodation <output data-cost-output="housing"></output></label><input id="cost-housing" name="housing" type="range" min="750" max="2500" step="50" value="750"><small>Published guidance: from CHF 750</small></div><div class="cost-range"><label for="cost-insurance">Health insurance <output data-cost-output="insurance"></output></label><input id="cost-insurance" name="insurance" type="range" min="150" max="500" step="10" value="150"><small>Published guidance: from CHF 150</small></div><div class="cost-range"><label for="cost-food">Food <output data-cost-output="food"></output></label><input id="cost-food" name="food" type="range" min="200" max="750" step="25" value="450"><small>Published guidance: CHF 200–750</small></div><div class="cost-range"><label for="cost-transport">Transportation <output data-cost-output="transport"></output></label><input id="cost-transport" name="transport" type="range" min="80" max="400" step="10" value="80"><small>Published guidance: from CHF 80</small></div><div class="cost-range"><label for="cost-personal">Personal expenses <output data-cost-output="personal"></output></label><input id="cost-personal" name="personal" type="range" min="0" max="1500" step="50" value="250"><small>Personal expenses vary by student.</small></div></fieldset><button class="tool-text-button" type="reset">Reset living scenario ↻</button></form><aside class="cost-result" aria-live="polite"><p class="label">Working estimate</p><h3 data-cost-program></h3><div class="cost-total"><span>Estimated full-program cost</span><strong data-cost-total></strong><small>Tuition + living scenario + one-time admission fees</small></div><div class="cost-breakdown" data-cost-breakdown></div><dl><div><dt>Tuition total</dt><dd data-cost-tuition></dd></div><div><dt>Living costs</dt><dd data-cost-living></dd></div><div><dt>Application + admission fees</dt><dd>${money(1250)}</dd></div><div><dt>Average per month</dt><dd data-cost-monthly></dd></div></dl><p class="cost-exclusion">Additional book and technology fees may apply and are not included.</p><div class="hit-tool__actions"><button class="button-primary" type="button" data-cost-print>Print / save PDF <span>↗</span></button><a class="button-secondary" href="${base}financing/fees-expenses/">Review published fees <span>↗</span></a></div></aside></div></div>`;
+      const form = tool.querySelector('[data-cost-form]');
+      const update = () => {
+        const formData = new FormData(form);
+        const program = programs.find((item) => item.id === formData.get('program')) || programs[0];
+        const livingMonthly = ['housing', 'insurance', 'food', 'transport', 'personal'].reduce((sum, key) => sum + Number(formData.get(key) || 0), 0);
+        const tuition = program.tuitionYear * program.years;
+        const living = livingMonthly * 12 * program.years;
+        const fees = 1250;
+        const total = tuition + living + fees;
+        tool.querySelector('[data-cost-program]').textContent = program.title;
+        tool.querySelector('[data-cost-total]').textContent = money(total);
+        tool.querySelector('[data-cost-tuition]').textContent = money(tuition);
+        tool.querySelector('[data-cost-living]').textContent = money(living);
+        tool.querySelector('[data-cost-monthly]').textContent = money(total / (program.years * 12));
+        tool.querySelector('[data-cost-academic]').innerHTML = `<div><span>Tuition / term</span><strong>${money(program.tuitionTerm)}</strong></div><div><span>Duration</span><strong>${escapeHtml(program.duration)}</strong></div><div><span>Terms</span><strong>${escapeHtml(program.terms)}</strong></div>`;
+        ['housing', 'insurance', 'food', 'transport', 'personal'].forEach((key) => {
+          tool.querySelector(`[data-cost-output="${key}"]`).textContent = money(Number(formData.get(key) || 0));
+        });
+        tool.querySelector('[data-cost-breakdown]').innerHTML = [['Tuition', tuition], ['Living', living], ['One-time fees', fees]].map(([label, value]) => `<div><span><b>${label}</b><em>${money(value)}</em></span><i><b style="width:${Math.max(3, value / total * 100)}%"></b></i></div>`).join('');
+      };
+      form.addEventListener('input', update);
+      form.addEventListener('change', update);
+      form.addEventListener('reset', () => window.setTimeout(update));
+      tool.querySelector('[data-cost-print]').addEventListener('click', () => window.print());
+      update();
+    };
+
+    if (tool.dataset.hitTool === 'signal') initSignal();
+    if (tool.dataset.hitTool === 'matrix') initMatrix();
+    if (tool.dataset.hitTool === 'cost') initCost();
+  }
+
   /* ------------------------------------------------------------------- init */
 
   function init() {
@@ -1311,6 +1452,7 @@
     initProgramPreview();
     initSignalField();
     initNetworkField();
+    initDecisionTools();
   }
 
   if (document.readyState === 'loading') {

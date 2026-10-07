@@ -15,7 +15,7 @@ for (const page of PAGES) {
   const menuHtml = html.match(/<aside class="menu"[\s\S]*?<\/aside>/)?.[0] || '';
   const checks = [
     ['one h1', (html.match(/<h1\b/g) || []).length === 1],
-    ['main landmark', html.includes('<main id="main-content">')],
+    ['main landmark', /<main\b[^>]*\bid="main-content"/.test(html)],
     ['skip link', html.includes('class="skip-link"')],
     ['source trace', html.includes('<!-- Content source: https://')],
     ['canonical URL', html.includes('<link rel="canonical" href="https://')],
@@ -38,6 +38,9 @@ for (const page of PAGES) {
     ['all menu destinations are local', !/href="https?:\/\/(?:www\.)?helvetictech\.ch/i.test(menuHtml)],
     ['homepage trust facts', page.route !== '' || (html.includes('class="home-facts"') && html.includes('class="international chapter"'))],
     ['desktop primary navigation', html.includes('class="desktop-nav"')],
+    ['decision tools in full menu', html.includes('tools/program-signal') && html.includes('tools/program-matrix') && html.includes('tools/study-cost-model')],
+    ['tool page shell', page.kind !== 'tool' || (html.includes(`data-hit-tool="${page.tool}"`) && html.includes('data-hit-programs'))],
+    ['program hub exposes tools', page.route !== 'programs' || html.includes('class="decision-tools-band chapter"')],
   ];
   for (const [name, ok] of checks) if (!ok) failures.push(`${output}: ${name}`);
 

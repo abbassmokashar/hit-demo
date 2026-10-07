@@ -641,6 +641,33 @@ export const SCHOLARSHIPS = {
   ],
 };
 
+export const PROGRAM_SIGNAL = {
+  route: 'tools/program-signal',
+  kind: 'tool',
+  tool: 'signal',
+  title: 'Program Signal',
+  description: 'Answer three focused questions to identify the Helvetic Tech Bachelor or Master programs that best align with your academic stage and technology interests.',
+  source: SOURCES.programs,
+};
+
+export const PROGRAM_MATRIX = {
+  route: 'tools/program-matrix',
+  kind: 'tool',
+  tool: 'matrix',
+  title: 'Program Matrix',
+  description: 'Compare up to three Helvetic Tech programs by study level, field, duration, credits, structure, tuition, and study format.',
+  source: SOURCES.programs,
+};
+
+export const STUDY_COST_MODEL = {
+  route: 'tools/study-cost-model',
+  kind: 'tool',
+  tool: 'cost',
+  title: 'Study Cost Model',
+  description: 'Build an indicative CHF study budget using Helvetic Tech tuition fees and published living-cost guidance.',
+  source: SOURCES.fees,
+};
+
 export const PAGES = [
   HOME,
   PROGRAMS_PAGE,
@@ -666,4 +693,7 @@ export const PAGES = [
   ALUMNI,
   FEES,
   SCHOLARSHIPS,
+  PROGRAM_SIGNAL,
+  PROGRAM_MATRIX,
+  STUDY_COST_MODEL,
 ];

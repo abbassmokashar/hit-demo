@@ -24,6 +24,10 @@ Interactive multi-page prototype for a Swiss editorial technology-school directi
 - Automated local-link and content checks.
 - Distinct card and accordion treatments (bordered, spaced items) instead of a flat document-style list.
 - Swiss editorial grids, generous spacing, and interactive program and learning systems.
+- Three connected HIT decision tools with distinct interfaces: Program Signal, Program Matrix, and Study Cost Model.
+- Program Signal ranks the three appropriate Bachelor or Master options from academic-stage and technology-interest inputs without treating the result as an admissions decision.
+- Program Matrix compares up to three programs and highlights differences in level, field, award, duration, credits, structure, format, tuition, and intakes.
+- Study Cost Model combines published HIT tuition and admission fees with editable living-cost assumptions, recalculates instantly, and supports browser printing or Save as PDF without collecting personal data.
 - No raster photograph is reused in a second placement anywhere in the generated site.
 - A trust-led homepage with verified program facts, transparent fees, international-student support, admissions steps, and distinct Apply, brochure, and contact paths.
 - Visible desktop navigation backed by the full-screen mobile and expanded navigation.
@@ -83,8 +87,11 @@ Serve the `prototype` directory with any static web server. The HTML output is g
 - `/alumni/`
 - `/financing/fees-expenses/`
 - `/financing/scholarships/`
+- `/tools/program-signal/`
+- `/tools/program-matrix/`
+- `/tools/study-cost-model/`
 
-The prototype currently contains 24 local routes. Every destination in the full-screen menu stays inside the prototype.
+The prototype currently contains 27 local routes. Every destination in the full-screen menu stays inside the prototype.
 
 The prototype uses only material published on the current Helvetic Tech website. The Faculty page carries only publicly published names and titles; unconfirmed biographies and portraits remain excluded.
 
