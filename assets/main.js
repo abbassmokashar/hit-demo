@@ -1394,32 +1394,181 @@
     const initCost = () => {
       const requested = new URLSearchParams(window.location.search).get('program');
       const initial = programs.some((program) => program.id === requested) ? requested : programs[0].id;
-      tool.innerHTML = `<div class="cost-console">${toolTitle('Study Cost Model', 'Build a transparent planning scenario in CHF.', 'Published HIT fees are fixed in the model. Living-cost controls remain editable so the assumptions are always visible.', 'Live estimate')}<div class="cost-layout"><form class="cost-controls" data-cost-form><fieldset><legend><span>01</span>Academic plan</legend><label>Program<select name="program">${programs.map((program) => `<option value="${program.id}" ${program.id === initial ? 'selected' : ''}>${escapeHtml(program.title)}</option>`).join('')}</select></label><div class="cost-fixed" data-cost-academic></div></fieldset><fieldset><legend><span>02</span>Monthly living scenario</legend><div class="cost-range"><label for="cost-housing">Accommodation <output data-cost-output="housing"></output></label><input id="cost-housing" name="housing" type="range" min="750" max="2500" step="50" value="750"><small>Published guidance: from CHF 750</small></div><div class="cost-range"><label for="cost-insurance">Health insurance <output data-cost-output="insurance"></output></label><input id="cost-insurance" name="insurance" type="range" min="150" max="500" step="10" value="150"><small>Published guidance: from CHF 150</small></div><div class="cost-range"><label for="cost-food">Food <output data-cost-output="food"></output></label><input id="cost-food" name="food" type="range" min="200" max="750" step="25" value="450"><small>Published guidance: CHF 200–750</small></div><div class="cost-range"><label for="cost-transport">Transportation <output data-cost-output="transport"></output></label><input id="cost-transport" name="transport" type="range" min="80" max="400" step="10" value="80"><small>Published guidance: from CHF 80</small></div><div class="cost-range"><label for="cost-personal">Personal expenses <output data-cost-output="personal"></output></label><input id="cost-personal" name="personal" type="range" min="0" max="1500" step="50" value="250"><small>Personal expenses vary by student.</small></div></fieldset><button class="tool-text-button" type="reset">Reset living scenario ↻</button></form><aside class="cost-result" aria-live="polite"><p class="label">Working estimate</p><h3 data-cost-program></h3><div class="cost-total"><span>Estimated full-program cost</span><strong data-cost-total></strong><small>Tuition + living scenario + one-time admission fees</small></div><div class="cost-breakdown" data-cost-breakdown></div><dl><div><dt>Tuition total</dt><dd data-cost-tuition></dd></div><div><dt>Living costs</dt><dd data-cost-living></dd></div><div><dt>Application + admission fees</dt><dd>${money(1250)}</dd></div><div><dt>Average per month</dt><dd data-cost-monthly></dd></div></dl><p class="cost-exclusion">Additional book and technology fees may apply and are not included.</p><div class="hit-tool__actions"><button class="button-primary" type="button" data-cost-print>Print / save PDF <span>↗</span></button><a class="button-secondary" href="${base}financing/fees-expenses/">Review published fees <span>↗</span></a></div></aside></div></div>`;
-      const form = tool.querySelector('[data-cost-form]');
-      const update = () => {
-        const formData = new FormData(form);
-        const program = programs.find((item) => item.id === formData.get('program')) || programs[0];
-        const livingMonthly = ['housing', 'insurance', 'food', 'transport', 'personal'].reduce((sum, key) => sum + Number(formData.get(key) || 0), 0);
-        const tuition = program.tuitionYear * program.years;
-        const living = livingMonthly * 12 * program.years;
-        const fees = 1250;
-        const total = tuition + living + fees;
-        tool.querySelector('[data-cost-program]').textContent = program.title;
-        tool.querySelector('[data-cost-total]').textContent = money(total);
-        tool.querySelector('[data-cost-tuition]').textContent = money(tuition);
-        tool.querySelector('[data-cost-living]').textContent = money(living);
-        tool.querySelector('[data-cost-monthly]').textContent = money(total / (program.years * 12));
-        tool.querySelector('[data-cost-academic]').innerHTML = `<div><span>Tuition / term</span><strong>${money(program.tuitionTerm)}</strong></div><div><span>Duration</span><strong>${escapeHtml(program.duration)}</strong></div><div><span>Terms</span><strong>${escapeHtml(program.terms)}</strong></div>`;
-        ['housing', 'insurance', 'food', 'transport', 'personal'].forEach((key) => {
-          tool.querySelector(`[data-cost-output="${key}"]`).textContent = money(Number(formData.get(key) || 0));
+      let lead = null;
+
+      /* Personal details remain in memory only. WordPress receives them after the visitor
+         explicitly requests the finished estimate. */
+      const countries = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Argentina', 'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Belgium', 'Bolivia', 'Bosnia and Herzegovina', 'Brazil', 'Bulgaria', 'Cameroon', 'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica', 'Croatia', 'Cyprus', 'Czechia', 'Denmark', 'Ecuador', 'Egypt', 'Estonia', 'Ethiopia', 'Finland', 'France', 'Georgia', 'Germany', 'Ghana', 'Greece', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Israel', 'Italy', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Latvia', 'Lebanon', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malaysia', 'Malta', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Montenegro', 'Morocco', 'Nepal', 'Netherlands', 'New Zealand', 'Nigeria', 'North Macedonia', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania', 'Saudi Arabia', 'Senegal', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Thailand', 'Tunisia', 'Turkey', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Vietnam', 'Zimbabwe', 'Other'];
+      const countryOptions = countries.map((country) => `<option value="${escapeHtml(country)}">${escapeHtml(country)}</option>`).join('');
+      const programOptions = programs.map((program) => `<option value="${program.id}" ${program.id === initial ? 'selected' : ''}>${escapeHtml(program.title)}</option>`).join('');
+
+      const loadImage = (src, timeout = 5000) => new Promise((resolve, reject) => {
+        const image = new Image();
+        const timer = window.setTimeout(() => reject(new Error('The HIT logo took too long to load.')), timeout);
+        image.onload = () => { window.clearTimeout(timer); resolve(image); };
+        image.onerror = () => { window.clearTimeout(timer); reject(new Error('The HIT logo could not be loaded.')); };
+        image.src = src;
+      });
+
+      const createEstimatePdf = async (estimate) => {
+        const width = 1240; const height = 1754;
+        const canvas = document.createElement('canvas'); canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        const ink = '#102b43'; const blue = '#1d4b73'; const red = '#e63946'; const pale = '#e9eef2'; const muted = '#52677a';
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, width, height);
+        try {
+          const logo = await loadImage(`${base}assets/images/hit-logo.svg`);
+          const logoWidth = 260; const logoHeight = logo.naturalHeight / logo.naturalWidth * logoWidth;
+          ctx.drawImage(logo, 74, 62, logoWidth, logoHeight);
+        } catch (_) {
+          ctx.fillStyle = ink; ctx.font = '700 42px Arial'; ctx.fillText('HELVETIC TECH', 74, 118);
+        }
+        ctx.fillStyle = red; ctx.fillRect(74, 238, 90, 7);
+        ctx.fillStyle = ink; ctx.font = '700 62px Arial'; ctx.fillText('Study cost estimate', 74, 325);
+        ctx.fillStyle = muted; ctx.font = '25px Arial';
+        ctx.fillText(`Prepared ${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())}`, 74, 368);
+        const field = (label, value, x, y, max = 500) => {
+          ctx.fillStyle = blue; ctx.font = '700 17px Arial'; ctx.fillText(label.toUpperCase(), x, y);
+          ctx.fillStyle = ink; ctx.font = '27px Arial';
+          const words = String(value || '—').split(' '); let line = ''; let lineY = y + 38;
+          words.forEach((word) => { const next = `${line}${line ? ' ' : ''}${word}`; if (ctx.measureText(next).width > max && line) { ctx.fillText(line, x, lineY); line = word; lineY += 33; } else line = next; });
+          ctx.fillText(line, x, lineY);
+        };
+        ctx.fillStyle = '#f5f7f8'; ctx.fillRect(74, 410, 1092, 288);
+        field('Applicant', `${lead?.firstName || ''} ${lead?.lastName || ''}`, 110, 445, 440);
+        field('Email', lead?.email, 110, 545, 440);
+        field('Country', lead?.country, 110, 630, 440);
+        field('Program', estimate.program, 650, 445, 450);
+        field('Degree of interest', lead?.degree, 650, 565, 450);
+        field('Preferred intake', estimate.intake, 650, 630, 450);
+        ctx.fillStyle = ink; ctx.fillRect(74, 730, 1092, 225);
+        ctx.fillStyle = '#ffffff'; ctx.font = '22px Arial'; ctx.fillText('ESTIMATED FULL-PROGRAM COST', 110, 797);
+        ctx.fillStyle = '#c7dceb'; ctx.font = '700 80px Arial'; ctx.fillText(estimate.total, 110, 890);
+        ctx.globalAlpha = .72; ctx.fillStyle = '#ffffff'; ctx.font = '22px Arial'; ctx.fillText('Tuition, selected living scenario and published one-time fees', 110, 931); ctx.globalAlpha = 1;
+        ctx.fillStyle = ink; ctx.font = '700 34px Arial'; ctx.fillText('Cost breakdown', 74, 1015);
+        [['Tuition', estimate.tuition], ['Living costs', estimate.living], ['One-time fees', estimate.oneTime]].forEach(([label, value], index) => {
+          const y = 1065 + index * 78; ctx.strokeStyle = '#d4dde4'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(74, y + 50); ctx.lineTo(1166, y + 50); ctx.stroke();
+          ctx.fillStyle = muted; ctx.font = '25px Arial'; ctx.fillText(label, 74, y + 28); ctx.fillStyle = ink; ctx.font = '700 27px Arial'; ctx.textAlign = 'right'; ctx.fillText(value, 1166, y + 28); ctx.textAlign = 'left';
         });
-        tool.querySelector('[data-cost-breakdown]').innerHTML = [['Tuition', tuition], ['Living', living], ['One-time fees', fees]].map(([label, value]) => `<div><span><b>${label}</b><em>${money(value)}</em></span><i><b style="width:${Math.max(3, value / total * 100)}%"></b></i></div>`).join('');
+        ctx.fillStyle = pale; ctx.fillRect(74, 1325, 1092, 190);
+        [['First study year', estimate.firstYear], ['Average per month', estimate.monthly], ['Program length', estimate.duration]].forEach(([label, value], index) => {
+          const x = 108 + index * 360; ctx.fillStyle = blue; ctx.font = '700 17px Arial'; ctx.fillText(label.toUpperCase(), x, 1382); ctx.fillStyle = ink; ctx.font = '700 30px Arial'; ctx.fillText(value, x, 1432);
+        });
+        ctx.fillStyle = muted; ctx.font = '21px Arial';
+        const disclaimer = 'Indicative planning estimate only. Tuition, fees and personal living costs may change. Helvetic Tech Admissions will confirm current charges and payment arrangements.';
+        const words = disclaimer.split(' '); let line = ''; let y = 1598;
+        words.forEach((word) => { const next = `${line}${line ? ' ' : ''}${word}`; if (ctx.measureText(next).width > 1060 && line) { ctx.fillText(line, 74, y); line = word; y += 31; } else line = next; }); ctx.fillText(line, 74, y);
+        const encodedImage = canvas.toDataURL('image/jpeg', .94).split(',')[1];
+        if (!encodedImage) throw new Error('This browser could not create the estimate document.');
+        const binaryImage = atob(encodedImage); const imageBytes = new Uint8Array(binaryImage.length);
+        for (let index = 0; index < binaryImage.length; index += 1) imageBytes[index] = binaryImage.charCodeAt(index);
+        const encoder = new TextEncoder(); const chunks = []; const offsets = [0]; let size = 0;
+        const pushText = (text) => { const bytes = encoder.encode(text); chunks.push(bytes); size += bytes.length; };
+        const pushBytes = (bytes) => { chunks.push(bytes); size += bytes.length; };
+        pushText('%PDF-1.4\n');
+        const object = (id, content) => { offsets[id] = size; pushText(`${id} 0 obj\n${content}\nendobj\n`); };
+        object(1, '<< /Type /Catalog /Pages 2 0 R >>');
+        object(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+        object(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+        offsets[4] = size; pushText(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imageBytes.length} >>\nstream\n`); pushBytes(imageBytes); pushText('\nendstream\nendobj\n');
+        const stream = 'q 595 0 0 842 0 0 cm /Im0 Do Q'; object(5, `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`);
+        const xref = size; pushText('xref\n0 6\n0000000000 65535 f \n'); for (let id = 1; id <= 5; id += 1) pushText(`${String(offsets[id]).padStart(10, '0')} 00000 n \n`);
+        pushText(`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);
+        const pdf = new Blob(chunks, { type: 'application/pdf' }); const url = URL.createObjectURL(pdf); const link = document.createElement('a');
+        link.href = url; link.download = `HIT-study-cost-estimate-${String(estimate.program).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.pdf`;
+        document.body.append(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(url), 5000);
       };
-      form.addEventListener('input', update);
-      form.addEventListener('change', update);
-      form.addEventListener('reset', () => window.setTimeout(update));
-      tool.querySelector('[data-cost-print]').addEventListener('click', () => window.print());
-      update();
+
+      const renderGate = () => {
+        tool.innerHTML = `<div class="cost-gate"><div class="cost-gate__story">${toolTitle('Before the numbers', 'Make the estimate useful to <em>you.</em>', 'Share the study route you are considering, then shape a transparent cost scenario around it.', 'Step 01 / 02')}<ol><li><span>01</span><div><strong>Introduce your study plan</strong><small>Tell us which level, program and intake you are considering.</small></div></li><li><span>02</span><div><strong>Shape the living scenario</strong><small>Adjust each published cost assumption with the figures that fit you.</small></div></li><li><span>03</span><div><strong>Receive the estimate</strong><small>Keep a finished PDF copy for your planning and admissions conversation.</small></div></li></ol><p class="cost-gate__privacy">Helvetic Tech uses these details to prepare your estimate and respond to your enquiry. <a href="${base}policies/">Read the privacy information</a>.</p></div><div class="cost-gate__form"><form class="lead-form" data-cost-lead><div class="lead-form__intro"><span>Required details</span><h3>Start your cost plan</h3><p>All fields are required.</p></div><div class="lead-form__grid"><label>First name<input type="text" name="first-name" autocomplete="given-name" required></label><label>Last name<input type="text" name="last-name" autocomplete="family-name" required></label><label>Email<input type="email" name="email" autocomplete="email" required></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required></label><label>Country<select name="country" autocomplete="country-name" required><option value="">Choose your country</option>${countryOptions}</select></label><label>Degree of interest<select name="degree" required><option value="">Choose a level</option><option>Bachelor</option><option>Master</option></select></label><label class="lead-form__wide">Program of interest<select name="program" required><option value="">Choose a program</option>${programOptions}</select></label><label class="lead-form__wide">Preferred intake<select name="intake" required><option value="">Choose an intake</option><option>September</option><option>January</option><option>April</option><option>Not sure yet</option></select></label><label class="lead-form__consent lead-form__wide"><input type="checkbox" name="consent" value="1" required><span>I agree that Helvetic Tech may use these details to prepare my estimate and respond to this enquiry.</span></label></div><button class="button-primary lead-form__submit" type="submit">Open my cost model <span aria-hidden="true">↗</span></button></form></div></div>`;
+        const form = tool.querySelector('[data-cost-lead]');
+        const programSelect = form.elements.program;
+        const degreeSelect = form.elements.degree;
+        const syncDegree = () => {
+          const program = programs.find((item) => item.id === programSelect.value);
+          if (program) degreeSelect.value = program.level;
+        };
+        const syncProgram = () => {
+          const current = programs.find((item) => item.id === programSelect.value);
+          if (current?.level === degreeSelect.value) return;
+          const firstMatch = programs.find((item) => item.level === degreeSelect.value);
+          if (firstMatch) programSelect.value = firstMatch.id;
+        };
+        programSelect.addEventListener('change', syncDegree);
+        degreeSelect.addEventListener('change', syncProgram);
+        syncDegree();
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+          const data = new FormData(form);
+          lead = {
+            firstName: String(data.get('first-name') || ''), lastName: String(data.get('last-name') || ''),
+            email: String(data.get('email') || ''), phone: String(data.get('phone') || ''), country: String(data.get('country') || ''),
+            degree: String(data.get('degree') || ''), program: String(data.get('program') || ''), intake: String(data.get('intake') || ''),
+            consent: data.get('consent') === '1', createdAt: new Date().toISOString(),
+          };
+          renderPlanner();
+        });
+      };
+
+      const renderPlanner = () => {
+        const selected = programs.find((program) => program.id === lead?.program) || programs.find((program) => program.id === initial) || programs[0];
+        let latestEstimate = null;
+        tool.innerHTML = `<div class="cost-console">${toolTitle('Study Cost Model', 'Build a transparent planning scenario in CHF.', 'Published HIT fees are fixed in the model. Living-cost controls remain editable so the assumptions are always visible.', 'Step 02 / 02')}<div class="cost-personal"><span>Prepared for</span><strong data-cost-applicant></strong><button type="button" data-cost-edit-details>Edit details</button></div><div class="cost-layout"><form class="cost-controls" data-cost-form><fieldset><legend><span>01</span>Academic plan</legend><label>Program<select name="program">${programs.map((program) => `<option value="${program.id}" ${program.id === selected.id ? 'selected' : ''}>${escapeHtml(program.title)}</option>`).join('')}</select></label><label>Preferred intake<select name="intake"><option ${lead?.intake === 'September' ? 'selected' : ''}>September</option><option ${lead?.intake === 'January' ? 'selected' : ''}>January</option><option ${lead?.intake === 'April' ? 'selected' : ''}>April</option><option ${lead?.intake === 'Not sure yet' ? 'selected' : ''}>Not sure yet</option></select></label><div class="cost-fixed" data-cost-academic></div></fieldset><fieldset><legend><span>02</span>Monthly living scenario</legend><div class="cost-range"><label for="cost-housing">Accommodation <output data-cost-output="housing"></output></label><input id="cost-housing" name="housing" type="range" min="750" max="2500" step="50" value="750"><small>Published guidance: from CHF 750</small></div><div class="cost-range"><label for="cost-insurance">Health insurance <output data-cost-output="insurance"></output></label><input id="cost-insurance" name="insurance" type="range" min="150" max="500" step="10" value="150"><small>Published guidance: from CHF 150</small></div><div class="cost-range"><label for="cost-food">Food <output data-cost-output="food"></output></label><input id="cost-food" name="food" type="range" min="200" max="750" step="25" value="450"><small>Published guidance: CHF 200–750</small></div><div class="cost-range"><label for="cost-transport">Transportation <output data-cost-output="transport"></output></label><input id="cost-transport" name="transport" type="range" min="80" max="400" step="10" value="80"><small>Published guidance: from CHF 80</small></div><div class="cost-range"><label for="cost-personal">Personal expenses <output data-cost-output="personal"></output></label><input id="cost-personal" name="personal" type="range" min="0" max="1500" step="50" value="250"><small>Personal expenses vary by student.</small></div></fieldset><button class="tool-text-button" type="reset">Reset living scenario ↻</button></form><aside class="cost-result" aria-live="polite"><p class="label">Working estimate</p><h3 data-cost-program></h3><div class="cost-total"><span>Estimated full-program cost</span><strong data-cost-total></strong><small>Tuition + living scenario + one-time admission fees</small></div><div class="cost-breakdown" data-cost-breakdown></div><dl><div><dt>Tuition total</dt><dd data-cost-tuition></dd></div><div><dt>Living costs</dt><dd data-cost-living></dd></div><div><dt>Application + admission fees</dt><dd>${money(1250)}</dd></div><div><dt>First study year</dt><dd data-cost-first></dd></div><div><dt>Average per month</dt><dd data-cost-monthly></dd></div></dl><p class="cost-exclusion">Additional book and technology fees may apply and are not included.</p><div class="estimate-delivery" data-estimate-delivery aria-live="polite"></div><div class="hit-tool__actions"><button class="button-primary" type="button" data-cost-receive><span>Receive my estimate</span><i aria-hidden="true">↗</i></button><a class="button-secondary" href="${base}financing/fees-expenses/">Review published fees <span>↗</span></a></div></aside></div></div>`;
+        const form = tool.querySelector('[data-cost-form]');
+        tool.querySelector('[data-cost-applicant]').textContent = `${lead.firstName} ${lead.lastName} · ${lead.email}`;
+        const update = () => {
+          const formData = new FormData(form);
+          const program = programs.find((item) => item.id === formData.get('program')) || programs[0];
+          const values = Object.fromEntries(['housing', 'insurance', 'food', 'transport', 'personal'].map((key) => [key, Number(formData.get(key) || 0)]));
+          const livingMonthly = Object.values(values).reduce((sum, value) => sum + value, 0);
+          const tuition = program.tuitionYear * program.years;
+          const living = livingMonthly * 12 * program.years;
+          const fees = 1250; const total = tuition + living + fees; const firstYear = program.tuitionYear + livingMonthly * 12 + fees;
+          lead.program = program.id; lead.degree = program.level; lead.intake = String(formData.get('intake') || '');
+          tool.querySelector('[data-cost-program]').textContent = program.title;
+          tool.querySelector('[data-cost-total]').textContent = money(total);
+          tool.querySelector('[data-cost-tuition]').textContent = money(tuition);
+          tool.querySelector('[data-cost-living]').textContent = money(living);
+          tool.querySelector('[data-cost-first]').textContent = money(firstYear);
+          tool.querySelector('[data-cost-monthly]').textContent = money(total / (program.years * 12));
+          tool.querySelector('[data-cost-academic]').innerHTML = `<div><span>Tuition / term</span><strong>${money(program.tuitionTerm)}</strong></div><div><span>Duration</span><strong>${escapeHtml(program.duration)}</strong></div><div><span>Terms</span><strong>${escapeHtml(program.terms)}</strong></div>`;
+          Object.entries(values).forEach(([key, value]) => { tool.querySelector(`[data-cost-output="${key}"]`).textContent = money(value); });
+          tool.querySelector('[data-cost-breakdown]').innerHTML = [['Tuition', tuition], ['Living', living], ['One-time fees', fees]].map(([label, value]) => `<div><span><b>${label}</b><em>${money(value)}</em></span><i><b style="width:${Math.max(3, value / total * 100)}%"></b></i></div>`).join('');
+          latestEstimate = {
+            programId: program.id, program: program.title, intake: String(formData.get('intake') || ''), total: money(total), tuition: money(tuition), living: money(living), oneTime: money(fees), firstYear: money(firstYear), monthly: money(total / (program.years * 12)), duration: program.duration,
+            totalValue: total, tuitionValue: tuition, livingValue: living, oneTimeValue: fees, firstYearValue: firstYear, monthlyValue: Math.round(total / (program.years * 12)), years: program.years, ...values,
+            recipient: lead.email, updatedAt: new Date().toISOString(),
+          };
+        };
+        form.addEventListener('input', update); form.addEventListener('change', update);
+        form.addEventListener('reset', () => window.setTimeout(update));
+        tool.querySelector('[data-cost-edit-details]').addEventListener('click', renderGate);
+        tool.querySelector('[data-cost-receive]').addEventListener('click', async (event) => {
+          const button = event.currentTarget; const label = button.querySelector('span'); const delivery = tool.querySelector('[data-estimate-delivery]');
+          const endpoint = window.HIT_ESTIMATE_ENDPOINT;
+          button.disabled = true; label.textContent = endpoint ? 'Sending estimate…' : 'Preparing PDF…'; delivery.classList.remove('is-visible');
+          try {
+            if (endpoint) {
+              const response = await fetch(endpoint, { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'X-WP-Nonce': window.HIT_ESTIMATE_NONCE || '' }, body: JSON.stringify({ lead, estimate: latestEstimate }) });
+              const result = await response.json().catch(() => ({}));
+              if (!response.ok) throw new Error(result.message || 'The estimate email could not be sent.');
+            } else {
+              await Promise.race([createEstimatePdf(latestEstimate), new Promise((_, reject) => window.setTimeout(() => reject(new Error('The PDF took too long to prepare.')), 15000))]);
+            }
+            delivery.innerHTML = endpoint ? '<strong>Estimate sent</strong><span>Your Helvetic Tech estimate has been emailed to <b></b>.</span>' : '<strong>Estimate ready</strong><span>Your Helvetic Tech PDF has been downloaded. It was prepared for <b></b>.</span>';
+            delivery.querySelector('b').textContent = lead.email; delivery.classList.add('is-visible');
+            label.textContent = endpoint ? 'Send another copy' : 'Download another copy';
+          } catch (error) {
+            console.error('HIT estimate error:', error);
+            delivery.innerHTML = endpoint ? '<strong>We could not send the estimate</strong><span>Please try again. Your scenario is still here.</span>' : '<strong>We could not prepare the PDF</strong><span>Please try again. Your scenario is still here.</span>';
+            delivery.classList.add('is-visible'); label.textContent = 'Try again';
+          } finally { button.disabled = false; }
+        });
+        update();
+      };
+
+      renderGate();
     };
 
     if (tool.dataset.hitTool === 'signal') initSignal();
