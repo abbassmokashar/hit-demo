@@ -6,6 +6,7 @@ import { PROGRAMS } from '../../data/site.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, '../..');
 const out = path.resolve(here, '../hit-core/starter-data');
+const embeddedOut = path.resolve(here, '../hit-core/includes/starter-data.php');
 
 async function walk(dir) {
   const found = [];
@@ -80,5 +81,6 @@ const intakes = ['January', 'April', 'September'].map((title, index) => ({ title
 await writeData('pages', pages);
 await writeData('programs', programs);
 await writeData('intakes', intakes);
+await writeFile(embeddedOut, `<?php\n/** Generated, embedded HIT starter data. */\nif ( ! defined( 'ABSPATH' ) ) exit;\nfunction hit_core_embedded_starter_data( $name ) {\n\tstatic $data = array(\n\t\t'pages' => ${phpValue(pages, 2)},\n\t\t'programs' => ${phpValue(programs, 2)},\n\t\t'intakes' => ${phpValue(intakes, 2)},\n\t);\n\treturn isset( $data[ $name ] ) ? $data[ $name ] : array();\n}\n`);
 console.log(`Exported ${pages.length} pages, ${programs.length} programs and ${intakes.length} intakes.`);
 
