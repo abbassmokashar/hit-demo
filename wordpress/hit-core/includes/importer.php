@@ -22,9 +22,48 @@ function hit_core_starter_data( $name ) {
 	return is_array( $data ) ? $data : array();
 }
 
+function hit_core_route_key( $route ) {
+	return '' === (string) $route ? '__home__' : (string) $route;
+}
+
 function hit_core_find_managed_page( $route ) {
-	$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids', 'meta_key' => '_hit_route', 'meta_value' => $route ) );
+	$path = trim( (string) $route, '/' );
+	$page = get_page_by_path( $path ?: 'home', OBJECT, 'page' );
+	if ( $page && get_post_meta( $page->ID, '_hit_managed_page', true ) ) return (int) $page->ID;
+	$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids', 'meta_key' => '_hit_route_key', 'meta_value' => hit_core_route_key( $route ) ) );
+	if ( $ids ) return (int) $ids[0];
+	if ( '' === (string) $route ) return 0;
+	$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids', 'meta_key' => '_hit_route', 'meta_value' => (string) $route ) );
 	return $ids ? (int) $ids[0] : 0;
+}
+
+/** Keep one empty managed URL parent per route and trash importer-created duplicates. */
+function hit_core_cleanup_managed_containers( $routes ) {
+	$containers = get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'ASC', 'meta_key' => '_hit_managed_container', 'meta_value' => '1' ) );
+	$cleaned = 0;
+	foreach ( $routes as $route ) {
+		$slug = basename( untrailingslashit( $route ) );
+		$title = ucwords( str_replace( '-', ' ', $slug ) );
+		$candidates = array_values( array_filter( $containers, static function( $page ) use ( $route, $slug, $title ) {
+			if ( '' !== trim( (string) $page->post_content ) ) return false;
+			$stored_route = (string) get_post_meta( $page->ID, '_hit_route', true );
+			return $stored_route === $route || $page->post_name === $slug || 0 === strpos( $page->post_name, $slug . '-' ) || $page->post_title === $title;
+		} ) );
+		if ( ! $candidates ) continue;
+		$canonical = $candidates[0];
+		foreach ( $candidates as $candidate ) {
+			if ( $candidate->post_name === $slug ) { $canonical = $candidate; break; }
+		}
+		update_post_meta( $canonical->ID, '_hit_managed_page', '1' );
+		update_post_meta( $canonical->ID, '_hit_managed_container', '1' );
+		update_post_meta( $canonical->ID, '_hit_route', $route );
+		update_post_meta( $canonical->ID, '_hit_route_key', hit_core_route_key( $route ) );
+		foreach ( $candidates as $candidate ) {
+			if ( (int) $candidate->ID === (int) $canonical->ID ) continue;
+			if ( wp_trash_post( $candidate->ID ) ) $cleaned++;
+		}
+	}
+	return $cleaned;
 }
 
 function hit_core_managed_page_count() {
@@ -44,6 +83,11 @@ function hit_core_import_starter_content( $refresh = false ) {
 	$errors = array();
 	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'HIT Core ' . HIT_CORE_VERSION . ' loaded, but WordPress returned zero records from the native pages collection.' ) );
 	$public_routes = array_fill_keys( array_map( static function( $page ) { return (string) ( $page['route'] ?? '' ); }, $pages ), true );
+	$container_routes = array_values( array_unique( array_filter( array_map( static function( $page ) use ( $public_routes ) {
+		$parent = (string) ( $page['parentRoute'] ?? '' );
+		return $parent && ! isset( $public_routes[ $parent ] ) ? $parent : '';
+	}, $pages ) ) ) );
+	$cleaned = hit_core_cleanup_managed_containers( $container_routes );
 	foreach ( $pages as $page ) {
 		$parent_route = (string) ( $page['parentRoute'] ?? '' );
 		if ( ! $parent_route || isset( $public_routes[ $parent_route ] ) || isset( $route_ids[ $parent_route ] ) ) continue;
@@ -56,13 +100,15 @@ function hit_core_import_starter_content( $refresh = false ) {
 			update_post_meta( $container_id, '_hit_managed_page', '1' );
 			update_post_meta( $container_id, '_hit_managed_container', '1' );
 			update_post_meta( $container_id, '_hit_route', $parent_route );
+			update_post_meta( $container_id, '_hit_route_key', hit_core_route_key( $parent_route ) );
 		}
 	}
 	foreach ( $pages as $page ) {
 		$route = (string) ( $page['route'] ?? '' );
 		$post_id = hit_core_find_managed_page( $route );
 		$content = hit_core_html_to_section_blocks( (string) ( $page['content'] ?? '' ) );
-		$post = array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => sanitize_text_field( $page['title'] ?? 'Untitled' ), 'post_name' => sanitize_title( $page['slug'] ?? '' ), 'post_content' => wp_slash( $content ) );
+		$post_title = ! empty( $page['frontPage'] ) ? 'Home' : sanitize_text_field( $page['title'] ?? 'Untitled' );
+		$post = array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => $post_title, 'post_name' => sanitize_title( $page['slug'] ?? '' ), 'post_content' => wp_slash( $content ) );
 		if ( $post_id && $refresh ) {
 			$post['ID'] = $post_id;
 			$result = wp_update_post( $post, true );
@@ -76,6 +122,7 @@ function hit_core_import_starter_content( $refresh = false ) {
 		$route_ids[ $route ] = (int) $post_id;
 		update_post_meta( $post_id, '_hit_managed_page', '1' );
 		update_post_meta( $post_id, '_hit_route', $route );
+		update_post_meta( $post_id, '_hit_route_key', hit_core_route_key( $route ) );
 		update_post_meta( $post_id, '_hit_page_kind', sanitize_key( $page['kind'] ?? 'page' ) );
 		update_post_meta( $post_id, '_hit_main_class', sanitize_text_field( $page['mainClass'] ?? '' ) );
 		update_post_meta( $post_id, '_hit_source_url', esc_url_raw( $page['source'] ?? '' ) );
@@ -98,7 +145,7 @@ function hit_core_import_starter_content( $refresh = false ) {
 	$managed = hit_core_managed_page_count();
 	$program_count = hit_core_program_count();
 	if ( $managed >= count( $pages ) && $program_count >= 6 ) update_option( 'hit_core_content_version', HIT_CORE_VERSION, false );
-	return array( 'created' => $created, 'updated' => $updated, 'pages' => count( $pages ), 'managed' => $managed, 'programs' => $program_count, 'errors' => $errors );
+	return array( 'created' => $created, 'updated' => $updated, 'cleaned' => $cleaned, 'pages' => count( $pages ), 'managed' => $managed, 'programs' => $program_count, 'errors' => $errors );
 }
 
 function hit_core_upsert_by_key( $post_type, $key, $value, $post ) {

@@ -11,7 +11,7 @@ add_action( 'admin_post_hit_refresh_content', static function() {
 	check_admin_referer( 'hit_refresh_content' );
 	$result = hit_core_import_starter_content( true );
 	update_option( 'hit_core_last_import', $result, false );
-	wp_safe_redirect( add_query_arg( array( 'page' => 'hit-website', 'refreshed' => 1, 'created' => $result['created'], 'updated' => $result['updated'] ), admin_url( 'admin.php' ) ) );
+	wp_safe_redirect( add_query_arg( array( 'page' => 'hit-website', 'refreshed' => 1, 'created' => $result['created'], 'updated' => $result['updated'], 'cleaned' => $result['cleaned'] ?? 0 ), admin_url( 'admin.php' ) ) );
 	exit;
 } );
 
@@ -20,7 +20,7 @@ add_action( 'admin_post_hit_import_content', static function() {
 	check_admin_referer( 'hit_import_content' );
 	$result = hit_core_import_starter_content( false );
 	update_option( 'hit_core_last_import', $result, false );
-	wp_safe_redirect( add_query_arg( array( 'page' => 'hit-website', 'imported' => 1, 'created' => $result['created'] ), admin_url( 'admin.php' ) ) );
+	wp_safe_redirect( add_query_arg( array( 'page' => 'hit-website', 'imported' => 1, 'created' => $result['created'], 'cleaned' => $result['cleaned'] ?? 0 ), admin_url( 'admin.php' ) ) );
 	exit;
 } );
 
@@ -37,8 +37,8 @@ function hit_core_admin_page() {
 	$last = get_option( 'hit_core_last_import', array() );
 	?>
 	<div class="wrap"><h1>HIT website</h1>
-	<?php if ( isset( $_GET['imported'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Missing HIT content was imported. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages were created.</p></div><?php endif; ?>
-	<?php if ( isset( $_GET['refreshed'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Starter content refreshed. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages created and <?php echo absint( $_GET['updated'] ?? 0 ); ?> pages updated.</p></div><?php endif; ?>
+	<?php if ( isset( $_GET['imported'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Missing HIT content was imported. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages were created and <?php echo absint( $_GET['cleaned'] ?? 0 ); ?> duplicate URL placeholders were moved to Trash.</p></div><?php endif; ?>
+	<?php if ( isset( $_GET['refreshed'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Starter content refreshed. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages created, <?php echo absint( $_GET['updated'] ?? 0 ); ?> pages updated, and <?php echo absint( $_GET['cleaned'] ?? 0 ); ?> duplicate URL placeholders moved to Trash.</p></div><?php endif; ?>
 	<p>This plugin owns the editable website content, program data, interactive tools and admissions enquiries. The parent theme owns the presentation; the child theme is reserved for deployment-specific customisations.</p>
 	<table class="widefat striped" style="max-width:800px"><tbody><tr><th>Native starter pages available</th><td><?php echo esc_html( $native_pages ); ?> / 27</td></tr><tr><th>Managed pages</th><td><?php echo esc_html( $pages ); ?> / 27</td></tr><tr><th>Structured programs</th><td><?php echo esc_html( $programs ); ?> / 6</td></tr><tr><th>Installed HIT Core</th><td><?php echo esc_html( HIT_CORE_VERSION ); ?></td></tr><tr><th>Imported content package</th><td><?php echo esc_html( get_option( 'hit_core_content_version', 'Not imported' ) ); ?></td></tr></tbody></table>
 	<?php if ( ! empty( $last['errors'] ) ) : ?><div class="notice notice-error inline"><p><strong>Last import messages:</strong></p><ul><?php foreach ( $last['errors'] as $error ) echo '<li>' . esc_html( $error ) . '</li>'; ?></ul></div><?php endif; ?>
