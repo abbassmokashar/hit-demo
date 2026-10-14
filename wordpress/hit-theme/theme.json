@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": { "contentSize": "1200px", "wideSize": "1440px" },
+    "color": { "palette": [
+      { "slug": "ink", "name": "HIT Ink", "color": "#102b43" },
+      { "slug": "red", "name": "HIT Red", "color": "#e63946" },
+      { "slug": "paper", "name": "HIT Paper", "color": "#f4f3ef" },
+      { "slug": "blue", "name": "HIT Blue", "color": "#1d4b73" }
+    ] },
+    "typography": { "fontFamilies": [
+      { "slug": "sans", "name": "Inter", "fontFamily": "Inter, sans-serif" },
+      { "slug": "serif", "name": "Instrument Serif", "fontFamily": "Instrument Serif, serif" },
+      { "slug": "mono", "name": "IBM Plex Mono", "fontFamily": "IBM Plex Mono, monospace" }
+    ] }
+  }
+}
+

@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( 'rest_api_init', static function() {
 	register_rest_route( 'hit/v1', '/estimate', array(
 		'methods'             => WP_REST_Server::CREATABLE,
-		'callback'            => 'hit_enquiries_send_estimate',
+		'callback'            => 'hit_core_enquiries_send_estimate',
 		'permission_callback' => '__return_true',
 		'args'                => array(
 			'lead'     => array( 'required' => true, 'type' => 'object' ),
@@ -14,7 +14,15 @@ add_action( 'rest_api_init', static function() {
 	) );
 } );
 
-function hit_enquiries_programs() {
+function hit_core_enquiries_programs() {
+	$structured = function_exists( 'hit_core_programs_for_tools' ) ? hit_core_programs_for_tools() : array();
+	if ( $structured ) {
+		$programs = array();
+		foreach ( $structured as $program ) {
+			$programs[ $program['id'] ] = array( 'title' => $program['title'], 'degree' => $program['level'], 'tuition_year' => (int) $program['tuitionYear'], 'years' => (int) $program['years'], 'duration' => $program['duration'] );
+		}
+		return $programs;
+	}
 	return array(
 		'bachelor-ai'            => array( 'title' => 'Bachelor in Artificial Intelligence', 'degree' => 'Bachelor', 'tuition_year' => 20550, 'years' => 3, 'duration' => '3 years' ),
 		'bachelor-cybersecurity' => array( 'title' => 'Bachelor in Cybersecurity', 'degree' => 'Bachelor', 'tuition_year' => 20550, 'years' => 3, 'duration' => '3 years' ),
@@ -25,21 +33,21 @@ function hit_enquiries_programs() {
 	);
 }
 
-function hit_enquiries_request_ip() {
+function hit_core_enquiries_request_ip() {
 	return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? 'unknown' ) );
 }
 
-function hit_enquiries_money( $value ) {
+function hit_core_enquiries_money( $value ) {
 	return 'CHF ' . number_format( (float) $value, 0, '.', "'" );
 }
 
-function hit_enquiries_bounded_number( $value, $minimum, $maximum ) {
+function hit_core_enquiries_bounded_number( $value, $minimum, $maximum ) {
 	$value = is_numeric( $value ) ? (int) round( (float) $value ) : -1;
 	return $value >= $minimum && $value <= $maximum ? $value : null;
 }
 
-function hit_enquiries_send_estimate( WP_REST_Request $request ) {
-	$rate_key = 'hit_estimate_' . hash_hmac( 'sha256', hit_enquiries_request_ip(), wp_salt( 'nonce' ) );
+function hit_core_enquiries_send_estimate( WP_REST_Request $request ) {
+	$rate_key = 'hit_estimate_' . hash_hmac( 'sha256', hit_core_enquiries_request_ip(), wp_salt( 'nonce' ) );
 	$count = (int) get_transient( $rate_key );
 	if ( $count >= 8 ) return new WP_Error( 'rate_limited', 'Please wait before requesting another estimate.', array( 'status' => 429 ) );
 	set_transient( $rate_key, $count + 1, HOUR_IN_SECONDS );
@@ -63,7 +71,7 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 	if ( ! is_email( $lead['email'] ) ) return new WP_Error( 'invalid_email', 'Please enter a valid email address.', array( 'status' => 400 ) );
 	if ( ! $lead['consent'] ) return new WP_Error( 'consent_required', 'Please confirm the enquiry consent before continuing.', array( 'status' => 400 ) );
 
-	$programs = hit_enquiries_programs();
+	$programs = hit_core_enquiries_programs();
 	$program_id = sanitize_key( $estimate_in['programId'] ?? $lead['program'] );
 	if ( ! isset( $programs[ $program_id ] ) ) return new WP_Error( 'invalid_program', 'Please choose a valid Helvetic Tech program.', array( 'status' => 400 ) );
 	$program = $programs[ $program_id ];
@@ -81,7 +89,7 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 	);
 	$monthly = array();
 	foreach ( $limits as $key => $range ) {
-		$monthly[ $key ] = hit_enquiries_bounded_number( $estimate_in[ $key ] ?? null, $range[0], $range[1] );
+		$monthly[ $key ] = hit_core_enquiries_bounded_number( $estimate_in[ $key ] ?? null, $range[0], $range[1] );
 		if ( null === $monthly[ $key ] ) return new WP_Error( 'invalid_cost', 'One or more living-cost values are outside the available planning range.', array( 'status' => 400 ) );
 	}
 
@@ -96,12 +104,12 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 		'programId' => $program_id,
 		'program'   => $program['title'],
 		'intake'    => $intake,
-		'total'     => hit_enquiries_money( $total ),
-		'tuition'   => hit_enquiries_money( $tuition ),
-		'living'    => hit_enquiries_money( $living ),
-		'oneTime'   => hit_enquiries_money( $one_time ),
-		'firstYear' => hit_enquiries_money( $first_year ),
-		'monthly'   => hit_enquiries_money( $average_month ),
+		'total'     => hit_core_enquiries_money( $total ),
+		'tuition'   => hit_core_enquiries_money( $tuition ),
+		'living'    => hit_core_enquiries_money( $living ),
+		'oneTime'   => hit_core_enquiries_money( $one_time ),
+		'firstYear' => hit_core_enquiries_money( $first_year ),
+		'monthly'   => hit_core_enquiries_money( $average_month ),
 		'duration'  => $program['duration'],
 	) + $monthly;
 
@@ -114,12 +122,12 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 	if ( ! is_wp_error( $enquiry_id ) ) {
 		$lead_meta = array( 'firstname' => $lead['firstName'], 'lastname' => $lead['lastName'], 'email' => $lead['email'], 'phone' => $lead['phone'], 'country' => $lead['country'], 'degree' => $lead['degree'], 'program' => $lead['program'], 'intake' => $lead['intake'], 'consent' => '1' );
 		foreach ( $lead_meta as $key => $value ) update_post_meta( $enquiry_id, '_hit_lead_' . $key, $value );
-		$estimate_meta = array( 'program' => $estimate['program'], 'intake' => $estimate['intake'], 'total' => $estimate['total'], 'tuition' => $estimate['tuition'], 'living' => $estimate['living'], 'onetime' => $estimate['oneTime'], 'firstyear' => $estimate['firstYear'], 'monthly' => $estimate['monthly'], 'duration' => $estimate['duration'], 'housing' => hit_enquiries_money( $monthly['housing'] ), 'insurance' => hit_enquiries_money( $monthly['insurance'] ), 'food' => hit_enquiries_money( $monthly['food'] ), 'transport' => hit_enquiries_money( $monthly['transport'] ), 'personal' => hit_enquiries_money( $monthly['personal'] ) );
+		$estimate_meta = array( 'program' => $estimate['program'], 'intake' => $estimate['intake'], 'total' => $estimate['total'], 'tuition' => $estimate['tuition'], 'living' => $estimate['living'], 'onetime' => $estimate['oneTime'], 'firstyear' => $estimate['firstYear'], 'monthly' => $estimate['monthly'], 'duration' => $estimate['duration'], 'housing' => hit_core_enquiries_money( $monthly['housing'] ), 'insurance' => hit_core_enquiries_money( $monthly['insurance'] ), 'food' => hit_core_enquiries_money( $monthly['food'] ), 'transport' => hit_core_enquiries_money( $monthly['transport'] ), 'personal' => hit_core_enquiries_money( $monthly['personal'] ) );
 		foreach ( $estimate_meta as $key => $value ) update_post_meta( $enquiry_id, '_hit_estimate_' . $key, $value );
 		update_post_meta( $enquiry_id, '_hit_received_at', current_time( 'mysql' ) );
 	}
 
-	$pdf = hit_enquiries_create_estimate_pdf( $lead, $estimate );
+	$pdf = hit_core_enquiries_create_estimate_pdf( $lead, $estimate );
 	if ( is_wp_error( $pdf ) ) return $pdf;
 	$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 	$subject = sanitize_text_field( get_option( 'hit_estimate_subject', 'Your Helvetic Tech study cost estimate' ) );
@@ -127,7 +135,7 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 	$sent = wp_mail( $lead['email'], $subject, $message, $headers, array( $pdf ) );
 	if ( ! is_wp_error( $enquiry_id ) ) update_post_meta( $enquiry_id, '_hit_email_sent', $sent ? '1' : '0' );
 
-	$recipient = sanitize_email( get_option( 'hit_enquiries_recipient', get_option( 'admin_email' ) ) );
+	$recipient = sanitize_email( get_option( 'hit_core_enquiries_recipient', get_option( 'admin_email' ) ) );
 	$notified = false;
 	if ( $recipient ) {
 		$notice = '<p>A new Helvetic Tech study cost enquiry was submitted.</p><ul>';
@@ -141,80 +149,80 @@ function hit_enquiries_send_estimate( WP_REST_Request $request ) {
 	return rest_ensure_response( array( 'success' => true, 'message' => 'Estimate sent.' ) );
 }
 
-function hit_enquiries_pdf_ascii( $text ) {
+function hit_core_enquiries_pdf_ascii( $text ) {
 	$text = html_entity_decode( (string) $text, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	$value = function_exists( 'iconv' ) ? iconv( 'UTF-8', 'ASCII//TRANSLIT//IGNORE', $text ) : $text;
 	return $value ?: $text;
 }
 
-function hit_enquiries_pdf_escape( $text ) {
-	$text = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', hit_enquiries_pdf_ascii( $text ) );
+function hit_core_enquiries_pdf_escape( $text ) {
+	$text = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', hit_core_enquiries_pdf_ascii( $text ) );
 	return str_replace( array( '\\', '(', ')' ), array( '\\\\', '\\(', '\\)' ), $text );
 }
 
-function hit_enquiries_pdf_text( $text, $x, $top, $size, $bold = false, $color = '0.063 0.169 0.263' ) {
-	return sprintf( "BT /%s %.2F Tf %s rg 1 0 0 1 %.2F %.2F Tm (%s) Tj ET\n", $bold ? 'F2' : 'F1', $size, $color, $x, 842 - $top, hit_enquiries_pdf_escape( $text ) );
+function hit_core_enquiries_pdf_text( $text, $x, $top, $size, $bold = false, $color = '0.063 0.169 0.263' ) {
+	return sprintf( "BT /%s %.2F Tf %s rg 1 0 0 1 %.2F %.2F Tm (%s) Tj ET\n", $bold ? 'F2' : 'F1', $size, $color, $x, 842 - $top, hit_core_enquiries_pdf_escape( $text ) );
 }
 
-function hit_enquiries_pdf_line( $x1, $top1, $x2, $top2, $width = .5, $color = '.82 .86 .89' ) {
+function hit_core_enquiries_pdf_line( $x1, $top1, $x2, $top2, $width = .5, $color = '.82 .86 .89' ) {
 	return sprintf( "q %s RG %.2F w %.2F %.2F m %.2F %.2F l S Q\n", $color, $width, $x1, 842 - $top1, $x2, 842 - $top2 );
 }
 
-function hit_enquiries_pdf_wrap( $text, $max_chars = 42 ) {
-	return explode( "\n", wordwrap( hit_enquiries_pdf_ascii( $text ), $max_chars, "\n", true ) );
+function hit_core_enquiries_pdf_wrap( $text, $max_chars = 42 ) {
+	return explode( "\n", wordwrap( hit_core_enquiries_pdf_ascii( $text ), $max_chars, "\n", true ) );
 }
 
-function hit_enquiries_pdf_wrapped( $text, $x, $top, $size, $max_chars, $line_height, $bold = false, $color = '0.063 0.169 0.263' ) {
+function hit_core_enquiries_pdf_wrapped( $text, $x, $top, $size, $max_chars, $line_height, $bold = false, $color = '0.063 0.169 0.263' ) {
 	$out = '';
-	foreach ( hit_enquiries_pdf_wrap( $text, $max_chars ) as $line ) { $out .= hit_enquiries_pdf_text( $line, $x, $top, $size, $bold, $color ); $top += $line_height; }
+	foreach ( hit_core_enquiries_pdf_wrap( $text, $max_chars ) as $line ) { $out .= hit_core_enquiries_pdf_text( $line, $x, $top, $size, $bold, $color ); $top += $line_height; }
 	return $out;
 }
 
-function hit_enquiries_create_estimate_pdf( $lead, $estimate ) {
+function hit_core_enquiries_create_estimate_pdf( $lead, $estimate ) {
 	$temp_dir = get_temp_dir();
 	$pdf = trailingslashit( $temp_dir ) . wp_unique_filename( $temp_dir, 'HIT-study-cost-estimate-' . sanitize_title( $estimate['program'] ) . '.pdf' );
 	$ink = '0.063 0.169 0.263'; $blue = '0.114 0.294 0.451'; $red = '0.902 0.224 0.275'; $muted = '0.322 0.404 0.478'; $rule = '.82 .86 .89';
 	$c = '';
-	$c .= hit_enquiries_pdf_text( 'HELVETIC TECH', 50, 67, 13, true, $ink );
-	$c .= hit_enquiries_pdf_text( 'Study cost estimate', 50, 98, 23, true, $ink );
-	$c .= hit_enquiries_pdf_text( 'Prepared for your study planning - ' . wp_date( 'j F Y' ), 50, 118, 9.5, false, $muted );
-	$c .= hit_enquiries_pdf_line( 50, 138, 545, 138, 2.2, $red );
-	$c .= hit_enquiries_pdf_text( 'APPLICANT', 50, 174, 8, true, $blue );
-	$c .= hit_enquiries_pdf_text( $lead['firstName'] . ' ' . $lead['lastName'], 50, 195, 11, true, $ink );
-	$c .= hit_enquiries_pdf_text( $lead['email'], 50, 214, 9.5, false, $muted );
-	$c .= hit_enquiries_pdf_text( $lead['phone'] . ' - ' . $lead['country'], 50, 232, 9.5, false, $muted );
-	$c .= hit_enquiries_pdf_text( 'STUDY PLAN', 315, 174, 8, true, $blue );
-	$c .= hit_enquiries_pdf_wrapped( $estimate['program'], 315, 195, 10.5, 37, 14, true, $ink );
-	$c .= hit_enquiries_pdf_text( $lead['degree'] . ' - ' . $estimate['intake'], 315, 232, 9.5, false, $muted );
-	$c .= hit_enquiries_pdf_line( 50, 264, 545, 264, .7, $rule );
-	$c .= hit_enquiries_pdf_text( 'ESTIMATED FULL-PROGRAM COST', 50, 301, 8, true, $red );
-	$c .= hit_enquiries_pdf_text( $estimate['total'], 50, 344, 28, true, $ink );
-	$c .= hit_enquiries_pdf_text( 'Tuition, selected living scenario and published one-time fees.', 50, 369, 9.5, false, $muted );
-	$c .= hit_enquiries_pdf_line( 50, 394, 545, 394, .7, $rule );
-	$c .= hit_enquiries_pdf_text( 'Cost breakdown', 50, 427, 14, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( 'HELVETIC TECH', 50, 67, 13, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( 'Study cost estimate', 50, 98, 23, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( 'Prepared for your study planning - ' . wp_date( 'j F Y' ), 50, 118, 9.5, false, $muted );
+	$c .= hit_core_enquiries_pdf_line( 50, 138, 545, 138, 2.2, $red );
+	$c .= hit_core_enquiries_pdf_text( 'APPLICANT', 50, 174, 8, true, $blue );
+	$c .= hit_core_enquiries_pdf_text( $lead['firstName'] . ' ' . $lead['lastName'], 50, 195, 11, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( $lead['email'], 50, 214, 9.5, false, $muted );
+	$c .= hit_core_enquiries_pdf_text( $lead['phone'] . ' - ' . $lead['country'], 50, 232, 9.5, false, $muted );
+	$c .= hit_core_enquiries_pdf_text( 'STUDY PLAN', 315, 174, 8, true, $blue );
+	$c .= hit_core_enquiries_pdf_wrapped( $estimate['program'], 315, 195, 10.5, 37, 14, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( $lead['degree'] . ' - ' . $estimate['intake'], 315, 232, 9.5, false, $muted );
+	$c .= hit_core_enquiries_pdf_line( 50, 264, 545, 264, .7, $rule );
+	$c .= hit_core_enquiries_pdf_text( 'ESTIMATED FULL-PROGRAM COST', 50, 301, 8, true, $red );
+	$c .= hit_core_enquiries_pdf_text( $estimate['total'], 50, 344, 28, true, $ink );
+	$c .= hit_core_enquiries_pdf_text( 'Tuition, selected living scenario and published one-time fees.', 50, 369, 9.5, false, $muted );
+	$c .= hit_core_enquiries_pdf_line( 50, 394, 545, 394, .7, $rule );
+	$c .= hit_core_enquiries_pdf_text( 'Cost breakdown', 50, 427, 14, true, $ink );
 	$rows = array( 'Tuition' => $estimate['tuition'], 'Living costs' => $estimate['living'], 'One-time costs' => $estimate['oneTime'] );
 	$top = 463;
 	foreach ( $rows as $label => $value ) {
-		$c .= hit_enquiries_pdf_text( $label, 50, $top, 10, false, $muted );
-		$c .= hit_enquiries_pdf_text( $value, 420, $top, 10.5, true, $ink );
-		$c .= hit_enquiries_pdf_line( 50, $top + 15, 545, $top + 15, .35, $rule );
+		$c .= hit_core_enquiries_pdf_text( $label, 50, $top, 10, false, $muted );
+		$c .= hit_core_enquiries_pdf_text( $value, 420, $top, 10.5, true, $ink );
+		$c .= hit_core_enquiries_pdf_line( 50, $top + 15, 545, $top + 15, .35, $rule );
 		$top += 40;
 	}
-	$c .= hit_enquiries_pdf_text( 'MONTHLY LIVING ASSUMPTIONS', 50, 604, 8, true, $blue );
+	$c .= hit_core_enquiries_pdf_text( 'MONTHLY LIVING ASSUMPTIONS', 50, 604, 8, true, $blue );
 	$assumptions = array( 'Accommodation' => $estimate['housing'], 'Health insurance' => $estimate['insurance'], 'Food' => $estimate['food'], 'Transportation' => $estimate['transport'], 'Personal' => $estimate['personal'] );
 	$x = 50; $y = 631; $index = 0;
 	foreach ( $assumptions as $label => $value ) {
-		$c .= hit_enquiries_pdf_text( strtoupper( $label ), $x, $y, 6.8, true, $muted );
-		$c .= hit_enquiries_pdf_text( hit_enquiries_money( $value ), $x, $y + 18, 9.5, true, $ink );
+		$c .= hit_core_enquiries_pdf_text( strtoupper( $label ), $x, $y, 6.8, true, $muted );
+		$c .= hit_core_enquiries_pdf_text( hit_core_enquiries_money( $value ), $x, $y + 18, 9.5, true, $ink );
 		$x += 168; $index++;
 		if ( 3 === $index ) { $x = 50; $y += 54; }
 	}
-	$c .= hit_enquiries_pdf_line( 50, 729, 545, 729, .7, $rule );
+	$c .= hit_core_enquiries_pdf_line( 50, 729, 545, 729, .7, $rule );
 	$summary = array( 'FIRST STUDY YEAR' => $estimate['firstYear'], 'AVERAGE PER MONTH' => $estimate['monthly'], 'PROGRAM LENGTH' => $estimate['duration'] );
 	$x = 50;
-	foreach ( $summary as $label => $value ) { $c .= hit_enquiries_pdf_text( $label, $x, 756, 7.2, true, $muted ); $c .= hit_enquiries_pdf_text( $value, $x, 778, 11.2, true, $ink ); $x += 177; }
-	$c .= hit_enquiries_pdf_line( 50, 801, 545, 801, .5, $rule );
-	$c .= hit_enquiries_pdf_text( 'Indicative estimate only. Admissions will confirm current charges and payment arrangements.', 50, 821, 7.4, false, $muted );
+	foreach ( $summary as $label => $value ) { $c .= hit_core_enquiries_pdf_text( $label, $x, 756, 7.2, true, $muted ); $c .= hit_core_enquiries_pdf_text( $value, $x, 778, 11.2, true, $ink ); $x += 177; }
+	$c .= hit_core_enquiries_pdf_line( 50, 801, 545, 801, .5, $rule );
+	$c .= hit_core_enquiries_pdf_text( 'Indicative estimate only. Admissions will confirm current charges and payment arrangements.', 50, 821, 7.4, false, $muted );
 
 	$objects = array(
 		1 => '<< /Type /Catalog /Pages 2 0 R >>',

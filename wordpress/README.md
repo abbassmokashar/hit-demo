@@ -1,26 +1,44 @@
-# HIT WordPress enquiries
+# HIT WordPress package
 
-`hit-enquiries` is the WordPress companion plugin for the prototype’s **Study Cost Model**.
+The HIT prototype uses the same update-safe architecture as HBS:
 
-## What it adds
+- `hit-theme` — presentation, navigation, templates, motion and public assets.
+- `hit-child` — deployment-specific overrides that survive parent-theme updates.
+- `hit-core` — editable page sections, structured program/intake data, starter-content import, decision-tool data and the complete admissions enquiry workflow.
 
-- A private **Enquiries** section in WordPress.
-- Secure `POST /wp-json/hit/v1/estimate` handling with validation and rate limiting.
-- Server-side recalculation using the published HIT tuition values instead of trusting browser totals.
-- A branded PDF emailed to the applicant.
-- An admissions notification email.
-- Readable enquiry detail pages, delivery status, and an Excel-compatible CSV export.
-- WordPress privacy export/erase support and configurable record retention.
+No page builder or separate forms/enquiries plugin is required.
 
-## Installation
+## Install
 
-1. Zip the `hit-enquiries` folder or use the packaged file in `dist`.
-2. In WordPress, open **Plugins → Add New → Upload Plugin**.
-3. Activate **HIT Enquiries**.
-4. Open **Enquiries → Settings** and set the Admissions email address.
-5. Configure authenticated SMTP or the host’s transactional mail service, then send the test email.
+1. Install `dist/hit-theme.zip` under **Appearance → Themes**. Do not activate it yet.
+2. Install `dist/hit-child.zip`, then activate **HIT Child**.
+3. Install and activate `dist/hit-core.zip` under **Plugins**.
+4. Core imports the 27 approved prototype pages, six programs and three intakes, and sets the homepage.
+5. Open **HIT website** and confirm the import counts.
+6. Open **Appearance → Menus** to review the editable header and full-screen menus.
+7. Open **Enquiries → Settings**, choose the Admissions recipient and send a test email.
+8. Choose **Post name** under **Settings → Permalinks** and save once.
 
-The plugin exposes `window.HIT_ESTIMATE_ENDPOINT` and `window.HIT_ESTIMATE_NONCE` automatically. The prototype’s existing cost-model script detects those values and switches from local PDF download to WordPress email delivery.
+If the earlier experimental **HIT Enquiries** plugin is installed, deactivate it before installing HIT Core and remove it after Core is active. Core migrates its recipient address and uses the same private enquiry records and endpoint.
 
-Before launch, review the public privacy notice, retention period, email wording, and admissions workflow with Helvetic Tech’s responsible legal and operations teams.
+## Editing model
+
+Pages are ordinary WordPress pages. Each visual section is a native **HIT page section** block. Editors can edit text, links and images, hide a section, and reorder sections. Programs and intakes are structured records; changes to program facts flow into Program Signal, Program Matrix and the server-verified Study Cost Model.
+
+The **Refresh HIT starter content** action updates only Core-managed pages and records. It preserves unrelated WordPress content, but replaces manual edits inside managed pages with the approved package version.
+
+## Rebuild after prototype changes
+
+```powershell
+node wordpress/tools/export-starter-data.mjs
+powershell -ExecutionPolicy Bypass -File wordpress/build-packages.ps1
+```
+
+The exporter converts the generated prototype into WordPress-safe starter content. The packaging script creates generic and versioned ZIP files in `wordpress/dist`.
+
+## Ownership boundary
+
+- Shared design or frontend behavior: `hit-theme`.
+- Site-specific overrides: `hit-child`.
+- Content models, imports, tools, enquiries, PDFs and email: `hit-core`.
 
