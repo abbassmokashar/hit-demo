@@ -6,12 +6,14 @@
 - [ ] Page hierarchy and permalinks match the prototype.
 - [ ] Program facts, fees, awards and intakes match approved Helvetic Tech content.
 - [ ] Page sections can be edited, hidden and reordered in the block editor.
+- [ ] Text, link destinations and section images can be changed through the HIT section sidebar controls and Media Library.
 - [ ] Header and full-screen navigation can be edited under Appearance → Menus.
 
 ## Interactive experience
 
 - [ ] Hero, reveal, hover, tabs, carousel and horizontal program interactions work.
 - [ ] The full-screen menu works with pointer and keyboard input.
+- [ ] The branded logo preloader appears on the first visit and logo transitions appear between internal pages.
 - [ ] Program Signal, Program Matrix and Study Cost Model work with Core data.
 - [ ] Study Cost Model recalculates server-side and sends the branded PDF.
 - [ ] Reduced-motion preferences are respected.

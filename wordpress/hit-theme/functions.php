@@ -2,7 +2,7 @@
 /** Theme bootstrap and WordPress integration. */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'HIT_THEME_VERSION', '1.0.0' );
+define( 'HIT_THEME_VERSION', '1.0.1' );
 require_once get_template_directory() . '/inc/class-hit-overlay-menu-walker.php';
 
 function hit_theme_setup() {
@@ -127,6 +127,7 @@ function hit_theme_seed_menus() {
 	hit_theme_seed_menu( 'HIT Full Screen', 'overlay', $items );
 }
 add_action( 'after_switch_theme', 'hit_theme_seed_menus' );
+add_action( 'admin_init', 'hit_theme_seed_menus' );
 
 add_action( 'admin_notices', static function() {
 	if ( ! current_user_can( 'activate_plugins' ) || defined( 'HIT_CORE_VERSION' ) ) return;

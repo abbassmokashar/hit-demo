@@ -19,11 +19,15 @@ No page builder or separate forms/enquiries plugin is required.
 7. Open **Enquiries → Settings**, choose the Admissions recipient and send a test email.
 8. Choose **Post name** under **Settings → Permalinks** and save once.
 
+If an activation import was skipped by the hosting environment, open **HIT website** in the WordPress dashboard. HIT Core automatically repairs a missing or partial import, and the same screen provides an **Import missing HIT content** button plus readable diagnostics.
+
 If the earlier experimental **HIT Enquiries** plugin is installed, deactivate it before installing HIT Core and remove it after Core is active. Core migrates its recipient address and uses the same private enquiry records and endpoint.
 
 ## Editing model
 
 Pages are ordinary WordPress pages. Each visual section is a native **HIT page section** block. Editors can edit text, links and images, hide a section, and reorder sections. Programs and intakes are structured records; changes to program facts flow into Program Signal, Program Matrix and the server-verified Study Cost Model.
+
+Open any imported page under **Pages → Edit**. Select a HIT page section to use its WordPress sidebar controls for headings and paragraphs, link labels and destinations, Media Library images, visibility and section order. The original approved HTML is retained in page metadata for recovery.
 
 The **Refresh HIT starter content** action updates only Core-managed pages and records. It preserves unrelated WordPress content, but replaces manual edits inside managed pages with the approved package version.
 

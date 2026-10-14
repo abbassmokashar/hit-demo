@@ -4,11 +4,15 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#0b2641">
-	<script>document.documentElement.classList.replace('no-js','js')</script>
+	<script>document.documentElement.classList.replace('no-js','js');try{if(sessionStorage.getItem('hit-visited')==='1')document.documentElement.classList.add('is-returning')}catch(e){}</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?> data-page="<?php echo esc_attr( hit_theme_page_kind() ); ?>">
 <?php wp_body_open(); ?>
+<div class="site-loader" data-site-loader role="status" aria-live="polite" aria-label="Loading Helvetic Institute of Technology">
+	<div class="loader-brand"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hit-logo.svg' ); ?>" width="188" height="75" alt="Helvetic Institute of Technology"><span aria-hidden="true"></span><small>La Tour-de-Peilz · Switzerland</small></div>
+</div>
+<div class="page-transition" data-page-transition aria-hidden="true"><div class="transition-brand"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hit-logo.svg' ); ?>" width="188" height="75" alt=""><span></span></div></div>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <header class="site-header" data-header>
 	<div class="site-header__progress" aria-hidden="true"><span></span></div>

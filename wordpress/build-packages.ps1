@@ -5,9 +5,9 @@ $PackageDist = Join-Path $PackageRoot 'dist'
 New-Item -ItemType Directory -Force -Path $PackageDist | Out-Null
 
 $packages = @(
-    @{ Folder = 'hit-theme'; Version = '1.0.0' },
-    @{ Folder = 'hit-child'; Version = '1.0.0' },
-    @{ Folder = 'hit-core'; Version = '1.0.0' }
+    @{ Folder = 'hit-theme'; Version = '1.0.1' },
+    @{ Folder = 'hit-child'; Version = '1.0.1' },
+    @{ Folder = 'hit-core'; Version = '1.0.1' }
 )
 
 function New-FileOnlyZip {
@@ -26,6 +26,7 @@ function New-FileOnlyZip {
 foreach ($package in $packages) {
     $generic = Join-Path $PackageDist ($package.Folder + '.zip')
     $versioned = Join-Path $PackageDist ($package.Folder + '-' + $package.Version + '.zip')
+    Get-ChildItem -LiteralPath $PackageDist -Filter ($package.Folder + '-*.zip') -File | Where-Object { $_.FullName -ne $versioned } | Remove-Item -Force
     if (Test-Path $generic) { Remove-Item -LiteralPath $generic -Force }
     if (Test-Path $versioned) { Remove-Item -LiteralPath $versioned -Force }
     New-FileOnlyZip -SourceDirectory (Join-Path $PackageRoot $package.Folder) -DestinationZip $generic

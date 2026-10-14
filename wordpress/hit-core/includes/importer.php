@@ -14,10 +14,22 @@ function hit_core_find_managed_page( $route ) {
 	return $ids ? (int) $ids[0] : 0;
 }
 
+function hit_core_managed_page_count() {
+	$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => -1, 'fields' => 'ids', 'meta_key' => '_hit_managed_page', 'meta_value' => '1', 'no_found_rows' => true ) );
+	return count( $ids );
+}
+
+function hit_core_program_count() {
+	$counts = wp_count_posts( 'hit_program' );
+	return $counts && isset( $counts->publish ) ? (int) $counts->publish : 0;
+}
+
 function hit_core_import_starter_content( $refresh = false ) {
 	$pages = hit_core_starter_data( 'pages' );
 	$route_ids = array();
 	$created = $updated = 0;
+	$errors = array();
+	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'The bundled pages.json file could not be read or contained no pages.' ) );
 	$public_routes = array_fill_keys( array_map( static function( $page ) { return (string) ( $page['route'] ?? '' ); }, $pages ), true );
 	foreach ( $pages as $page ) {
 		$parent_route = (string) ( $page['parentRoute'] ?? '' );
@@ -25,6 +37,7 @@ function hit_core_import_starter_content( $refresh = false ) {
 		$slug = basename( untrailingslashit( $parent_route ) );
 		$container_id = hit_core_find_managed_page( $parent_route );
 		if ( ! $container_id ) $container_id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'private', 'post_title' => ucwords( str_replace( '-', ' ', $slug ) ), 'post_name' => $slug, 'post_content' => '' ), true );
+		if ( is_wp_error( $container_id ) ) $errors[] = $parent_route . ': ' . $container_id->get_error_message();
 		if ( ! is_wp_error( $container_id ) ) {
 			$route_ids[ $parent_route ] = (int) $container_id;
 			update_post_meta( $container_id, '_hit_managed_page', '1' );
@@ -45,7 +58,8 @@ function hit_core_import_starter_content( $refresh = false ) {
 			$post_id = wp_insert_post( $post, true );
 			if ( ! is_wp_error( $post_id ) ) $created++;
 		}
-		if ( is_wp_error( $post_id ) || ! $post_id ) continue;
+		if ( is_wp_error( $post_id ) ) { $errors[] = ( $route ?: '/' ) . ': ' . $post_id->get_error_message(); continue; }
+		if ( ! $post_id ) { $errors[] = ( $route ?: '/' ) . ': WordPress returned no page ID.'; continue; }
 		$route_ids[ $route ] = (int) $post_id;
 		update_post_meta( $post_id, '_hit_managed_page', '1' );
 		update_post_meta( $post_id, '_hit_route', $route );
@@ -68,8 +82,10 @@ function hit_core_import_starter_content( $refresh = false ) {
 	}
 	hit_core_import_programs();
 	hit_core_import_intakes();
-	update_option( 'hit_core_content_version', HIT_CORE_VERSION, false );
-	return array( 'created' => $created, 'updated' => $updated, 'pages' => count( $pages ) );
+	$managed = hit_core_managed_page_count();
+	$program_count = hit_core_program_count();
+	if ( $managed >= count( $pages ) && $program_count >= 6 ) update_option( 'hit_core_content_version', HIT_CORE_VERSION, false );
+	return array( 'created' => $created, 'updated' => $updated, 'pages' => count( $pages ), 'managed' => $managed, 'programs' => $program_count, 'errors' => $errors );
 }
 
 function hit_core_upsert_by_key( $post_type, $key, $value, $post ) {

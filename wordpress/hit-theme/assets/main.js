@@ -22,6 +22,54 @@
   const escapeHtml = (value = '') =>
     String(value).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char]);
 
+  /* ------------------------------------------------------ branded page flow */
+
+  function initPageFlow() {
+    const loader = document.querySelector('[data-site-loader]');
+    const transition = document.querySelector('[data-page-transition]');
+    let returning = false;
+    try { returning = window.sessionStorage.getItem('hit-visited') === '1'; } catch (_) { /* Storage is optional. */ }
+
+    if (returning) root.classList.add('is-returning');
+
+    const completeLoader = () => {
+      if (!loader) return;
+      loader.classList.add('is-complete');
+      loader.setAttribute('aria-hidden', 'true');
+      try { window.sessionStorage.setItem('hit-visited', '1'); } catch (_) { /* Storage is optional. */ }
+    };
+
+    if (returning || prefersReduced()) completeLoader();
+    else {
+      const started = performance.now();
+      const finish = () => window.setTimeout(completeLoader, Math.max(0, 1050 - (performance.now() - started)));
+      if (document.readyState === 'complete') finish();
+      else window.addEventListener('load', finish, { once: true });
+      window.setTimeout(completeLoader, 3200);
+    }
+
+    if (!transition) return;
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (link.closest('#wpadminbar')) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+      const url = new URL(link.href, window.location.href);
+      if (url.origin !== window.location.origin || url.protocol !== window.location.protocol) return;
+      if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) return;
+      event.preventDefault();
+      transition.classList.add('is-visible');
+      transition.setAttribute('aria-hidden', 'false');
+      try { window.sessionStorage.setItem('hit-visited', '1'); } catch (_) { /* Storage is optional. */ }
+      window.setTimeout(() => { window.location.href = url.href; }, prefersReduced() ? 40 : 680);
+    });
+
+    window.addEventListener('pageshow', () => {
+      transition.classList.remove('is-visible');
+      transition.setAttribute('aria-hidden', 'true');
+    });
+  }
+
   /* ------------------------------------------------------------ scroll bus */
 
   const scrollHandlers = new Set();
@@ -1579,6 +1627,7 @@
   /* ------------------------------------------------------------------- init */
 
   function init() {
+    initPageFlow();
     attachScroll();
     initReveals();
     initSwissTime();
