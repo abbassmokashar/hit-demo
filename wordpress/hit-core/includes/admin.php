@@ -33,13 +33,14 @@ add_action( 'admin_notices', static function() {
 function hit_core_admin_page() {
 	$pages = hit_core_managed_page_count();
 	$programs = hit_core_program_count();
+	$native_pages = count( hit_core_starter_data( 'pages' ) );
 	$last = get_option( 'hit_core_last_import', array() );
 	?>
 	<div class="wrap"><h1>HIT website</h1>
 	<?php if ( isset( $_GET['imported'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Missing HIT content was imported. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages were created.</p></div><?php endif; ?>
 	<?php if ( isset( $_GET['refreshed'] ) ) : ?><div class="notice notice-success is-dismissible"><p>Starter content refreshed. <?php echo absint( $_GET['created'] ?? 0 ); ?> pages created and <?php echo absint( $_GET['updated'] ?? 0 ); ?> pages updated.</p></div><?php endif; ?>
 	<p>This plugin owns the editable website content, program data, interactive tools and admissions enquiries. The parent theme owns the presentation; the child theme is reserved for deployment-specific customisations.</p>
-	<table class="widefat striped" style="max-width:800px"><tbody><tr><th>Managed pages</th><td><?php echo esc_html( $pages ); ?> / 27</td></tr><tr><th>Structured programs</th><td><?php echo esc_html( $programs ); ?> / 6</td></tr><tr><th>Installed HIT Core</th><td><?php echo esc_html( HIT_CORE_VERSION ); ?></td></tr><tr><th>Imported content package</th><td><?php echo esc_html( get_option( 'hit_core_content_version', 'Not imported' ) ); ?></td></tr></tbody></table>
+	<table class="widefat striped" style="max-width:800px"><tbody><tr><th>Native starter pages available</th><td><?php echo esc_html( $native_pages ); ?> / 27</td></tr><tr><th>Managed pages</th><td><?php echo esc_html( $pages ); ?> / 27</td></tr><tr><th>Structured programs</th><td><?php echo esc_html( $programs ); ?> / 6</td></tr><tr><th>Installed HIT Core</th><td><?php echo esc_html( HIT_CORE_VERSION ); ?></td></tr><tr><th>Imported content package</th><td><?php echo esc_html( get_option( 'hit_core_content_version', 'Not imported' ) ); ?></td></tr></tbody></table>
 	<?php if ( ! empty( $last['errors'] ) ) : ?><div class="notice notice-error inline"><p><strong>Last import messages:</strong></p><ul><?php foreach ( $last['errors'] as $error ) echo '<li>' . esc_html( $error ) . '</li>'; ?></ul></div><?php endif; ?>
 	<?php if ( $pages < 27 || $programs < 6 ) : ?><h2>Import missing content</h2><p>This safe import creates only missing HIT pages and records. Existing managed-page edits are preserved.</p><form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><?php wp_nonce_field( 'hit_import_content' ); ?><input type="hidden" name="action" value="hit_import_content"><?php submit_button( 'Import missing HIT content', 'primary' ); ?></form><?php endif; ?>
 	<h2>Refresh managed content</h2><p>This updates only pages and structured records created by HIT Core. Unrelated WordPress content is not changed. Existing managed-page edits are replaced, so use this only when deploying an approved content update.</p>

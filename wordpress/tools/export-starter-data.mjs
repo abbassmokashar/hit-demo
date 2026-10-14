@@ -81,6 +81,6 @@ const intakes = ['January', 'April', 'September'].map((title, index) => ({ title
 await writeData('pages', pages);
 await writeData('programs', programs);
 await writeData('intakes', intakes);
-await writeFile(embeddedOut, `<?php\n/** Generated, embedded HIT starter data. */\nif ( ! defined( 'ABSPATH' ) ) exit;\nfunction hit_core_embedded_starter_data( $name ) {\n\tstatic $data = array(\n\t\t'pages' => ${phpValue(pages, 2)},\n\t\t'programs' => ${phpValue(programs, 2)},\n\t\t'intakes' => ${phpValue(intakes, 2)},\n\t);\n\treturn isset( $data[ $name ] ) ? $data[ $name ] : array();\n}\n`);
+await writeFile(embeddedOut, `<?php\n/** Generated, self-contained HIT starter content bundle. */\nif ( ! defined( 'ABSPATH' ) ) exit;\nfunction hit_core_bundled_starter_data( $name ) {\n\tswitch ( $name ) {\n\t\tcase 'pages':\n\t\t\treturn ${phpValue(pages, 3)};\n\t\tcase 'programs':\n\t\t\treturn ${phpValue(programs, 3)};\n\t\tcase 'intakes':\n\t\t\treturn ${phpValue(intakes, 3)};\n\t\tdefault:\n\t\t\treturn array();\n\t}\n}\n`);
 console.log(`Exported ${pages.length} pages, ${programs.length} programs and ${intakes.length} intakes.`);
 

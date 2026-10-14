@@ -1,18 +1,19 @@
 <?php
-/** Generated, embedded HIT starter data. */
+/** Generated, self-contained HIT starter content bundle. */
 if ( ! defined( 'ABSPATH' ) ) exit;
-function hit_core_embedded_starter_data( $name ) {
-	static $data = array(
-		'pages' => array(
-      array(
-        'route' => '',
-        'slug' => 'home',
-        'parentRoute' => '',
-        'title' => 'AI, Cybersecurity & Blockchain',
-        'description' => 'Develop the expertise to pursue high-demand technology careers through a Swiss-based education.',
-        'kind' => 'home',
-        'mainClass' => '',
-        'content' => '<section class="home-hero dark" data-hero data-chapter="Introduction"><figure class="home-hero__photo" aria-hidden="true"><img src="{{theme_url}}/assets/images/official-community.webp" alt="" fetchpriority="high" decoding="async"></figure><canvas class="hero-signal" data-network aria-hidden="true"></canvas><div class="shell hero-content"><p class="label reveal">School of technology, Switzerland</p><h1 class="reveal"><span>AI, Cybersecurity</span><em>and Blockchain</em></h1><div class="hero-lower"><p class="hero-intro reveal">Develop the expertise to pursue high-demand technology careers through a Swiss-based education.</p><div class="hero-actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-cursor="Apply">Apply <span>↗</span></a><a class="button-secondary" href="https://t8d78.share.hsforms.com/2VJF0JmhFQgusDgsBs8zfNw" data-cursor="Open">Request brochure <span>↗</span></a></div></div></div></section>
+function hit_core_bundled_starter_data( $name ) {
+	switch ( $name ) {
+		case 'pages':
+			return array(
+        array(
+          'route' => '',
+          'slug' => 'home',
+          'parentRoute' => '',
+          'title' => 'AI, Cybersecurity & Blockchain',
+          'description' => 'Develop the expertise to pursue high-demand technology careers through a Swiss-based education.',
+          'kind' => 'home',
+          'mainClass' => '',
+          'content' => '<section class="home-hero dark" data-hero data-chapter="Introduction"><figure class="home-hero__photo" aria-hidden="true"><img src="{{theme_url}}/assets/images/official-community.webp" alt="" fetchpriority="high" decoding="async"></figure><canvas class="hero-signal" data-network aria-hidden="true"></canvas><div class="shell hero-content"><p class="label reveal">School of technology, Switzerland</p><h1 class="reveal"><span>AI, Cybersecurity</span><em>and Blockchain</em></h1><div class="hero-lower"><p class="hero-intro reveal">Develop the expertise to pursue high-demand technology careers through a Swiss-based education.</p><div class="hero-actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-cursor="Apply">Apply <span>↗</span></a><a class="button-secondary" href="https://t8d78.share.hsforms.com/2VJF0JmhFQgusDgsBs8zfNw" data-cursor="Open">Request brochure <span>↗</span></a></div></div></div></section>
   <section class="home-facts" id="facts" data-chapter="Key facts"><div class="shell home-facts__grid"><div class="home-fact reveal"><strong>6</strong><span>Bachelor and Master programs</span></div><div class="home-fact reveal"><strong>3</strong><span>Intakes: January · April · September</span></div><div class="home-fact reveal"><strong>180 ECTS</strong><span>Bachelor programs · 3 years</span></div><div class="home-fact reveal"><strong>120 ECTS</strong><span>Master programs · 2 years</span></div></div></section>
   <section class="home-evidence chapter" id="why" data-chapter="Why Helvetic Tech"><div class="shell evidence-layout"><div class="evidence-heading reveal"><p class="label">Why Helvetic Tech</p><h2><span>Clear facts.</span><em>Practical support.</em></h2></div><div class="evidence-list"><article class="evidence-row reveal"><span>01</span><div><h3>Dual-degree structure</h3><p>Programs are delivered in partnership between Helvetic Tech and Tiffin University. Upon successful completion, students receive a Swiss qualification from Helvetic Tech and an American degree from Tiffin University.</p><a href="{{home_url}}/faq/">Read the program FAQ ↗</a></div></article><article class="evidence-row reveal"><span>02</span><div><h3>International student support</h3><p>Student Services provides guidance on accommodation, visa procedures, health insurance, academic advising, orientation, and everyday life in Switzerland.</p><a href="{{home_url}}/student-services/">Explore student support ↗</a></div></article><article class="evidence-row reveal"><span>03</span><div><h3>Transparent study costs</h3><p>Bachelor tuition is CHF 6’850 per term and Master tuition is CHF 7’350 per term. Living-cost guidance is published in CHF.</p><a href="{{home_url}}/financing/fees-expenses/">View fees &amp; expenses ↗</a></div></article></div></div></section>
   <section class="programs chapter" id="programs" data-chapter="Programs" data-study-scroll><div class="programs-pin"><div class="study-deck" data-study-deck><div class="projects-heading study-intro reveal"><p class="label">Programs</p><h2><span>Bachelor and Master</span><em>programs.</em></h2><p class="study-intro__note">Dual Swiss and US degree pathways in artificial intelligence, cybersecurity, and blockchain.</p><a class="line-link" href="{{home_url}}/programs/">Explore all programs <span>↗</span></a></div><article class="study-project study-project--ai reveal" data-study-project data-cursor="Explore"><figure class="study-project__media" aria-hidden="true"><img src="{{theme_url}}/assets/images/discipline-ai.webp" alt="" loading="lazy" decoding="async"></figure><span class="study-project__scrim" aria-hidden="true"></span><div class="study-project__top"><span>/01</span><span>Artificial Intelligence</span><i>Open ↘</i></div><div class="study-project__body"><h3>Artificial Intelligence</h3><div><a href="{{home_url}}/programs/bachelor-in-artificial-intelligence/"><span>Bachelor</span>Bachelor in Artificial Intelligence<i>↗</i></a><a href="{{home_url}}/programs/master-in-artificial-intelligence/"><span>Master</span>Master in Artificial Intelligence<i>↗</i></a></div></div></article><article class="study-project study-project--cybersecurity reveal" data-study-project data-cursor="Explore"><figure class="study-project__media" aria-hidden="true"><img src="{{theme_url}}/assets/images/discipline-cyber.webp" alt="" loading="lazy" decoding="async"></figure><span class="study-project__scrim" aria-hidden="true"></span><div class="study-project__top"><span>/02</span><span>Cybersecurity</span><i>Open ↘</i></div><div class="study-project__body"><h3>Cybersecurity</h3><div><a href="{{home_url}}/programs/bachelor-in-cybersecurity/"><span>Bachelor</span>Bachelor in Cybersecurity<i>↗</i></a><a href="{{home_url}}/programs/master-in-cybersecurity/"><span>Master</span>Master in Cybersecurity<i>↗</i></a></div></div></article><article class="study-project study-project--blockchain reveal" data-study-project data-cursor="Explore"><figure class="study-project__media" aria-hidden="true"><img src="{{theme_url}}/assets/images/discipline-blockchain.webp" alt="" loading="lazy" decoding="async"></figure><span class="study-project__scrim" aria-hidden="true"></span><div class="study-project__top"><span>/03</span><span>Blockchain</span><i>Open ↘</i></div><div class="study-project__body"><h3>Blockchain</h3><div><a href="{{home_url}}/programs/bachelor-in-blockchain/"><span>Bachelor</span>Bachelor in Blockchain<i>↗</i></a><a href="{{home_url}}/programs/master-in-blockchain/"><span>Master</span>Master in Blockchain<i>↗</i></a></div></div></article></div><div class="study-progress" aria-hidden="true"><span data-study-current>01</span><i><b data-study-progress></b></i><span>03</span></div></div></section>
@@ -21,18 +22,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="international chapter" id="international" data-chapter="International students"><div class="shell international-layout"><div class="international-copy reveal"><p class="label">International students</p><h2><span>Support for your move</span><em>to Switzerland.</em></h2><p>Applications are open to candidates of all nationalities. Student Services provides personalized guidance from your offer through arrival and study in Switzerland.</p><div class="international-links"><a href="{{home_url}}/student-services/">Student support <span>↗</span></a><a href="{{home_url}}/financing/fees-expenses/">Fees &amp; expenses <span>↗</span></a><a href="{{home_url}}/financing/scholarships/">Scholarships <span>↗</span></a></div></div><div class="international-points"><article class="reveal"><span>Visa &amp; immigration</span><p>Guidance on student visa applications, residence permits, and renewals.</p></article><article class="reveal"><span>Accommodation</span><p>Limited student accommodation is allocated on a first-come, first-served basis. Early application is recommended.</p></article><article class="reveal"><span>Health insurance</span><p>Health insurance is mandatory in Switzerland. Student Services provides guidance on compliant coverage.</p></article><article class="reveal"><span>Intakes</span><p>Programs begin in January, April, and September.</p></article></div></div></section>
   <section class="home-admissions chapter" id="admissions" data-chapter="Admissions"><div class="shell"><div class="chapter-heading reveal"><p class="label">Admissions</p><h2><span>A clear path from application</span><em>to arrival.</em></h2></div><div class="admission-path"><article class="reveal"><span>01</span><h3>Apply</h3><p>Complete the application form and upload the required documents.</p></article><article class="reveal"><span>02</span><h3>Review</h3><p>The admissions team reviews your application and may invite you to an online interview.</p></article><article class="reveal"><span>03</span><h3>Decision</h3><p>Successful applicants receive an offer and the steps required to confirm their place.</p></article><article class="reveal"><span>04</span><h3>Visa and arrival</h3><p>Helvetic Tech provides guidance and supporting documentation for the visa process.</p></article></div><a class="line-link" href="{{home_url}}/admissions/">Admissions requirements and documents <span>↗</span></a></div></section>
   <section class="home-close" data-chapter="Apply"><div class="shell home-close__inner"><div class="reveal"><p class="label">Your next step</p><h2>Applications are open to candidates of all nationalities.</h2></div><div class="home-close__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Apply <span>↗</span></a><a class="button-secondary" href="{{home_url}}/contact/">Contact us <span>↗</span></a></div></div></section>',
-        'source' => 'https://www.helvetictech.ch/',
-        'frontPage' => true,
-      ),
-      array(
-        'route' => 'admissions/',
-        'slug' => 'admissions',
-        'parentRoute' => '',
-        'title' => 'Admissions',
-        'description' => 'The admissions process at Helvetic Tech is designed to be clear, structured, and accessible, while ensuring that applicants have the academic foundation and motivation required to succeed in a technology-focused environment.',
-        'kind' => 'admissions',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media dark">
+          'source' => 'https://www.helvetictech.ch/',
+          'frontPage' => true,
+        ),
+        array(
+          'route' => 'admissions/',
+          'slug' => 'admissions',
+          'parentRoute' => '',
+          'title' => 'Admissions',
+          'description' => 'The admissions process at Helvetic Tech is designed to be clear, structured, and accessible, while ensuring that applicants have the academic foundation and motivation required to succeed in a technology-focused environment.',
+          'kind' => 'admissions',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/students-classroom.webp" alt="Students studying in a classroom at the Helvetic Institute of Technology" decoding="async" fetchpriority="high"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-media__inner">
@@ -52,30 +53,30 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter" id="eligibility"><div class="shell chapter-heading reveal"><p class="label">Eligibility requirements</p><h2><span>Eligibility</span><em>requirements</em></h2></div><div class="shell card-grid card-grid--three"><article class="card reveal"><span class="card__index" aria-hidden="true">01</span><h3>Bachelor programs</h3><p>Applicants must hold a recognized secondary school diploma or equivalent qualification.</p></article><article class="card reveal"><span class="card__index" aria-hidden="true">02</span><h3>Master programs</h3><p>Applicants must hold a recognized bachelor’s degree or equivalent qualification.</p></article><article class="card reveal"><span class="card__index" aria-hidden="true">03</span><h3>English proficiency</h3><p>Applicants whose previous education was not conducted in English may be required to demonstrate sufficient proficiency.</p></article></div></section>
   <section class="chapter" id="enrolment"><div class="shell chapter-heading reveal"><p class="label">Offer and enrollment</p><h2><span>Offer and</span><em>enrollment</em></h2></div><div class="shell accordion-stack reveal"><div class="accordion" data-accordion><button type="button" aria-expanded="false">Offer and enrolment <span>+</span></button><div><p>To confirm your enrolment, you sign and return the offer letter and student agreement, pay the admission fee, and receive official acceptance documents required for visa applications and administrative procedures.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Visa and arrival <span>+</span></button><div><p>Students requiring a visa complete the application process through their local Swiss embassy or consulate. Helvetic Tech provides guidance and supporting documentation throughout, and applicants are encouraged to apply early.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Credit transfer <span>+</span></button><div><p>Applicants may request recognition of prior learning or credit transfer. Each request is evaluated individually based on course content and academic standards.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Accommodation <span>+</span></button><div><p>Helvetic Tech supports students in finding accommodation in the Lake Geneva region. A limited number of options are reserved for students and allocated on a first-come, first-served basis, so early application is recommended.</p></div></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/admissions',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'alumni/',
-        'slug' => 'alumni',
-        'parentRoute' => '',
-        'title' => 'Alumni',
-        'description' => 'Helvetic alumni form a powerful, diverse, and deeply connected professional network that continues to grow with every graduating class.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Alumni"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/alumni-network.webp" alt="The Helvetic Tech alumni and professional network" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Alumni</p><h1 class="reveal">Alumni</h1><p class="reveal">Helvetic alumni form a powerful, diverse, and deeply connected professional network that continues to grow with every graduating class.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="The Helvetic alumni network"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">The Helvetic alumni network</p><h2 class="reveal">The Helvetic alumni network</h2><p class="reveal">The Helvetic alumni network is a global community of business professionals who share the experience of earning a dual Swiss and American degree in one of the world’s most prestigious settings.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Where our alumni work</h2><p class="reveal">Helvetic alumni have built careers at some of the world’s most respected and influential organizations.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Alumni success and impact</h2><p class="reveal">The success of Helvetic alumni is reflected not only in the organizations they join but in the leadership roles they assume and the impact they create.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Staying connected</h2><p class="reveal">Helvetic maintains active communication channels with its alumni community through regular newsletters, social media engagement, and dedicated alumni platforms.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Alumni events and reunions</h2><p class="reveal">Helvetic organizes alumni events and reunions throughout the year, both on campus and in key cities around the world.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Mentorship and giving back</h2><p class="reveal">By sharing their professional experiences, career advice, and industry insights with current students, alumni play a direct role in shaping the next generation of business leaders.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/alumni',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'campus-life/',
-        'slug' => 'campus-life',
-        'parentRoute' => '',
-        'title' => 'Campus Life',
-        'description' => 'Campus life at Helvetic Tech is shaped by a combination of focused academic study, an international environment, and a unique location on the shores of Lake Geneva.',
-        'kind' => 'campus',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media dark">
+          'source' => 'https://www.helvetictech.ch/admissions',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'alumni/',
+          'slug' => 'alumni',
+          'parentRoute' => '',
+          'title' => 'Alumni',
+          'description' => 'Helvetic alumni form a powerful, diverse, and deeply connected professional network that continues to grow with every graduating class.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Alumni"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/alumni-network.webp" alt="The Helvetic Tech alumni and professional network" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Alumni</p><h1 class="reveal">Alumni</h1><p class="reveal">Helvetic alumni form a powerful, diverse, and deeply connected professional network that continues to grow with every graduating class.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="The Helvetic alumni network"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">The Helvetic alumni network</p><h2 class="reveal">The Helvetic alumni network</h2><p class="reveal">The Helvetic alumni network is a global community of business professionals who share the experience of earning a dual Swiss and American degree in one of the world’s most prestigious settings.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Where our alumni work</h2><p class="reveal">Helvetic alumni have built careers at some of the world’s most respected and influential organizations.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Alumni success and impact</h2><p class="reveal">The success of Helvetic alumni is reflected not only in the organizations they join but in the leadership roles they assume and the impact they create.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Staying connected</h2><p class="reveal">Helvetic maintains active communication channels with its alumni community through regular newsletters, social media engagement, and dedicated alumni platforms.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Alumni events and reunions</h2><p class="reveal">Helvetic organizes alumni events and reunions throughout the year, both on campus and in key cities around the world.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Mentorship and giving back</h2><p class="reveal">By sharing their professional experiences, career advice, and industry insights with current students, alumni play a direct role in shaping the next generation of business leaders.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/alumni',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'campus-life/',
+          'slug' => 'campus-life',
+          'parentRoute' => '',
+          'title' => 'Campus Life',
+          'description' => 'Campus life at Helvetic Tech is shaped by a combination of focused academic study, an international environment, and a unique location on the shores of Lake Geneva.',
+          'kind' => 'campus',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/lake-montreux.webp" alt="Lake Geneva and the Swiss Alps near Montreux" decoding="async" fetchpriority="high"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-media__inner">
@@ -105,18 +106,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter media-section dark"><div class="shell media-grid"><figure class="media-grid__figure reveal" data-media-hover><img src="{{theme_url}}/assets/images/campus-walk.webp" alt="Students walking together on campus" data-parallax="0.45"><figcaption>Student life</figcaption></figure><div class="media-grid__copy reveal"><p class="label">Cultural environment</p><h2>Cultural environment</h2><p>The Lake Geneva region offers a diverse cultural setting, with access to museums, historical sites, and international events. Students are exposed to different cultures and perspectives, both within the classroom and in daily life.</p></div></div></section>
   <section class="chapter" id="town"><div class="shell chapter-heading reveal"><p class="label">Student life</p><h2><span>Student life &amp;</span><em>Living in La Tour-de-Peilz</em></h2></div><div class="shell card-grid card-grid--three"><article class="card reveal"><span class="card__index" aria-hidden="true">01</span><h3>Student life</h3><p>Throughout the academic year, students have opportunities to engage in activities that support community building and interaction. This may include orientation activities, social events, and informal gatherings that help students connect and integrate into the environment.</p></article><article class="card reveal"><span class="card__index" aria-hidden="true">02</span><h3>Living in La Tour-de-Peilz</h3><p>La Tour-de-Peilz offers a calm and accessible living environment on the shores of Lake Geneva. The town provides essential services, local shops, and easy access to public transport.</p></article><article class="card reveal"><span class="card__index" aria-hidden="true">03</span><h3>Exploring Switzerland</h3><p>Studying in Switzerland provides access to a country known for its natural environment, safety, and efficient infrastructure. Students can travel easily within the country and to neighbouring European cities.</p></article></div></section>
   <section class="next-band" data-chapter="Admissions"><a class="shell next-band__link reveal" href="{{home_url}}/admissions/"><span class="label">Admissions</span><strong>Admissions</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/campus-life',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'career-impact/',
-        'slug' => 'career-impact',
-        'parentRoute' => '',
-        'title' => 'Career outcomes',
-        'description' => 'The value of a Helvetic Tech education is best understood through the opportunities it creates over time.',
-        'kind' => 'insights',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media hero-compact dark">
+          'source' => 'https://www.helvetictech.ch/campus-life',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'career-impact/',
+          'slug' => 'career-impact',
+          'parentRoute' => '',
+          'title' => 'Career outcomes',
+          'description' => 'The value of a Helvetic Tech education is best understood through the opportunities it creates over time.',
+          'kind' => 'insights',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media hero-compact dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/page-career.webp" alt="Graduates of the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-compact__inner"><div class="hero-media__copy"><p class="label reveal">Career outcomes</p><h1 class="reveal"><span>The Helvetic Tech</span><em>career advantage</em></h1><p class="hero-lead reveal">The value of a Helvetic Tech education is best understood through the opportunities it creates over time.</p></div></div>
@@ -149,18 +150,18 @@ function hit_core_embedded_starter_data( $name ) {
     </div>
   </div>
 </section><section class="next-band" data-chapter="Programs"><a class="shell next-band__link reveal" href="{{home_url}}/programs/"><span class="label">Programs</span><strong>Dual Bachelor &amp; Master Degrees</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/career-outcomes',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'contact/',
-        'slug' => 'contact',
-        'parentRoute' => '',
-        'title' => 'Contact',
-        'description' => 'Developing future leaders on the shores of Lake Geneva. A hub of academic excellence bridging American education with Swiss precision.',
-        'kind' => 'contact',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media hero-compact dark">
+          'source' => 'https://www.helvetictech.ch/career-outcomes',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'contact/',
+          'slug' => 'contact',
+          'parentRoute' => '',
+          'title' => 'Contact',
+          'description' => 'Developing future leaders on the shores of Lake Geneva. A hub of academic excellence bridging American education with Swiss precision.',
+          'kind' => 'contact',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media hero-compact dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/page-contact.webp" alt="The Helvetic Institute of Technology in La Tour-de-Peilz, Switzerland" fetchpriority="high" decoding="async"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-compact__inner"><div class="hero-media__copy"><p class="label reveal">Visit Us</p><h1 class="reveal"><span>Visit</span><em>Us</em></h1><p class="hero-lead reveal">Developing future leaders on the shores of Lake Geneva. A hub of academic excellence bridging American education with Swiss precision.</p></div></div>
@@ -171,18 +172,18 @@ function hit_core_embedded_starter_data( $name ) {
     <figure class="visit-map reveal"><iframe title="Map of the Helvetic Institute of Technology, La Tour-de-Peilz, Switzerland" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=6.8405%2C46.4475%2C6.8785%2C46.4635&amp;layer=mapnik&amp;marker=46.4555%2C6.8595"></iframe><figcaption><span class="label">La Tour-de-Peilz, Switzerland</span><a href="https://www.openstreetmap.org/?mlat=46.4555&mlon=6.8595#map=16/46.4555/6.8595" target="_blank" rel="noopener">Open in OpenStreetMap <span aria-hidden="true">↗</span></a></figcaption></figure>
   </div></section>
   <section class="next-band" data-chapter="Contact us"><a class="shell next-band__link reveal" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78"><span class="label">Contact us</span><strong>Request More Information</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'faculty/',
-        'slug' => 'faculty',
-        'parentRoute' => '',
-        'title' => 'Faculty',
-        'description' => 'Learn from instructors who are active professionals in their fields.',
-        'kind' => 'faculty',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media dark">
+          'source' => 'https://www.helvetictech.ch/',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'faculty/',
+          'slug' => 'faculty',
+          'parentRoute' => '',
+          'title' => 'Faculty',
+          'description' => 'Learn from instructors who are active professionals in their fields.',
+          'kind' => 'faculty',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/faculty-seminar.webp" alt="A technology seminar at the Helvetic Institute of Technology" decoding="async" fetchpriority="high"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-media__inner">
@@ -198,18 +199,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter chapter--mint" id="people"><div class="shell chapter-heading reveal"><p class="label">Faculty</p><h2><span>Helvetic Tech</span><em>Faculty</em></h2></div><div class="shell card-grid card-grid--three"><article class="card reveal"><span class="card__index" aria-hidden="true">01</span><span class="card__tag">Faculty</span><h3>Noura El Moussa</h3></article><article class="card reveal"><span class="card__index" aria-hidden="true">02</span><span class="card__tag">Faculty</span><h3>Dr. Tabot Arreytambe</h3></article><article class="card reveal"><span class="card__index" aria-hidden="true">03</span><span class="card__tag">Faculty</span><h3>Robert Fontaine</h3></article></div></section>
   <section class="quote-section"><div class="shell reveal"><blockquote class="pull-quote"><p>Our faculty bring current industry experience into the classroom, ensuring that teaching is grounded in real-world practice.</p></blockquote></div></section>
   <section class="next-band" data-chapter="Programs"><a class="shell next-band__link reveal" href="{{home_url}}/programs/"><span class="label">Programs</span><strong>Dual Bachelor &amp; Master Degrees</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/faculty',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'faq/',
-        'slug' => 'faq',
-        'parentRoute' => '',
-        'title' => 'Questions and answers',
-        'description' => 'Answers about programs, admissions, visas, accommodation, and student life at Helvetic Tech.',
-        'kind' => 'faq',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media hero-compact dark">
+          'source' => 'https://www.helvetictech.ch/faculty',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'faq/',
+          'slug' => 'faq',
+          'parentRoute' => '',
+          'title' => 'Questions and answers',
+          'description' => 'Answers about programs, admissions, visas, accommodation, and student life at Helvetic Tech.',
+          'kind' => 'faq',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media hero-compact dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/page-faq.webp" alt="Advisors answering questions at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-compact__inner"><div class="hero-media__copy"><p class="label reveal">Frequently Asked Questions</p><h1 class="reveal"><span>Frequently Asked</span><em>Questions</em></h1><p class="hero-lead reveal">Shaping the next generation of professionals in a rapidly evolving technological landscape.</p></div></div>
@@ -224,54 +225,54 @@ function hit_core_embedded_starter_data( $name ) {
   <div class="faq-panels"><div role="tabpanel" data-panel="about"><div class="accordion" data-accordion><button type="button" aria-expanded="false">Where is Helvetic Tech located? <span>+</span></button><div><p>Helvetic Tech is located in La Tour-de-Peilz, in the Lake Geneva region of Switzerland. The campus is situated in the Swiss Riviera, with convenient access to cities such as Lausanne and Geneva, as well as major European destinations.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What makes Helvetic Tech different? <span>+</span></button><div><p>Helvetic Tech combines Swiss academic standards with a practical, industry-focused approach. Programs are designed to integrate technical knowledge with real-world applications, supported by small class sizes and a personalized learning environment.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What programs does Helvetic Tech offer? <span>+</span></button><div><p>Helvetic Tech offers bachelor’s and master’s programs in fields such as artificial intelligence, cybersecurity, and blockchain, with a strong focus on emerging technologies.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What are dual degrees? <span>+</span></button><div><p>Dual degrees are programs delivered in partnership between Helvetic Tech and Tiffin University. Upon successful completion, students receive both a Swiss qualification from Helvetic Tech and an American degree from Tiffin University.</p></div></div></div><div role="tabpanel" data-panel="admissions" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">How do I apply to Helvetic Tech? <span>+</span></button><div><p>Applications are submitted online through the application form. You can start your application and submit any missing documents once they become available, allowing you to secure your place while completing your file.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What are the admission requirements? <span>+</span></button><div><p>Admission requirements depend on the level of study. For bachelor’s programs, applicants must hold a recognized secondary school diploma. For master’s programs, applicants must hold a relevant undergraduate degree or equivalent. Applicants may also need to demonstrate English proficiency if previous studies were not conducted in English.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What documents are required for admission? <span>+</span></button><div><p>Applicants are typically required to submit a completed application form, academic transcripts and diplomas, identification such as a passport or equivalent, and proof of English proficiency if applicable. Additional documents may be requested depending on the program.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Can I defer my admission? <span>+</span></button><div><p>Deferral options may be available depending on the intake and individual circumstances. Applicants should contact the admissions team for specific guidance.</p></div></div></div><div role="tabpanel" data-panel="visa" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">Do I need a student visa to study in Switzerland? <span>+</span></button><div><p>Students from outside the EU/EEA generally require a student visa. The process is handled through the Swiss embassy or consulate in the applicant’s country.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">How does Helvetic Tech support the visa process? <span>+</span></button><div><p>Helvetic Tech provides the necessary documentation and guidance to support students throughout the visa application process.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Is health insurance required for students? <span>+</span></button><div><p>Yes, health insurance is mandatory for all students in Switzerland. Students must obtain coverage that meets Swiss legal requirements upon arrival.</p></div></div></div><div role="tabpanel" data-panel="accommodation" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">What accommodation options are available for students? <span>+</span></button><div><p>Students can choose from a range of accommodation options in and around La Tour-de-Peilz and nearby areas such as Vevey. These include shared apartments and private housing, depending on availability and budget.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Does Helvetic Tech provide accommodation? <span>+</span></button><div><p>Helvetic Tech offers a limited number of accommodation options reserved for its students, allocated on a first-come, first-served basis. The institution also provides guidance to help students find suitable housing in the surrounding area.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">Where is student accommodation located? <span>+</span></button><div><p>Accommodation is typically located close to the campus or within short commuting distance, particularly in La Tour-de-Peilz and surrounding areas.</p></div></div></div><div role="tabpanel" data-panel="registration" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">When do programs start? <span>+</span></button><div><p>Helvetic Tech offers three intakes per year, in September, January, and April.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">How do I complete my enrolment? <span>+</span></button><div><p>After receiving an offer, students must confirm their place by completing the required administrative steps, including submitting documents and paying the admission fee.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">When will I receive my timetable? <span>+</span></button><div><p>Students typically receive their timetable during the registration week before the start of the academic term.</p></div></div></div><div role="tabpanel" data-panel="arrival" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">When should I arrive in Switzerland? <span>+</span></button><div><p>Students are advised to arrive at least one week before the start of the term to complete administrative formalities and settle in.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What is the nearest airport to Helvetic Tech? <span>+</span></button><div><p>Geneva Airport is the closest international airport, with direct train connections to La Tour-de-Peilz.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What happens after arrival? <span>+</span></button><div><p>Upon arrival, students receive guidance on registration, residence permits, and orientation to help them transition smoothly into student life.</p></div></div></div><div role="tabpanel" data-panel="experience" hidden><div class="accordion" data-accordion><button type="button" aria-expanded="false">What is the study format at Helvetic Tech? <span>+</span></button><div><p>Programs are delivered in a blended format that combines on-campus learning with online components, offering both structure and flexibility.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What is the class size? <span>+</span></button><div><p>Helvetic Tech maintains small class sizes to ensure personalized support, close interaction with faculty, and an effective learning environment.</p></div></div><div class="accordion" data-accordion><button type="button" aria-expanded="false">What support services are available to students? <span>+</span></button><div><p>Students benefit from academic support, mentorship, and career guidance throughout their studies, as well as assistance with administrative and practical aspects of student life.</p></div></div></div><p class="faq-empty" hidden data-faq-empty>No questions match your search.</p></div>
 </div></section>
   <section class="next-band" data-chapter="Request More Information"><a class="shell next-band__link reveal" href="https://t8d78.share.hsforms.com/2VJF0JmhFQgusDgsBs8zfNw"><span class="label">Request More Information</span><strong>Request More Information</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/faq',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'financing/fees-expenses/',
-        'slug' => 'fees-expenses',
-        'parentRoute' => 'financing/',
-        'title' => 'Fees & Expenses',
-        'description' => 'Understanding the cost of your studies is an essential part of planning your academic journey.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--finance source-hero--visual" data-chapter="Fees &amp; Expenses"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/brand-fees.webp" alt="Helvetic Institute of Technology campus life" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Fees &amp; Expenses</p><h1 class="reveal">Fees &amp; Expenses</h1><p class="reveal">Understanding the cost of your studies is an essential part of planning your academic journey.</p></div></div></section><section class="source-feature source-feature--finance" id="section-1" data-chapter="Overview"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Overview</p><h2 class="reveal">Overview</h2><p class="reveal">At Helvetic Tech, tuition is structured in a transparent and straightforward way, allowing students to clearly anticipate both academic fees and living expenses in Switzerland.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Dual degree value</h2><p class="reveal">Students benefit from a dual-degree structure combining a Swiss qualification with a degree from Tiffin University.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Tuition fees</h2><ul class="source-ledger__list reveal"><li>Bachelor: CHF 6’850 per term · CHF 20’550 per year · 3 years full-time</li><li>Master: CHF 7’350 per term · CHF 22’050 per year · 2 years full-time</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Admission fees</h2><ul class="source-ledger__list reveal"><li>Application fee: CHF 250</li><li>Admission fee: CHF 1’000</li></ul></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>What is included</h2><ul class="source-ledger__list reveal"><li>Academic instruction</li><li>Access to campus facilities</li><li>Learning platforms and academic resources</li></ul></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Living expenses</h2><ul class="source-ledger__list reveal"><li>Accommodation: from CHF 750</li><li>Health insurance: from CHF 150</li><li>Food: CHF 200 – 750</li><li>Transportation: from CHF 80</li><li>Personal expenses: varies</li></ul></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Return on investment</h2><p class="reveal">The return on investment is measured not only in the degree obtained, but in the combination of skills, exposure, and positioning that supports long-term career development.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/financing/fees-expenses',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'financing/scholarships/',
-        'slug' => 'scholarships',
-        'parentRoute' => 'financing/',
-        'title' => 'Scholarships & Funding',
-        'description' => 'Helvetic Tech offers a limited number of scholarships to support outstanding candidates.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--finance source-hero--visual" data-chapter="Scholarships &amp; Funding"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/brand-scholarships.webp" alt="Helvetic Institute of Technology students" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Scholarships &amp; Funding</p><h1 class="reveal">Scholarships &amp; Funding</h1><p class="reveal">Helvetic Tech offers a limited number of scholarships to support outstanding candidates.</p></div></div></section><section class="source-feature source-feature--finance" id="section-1" data-chapter="Exceptional candidate support"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Exceptional candidate support</p><h2 class="reveal">Exceptional candidate support</h2><p class="reveal">Scholarships are awarded on a competitive basis and are not guaranteed. Each application is assessed individually, with consideration given to academic performance, professional profile, and overall alignment with the institution.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Scholarship approach</h2><p class="reveal">Scholarships are granted based on a combination of merit, experience, and the ability to contribute to a dynamic and international academic environment.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Merit-based scholarship</h2><ul class="source-ledger__list reveal"><li>Academic performance and consistency</li><li>Motivation and clarity of career goals</li><li>Professional or extracurricular experience</li><li>Ability to contribute to a collaborative learning environment</li><li>Adaptability to an international setting</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Women in technology scholarship</h2><p class="reveal">This scholarship is awarded to female candidates who demonstrate strong potential to pursue careers in areas such as artificial intelligence, cybersecurity, data, or digital innovation.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>High-achiever consideration</h2><ul class="source-ledger__list reveal"><li>Top academic results or equivalent performance</li><li>Strong intellectual engagement</li><li>Consistency in academic achievements</li></ul></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Application process</h2><p class="reveal">Scholarship consideration is integrated into the admissions process. Applicants do not apply for specific scholarships but are evaluated based on their overall profile.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/financing/scholarships',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'governance/',
-        'slug' => 'governance',
-        'parentRoute' => '',
-        'title' => 'Governance',
-        'description' => 'The Management Committee acts as the principal decision-making body of Helvetic Tech.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Governance"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/governance-leadership.webp" alt="Academic leadership at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Governance</p><h1 class="reveal">Governance</h1><p class="reveal">The Management Committee acts as the principal decision-making body of Helvetic Tech.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="Management committee"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Management committee</p><h2 class="reveal">Management committee</h2><p class="reveal">The Management Committee acts as the principal decision-making body of Helvetic Tech. It is responsible for the institution’s strategic direction and provides oversight of academic affairs, research activities, administrative functions, and the allocation of institutional resources.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Composition</h2><ul class="source-ledger__list reveal"><li>Dr. Kevin Koidl — Dean of Academics</li><li>Dr. Anca Prisacariu — Quality Assurance Director</li><li>Dr Killian Levacher — AI Expert</li><li>Echesirim Izuchukwu — Industry Expert</li></ul></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/governance',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'institute/',
-        'slug' => 'institute',
-        'parentRoute' => '',
-        'title' => 'Institute',
-        'description' => 'Shaping the next generation of professionals in a rapidly evolving technological landscape.',
-        'kind' => 'institute',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media dark">
+          'source' => 'https://www.helvetictech.ch/faq',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'financing/fees-expenses/',
+          'slug' => 'fees-expenses',
+          'parentRoute' => 'financing/',
+          'title' => 'Fees & Expenses',
+          'description' => 'Understanding the cost of your studies is an essential part of planning your academic journey.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--finance source-hero--visual" data-chapter="Fees &amp; Expenses"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/brand-fees.webp" alt="Helvetic Institute of Technology campus life" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Fees &amp; Expenses</p><h1 class="reveal">Fees &amp; Expenses</h1><p class="reveal">Understanding the cost of your studies is an essential part of planning your academic journey.</p></div></div></section><section class="source-feature source-feature--finance" id="section-1" data-chapter="Overview"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Overview</p><h2 class="reveal">Overview</h2><p class="reveal">At Helvetic Tech, tuition is structured in a transparent and straightforward way, allowing students to clearly anticipate both academic fees and living expenses in Switzerland.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Dual degree value</h2><p class="reveal">Students benefit from a dual-degree structure combining a Swiss qualification with a degree from Tiffin University.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Tuition fees</h2><ul class="source-ledger__list reveal"><li>Bachelor: CHF 6’850 per term · CHF 20’550 per year · 3 years full-time</li><li>Master: CHF 7’350 per term · CHF 22’050 per year · 2 years full-time</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Admission fees</h2><ul class="source-ledger__list reveal"><li>Application fee: CHF 250</li><li>Admission fee: CHF 1’000</li></ul></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>What is included</h2><ul class="source-ledger__list reveal"><li>Academic instruction</li><li>Access to campus facilities</li><li>Learning platforms and academic resources</li></ul></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Living expenses</h2><ul class="source-ledger__list reveal"><li>Accommodation: from CHF 750</li><li>Health insurance: from CHF 150</li><li>Food: CHF 200 – 750</li><li>Transportation: from CHF 80</li><li>Personal expenses: varies</li></ul></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Return on investment</h2><p class="reveal">The return on investment is measured not only in the degree obtained, but in the combination of skills, exposure, and positioning that supports long-term career development.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/financing/fees-expenses',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'financing/scholarships/',
+          'slug' => 'scholarships',
+          'parentRoute' => 'financing/',
+          'title' => 'Scholarships & Funding',
+          'description' => 'Helvetic Tech offers a limited number of scholarships to support outstanding candidates.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--finance source-hero--visual" data-chapter="Scholarships &amp; Funding"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/brand-scholarships.webp" alt="Helvetic Institute of Technology students" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Scholarships &amp; Funding</p><h1 class="reveal">Scholarships &amp; Funding</h1><p class="reveal">Helvetic Tech offers a limited number of scholarships to support outstanding candidates.</p></div></div></section><section class="source-feature source-feature--finance" id="section-1" data-chapter="Exceptional candidate support"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Exceptional candidate support</p><h2 class="reveal">Exceptional candidate support</h2><p class="reveal">Scholarships are awarded on a competitive basis and are not guaranteed. Each application is assessed individually, with consideration given to academic performance, professional profile, and overall alignment with the institution.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Scholarship approach</h2><p class="reveal">Scholarships are granted based on a combination of merit, experience, and the ability to contribute to a dynamic and international academic environment.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Merit-based scholarship</h2><ul class="source-ledger__list reveal"><li>Academic performance and consistency</li><li>Motivation and clarity of career goals</li><li>Professional or extracurricular experience</li><li>Ability to contribute to a collaborative learning environment</li><li>Adaptability to an international setting</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Women in technology scholarship</h2><p class="reveal">This scholarship is awarded to female candidates who demonstrate strong potential to pursue careers in areas such as artificial intelligence, cybersecurity, data, or digital innovation.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>High-achiever consideration</h2><ul class="source-ledger__list reveal"><li>Top academic results or equivalent performance</li><li>Strong intellectual engagement</li><li>Consistency in academic achievements</li></ul></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Application process</h2><p class="reveal">Scholarship consideration is integrated into the admissions process. Applicants do not apply for specific scholarships but are evaluated based on their overall profile.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/financing/scholarships',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'governance/',
+          'slug' => 'governance',
+          'parentRoute' => '',
+          'title' => 'Governance',
+          'description' => 'The Management Committee acts as the principal decision-making body of Helvetic Tech.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Governance"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/governance-leadership.webp" alt="Academic leadership at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Governance</p><h1 class="reveal">Governance</h1><p class="reveal">The Management Committee acts as the principal decision-making body of Helvetic Tech.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="Management committee"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Management committee</p><h2 class="reveal">Management committee</h2><p class="reveal">The Management Committee acts as the principal decision-making body of Helvetic Tech. It is responsible for the institution’s strategic direction and provides oversight of academic affairs, research activities, administrative functions, and the allocation of institutional resources.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Composition</h2><ul class="source-ledger__list reveal"><li>Dr. Kevin Koidl — Dean of Academics</li><li>Dr. Anca Prisacariu — Quality Assurance Director</li><li>Dr Killian Levacher — AI Expert</li><li>Echesirim Izuchukwu — Industry Expert</li></ul></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/governance',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'institute/',
+          'slug' => 'institute',
+          'parentRoute' => '',
+          'title' => 'Institute',
+          'description' => 'Shaping the next generation of professionals in a rapidly evolving technological landscape.',
+          'kind' => 'institute',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/about-institute.webp" alt="Modern campus architecture at the Helvetic Institute of Technology" decoding="async" fetchpriority="high"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-media__inner">
@@ -294,42 +295,42 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter chapter--mint values-section" id="values"><div class="shell chapter-heading reveal"><p class="label">Values</p><h2><span>Values</span><em></em></h2></div><div class="shell value-ledger"><article class="value-row reveal"><span>01</span><h3>Innovation</h3><p>Driven by curiosity and experimentation, learning goes beyond theory to explore emerging technologies and new ideas.</p></article><article class="value-row reveal"><span>02</span><h3>Relevance</h3><p>Programs are designed around real-world applications, ensuring skills remain practical, current, and directly applicable.</p></article><article class="value-row reveal"><span>03</span><h3>Global perspective</h3><p>A combination of Swiss academic rigor and international exposure prepares students for opportunities across global markets.</p></article><article class="value-row reveal"><span>04</span><h3>Mentorship</h3><p>A personalized learning environment with small class sizes enables close guidance and meaningful academic support.</p></article></div></section>
   <section class="chapter" id="community"><div class="shell chapter-heading reveal"><p class="label">Community</p><h2><span>Alumni &amp;</span><em>Professional Network</em></h2></div><div class="shell card-grid card-grid--two"><article class="card reveal"><span class="card__index" aria-hidden="true">01</span><h3>Alumni</h3><p>Graduates of Helvetic Tech become part of an active alumni community, connected through shared academic experience and professional ambition. As they progress in their careers, alumni remain part of a growing network that reflects the global and innovative environment of the institution.</p></article><article class="card reveal"><span class="card__index" aria-hidden="true">02</span><h3>Professional Network</h3><p>Students become part of an international community that extends beyond the classroom. Through connections with peers, faculty, and industry professionals, they build a strong network that supports career growth and creates lasting professional and personal relationships.</p></article></div></section>
   <section class="next-band" data-chapter="Faculty"><a class="shell next-band__link reveal" href="{{home_url}}/faculty/"><span class="label">Faculty</span><strong>Learn from industry professionals</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/about',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'institutional-development/',
-        'slug' => 'institutional-development',
-        'parentRoute' => '',
-        'title' => 'Institutional Development',
-        'description' => 'Helvetic Tech is a recently established institution designed to respond to the current and future demands of technology-driven industries.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Institutional Development"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/institutional-campus.webp" alt="The Helvetic Institute of Technology campus on Lake Geneva" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Institutional Development</p><h1 class="reveal">Institutional Development</h1><p class="reveal">Helvetic Tech is a recently established institution designed to respond to the current and future demands of technology-driven industries.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="A modern approach to development"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">A modern approach to development</p><h2 class="reveal">A modern approach to development</h2><p class="reveal">Helvetic Tech is structured to evolve alongside the industries it serves. Its development focuses on maintaining flexibility in program design and continuously aligning academic content with technological advancements.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Academic program development</h2><p class="reveal">Programs at Helvetic Tech are built around current and emerging areas of technology, including artificial intelligence, cybersecurity, and blockchain.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Educational partnerships</h2><p class="reveal">Helvetic Tech operates in partnership with Tiffin University, offering a dual-degree structure that combines a Swiss qualification with a US-accredited degree.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Quality and continuous improvement</h2><p class="reveal">Helvetic Tech implements structured processes to monitor and improve its academic and operational activities.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Faculty and learning environment</h2><p class="reveal">Faculty at Helvetic Tech are active professionals, ensuring that teaching remains connected to current industry practices.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Technology integration</h2><p class="reveal">Technology is central to both the curriculum and the overall learning experience.</p></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Student environment and support</h2><p class="reveal">Helvetic Tech provides a structured and supportive environment for students, with services designed to facilitate both academic progression and adaptation to life in Switzerland.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/institutional-development',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'job-vacancies/',
-        'slug' => 'job-vacancies',
-        'parentRoute' => '',
-        'title' => 'Job Vacancies',
-        'description' => 'The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Job Vacancies"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/page-vacancies.webp" alt="A professional working environment at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Job Vacancies</p><h1 class="reveal">Job Vacancies</h1><p class="reveal">The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="Job Vacancies"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Job Vacancies</p><h2 class="reveal">Job Vacancies</h2><p class="reveal">The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution. If you wish to apply, please submit your complete application, including your CV and cover letter.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Current openings</h2><p class="reveal">For information on current openings and advertised roles, please visit our LinkedIn page.</p><a class="line-link reveal" href="mailto:info@helvetictech.ch?subject=Spontaneous%20Application">Submit a Spontaneous Application <span>↗</span></a></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/job-vacancies',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'policies/',
-        'slug' => 'policies',
-        'parentRoute' => '',
-        'title' => 'Privacy Policy',
-        'description' => 'How the Helvetic Institute of Technology collects, processes, and protects personal data under the Swiss Federal Act on Data Protection and the EU GDPR.',
-        'kind' => 'policies',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media hero-compact dark">
+          'source' => 'https://www.helvetictech.ch/about',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'institutional-development/',
+          'slug' => 'institutional-development',
+          'parentRoute' => '',
+          'title' => 'Institutional Development',
+          'description' => 'Helvetic Tech is a recently established institution designed to respond to the current and future demands of technology-driven industries.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Institutional Development"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/institutional-campus.webp" alt="The Helvetic Institute of Technology campus on Lake Geneva" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Institutional Development</p><h1 class="reveal">Institutional Development</h1><p class="reveal">Helvetic Tech is a recently established institution designed to respond to the current and future demands of technology-driven industries.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="A modern approach to development"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">A modern approach to development</p><h2 class="reveal">A modern approach to development</h2><p class="reveal">Helvetic Tech is structured to evolve alongside the industries it serves. Its development focuses on maintaining flexibility in program design and continuously aligning academic content with technological advancements.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Academic program development</h2><p class="reveal">Programs at Helvetic Tech are built around current and emerging areas of technology, including artificial intelligence, cybersecurity, and blockchain.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Educational partnerships</h2><p class="reveal">Helvetic Tech operates in partnership with Tiffin University, offering a dual-degree structure that combines a Swiss qualification with a US-accredited degree.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Quality and continuous improvement</h2><p class="reveal">Helvetic Tech implements structured processes to monitor and improve its academic and operational activities.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Faculty and learning environment</h2><p class="reveal">Faculty at Helvetic Tech are active professionals, ensuring that teaching remains connected to current industry practices.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Technology integration</h2><p class="reveal">Technology is central to both the curriculum and the overall learning experience.</p></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Student environment and support</h2><p class="reveal">Helvetic Tech provides a structured and supportive environment for students, with services designed to facilitate both academic progression and adaptation to life in Switzerland.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/institutional-development',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'job-vacancies/',
+          'slug' => 'job-vacancies',
+          'parentRoute' => '',
+          'title' => 'Job Vacancies',
+          'description' => 'The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--academy source-hero--visual" data-chapter="Job Vacancies"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/page-vacancies.webp" alt="A professional working environment at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Job Vacancies</p><h1 class="reveal">Job Vacancies</h1><p class="reveal">The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution.</p></div></div></section><section class="source-feature source-feature--academy" id="section-1" data-chapter="Job Vacancies"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Job Vacancies</p><h2 class="reveal">Job Vacancies</h2><p class="reveal">The Helvetic Institute of Technology welcomes spontaneous applications from qualified candidates interested in joining the institution. If you wish to apply, please submit your complete application, including your CV and cover letter.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Current openings</h2><p class="reveal">For information on current openings and advertised roles, please visit our LinkedIn page.</p><a class="line-link reveal" href="mailto:info@helvetictech.ch?subject=Spontaneous%20Application">Submit a Spontaneous Application <span>↗</span></a></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/job-vacancies',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'policies/',
+          'slug' => 'policies',
+          'parentRoute' => '',
+          'title' => 'Privacy Policy',
+          'description' => 'How the Helvetic Institute of Technology collects, processes, and protects personal data under the Swiss Federal Act on Data Protection and the EU GDPR.',
+          'kind' => 'policies',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media hero-compact dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/page-policies.webp" alt="Institutional records at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-compact__inner"><div class="hero-media__copy"><p class="label reveal">Privacy Policy</p><h1 class="reveal"><span>Privacy</span><em>Policy</em></h1><p class="hero-lead reveal">How the Helvetic Institute of Technology collects, processes, and protects personal data under the Swiss Federal Act on Data Protection and the EU GDPR.</p></div></div>
@@ -342,18 +343,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter policy-index-section" id="policies" data-chapter="Policies"><div class="shell policy-block"><p class="label reveal">Framework</p><div class="card-grid card-grid--three"><article class="card reveal"><span class="card__tag">Framework</span><h3>Introduction</h3></article><article class="card reveal"><span class="card__tag">Framework</span><h3>Data protection principles</h3></article><article class="card reveal"><span class="card__tag">Framework</span><h3>Definitions</h3></article><article class="card reveal"><span class="card__tag">Framework</span><h3>Roles and responsibilities</h3></article></div></div><div class="shell policy-block"><p class="label reveal">Personal data</p><div class="card-grid card-grid--three"><article class="card reveal"><span class="card__tag">Personal data</span><h3>The data we collect</h3></article><article class="card reveal"><span class="card__tag">Personal data</span><h3>Why we collect personal data</h3></article><article class="card reveal"><span class="card__tag">Personal data</span><h3>Storing personal data</h3></article><article class="card reveal"><span class="card__tag">Personal data</span><h3>Data sharing</h3></article></div></div><div class="shell policy-block"><p class="label reveal">Security &amp; rights</p><div class="card-grid card-grid--three"><article class="card reveal"><span class="card__tag">Security &amp; rights</span><h3>Special rule on camera surveillance, photographs, and videos</h3></article><article class="card reveal"><span class="card__tag">Security &amp; rights</span><h3>Rights of the data subjects</h3></article><article class="card reveal"><span class="card__tag">Security &amp; rights</span><h3>Data security</h3></article><article class="card reveal"><span class="card__tag">Security &amp; rights</span><h3>Accountability and governance</h3></article></div></div><div class="shell policy-block"><p class="label reveal">Website</p><div class="card-grid card-grid--three"><article class="card reveal"><span class="card__tag">Website</span><h3>Website analytics</h3></article></div></div></section>
   <section class="chapter policy-source" id="compliance" data-chapter="Privacy policy"><div class="shell chapter-heading reveal"><p class="label">Privacy policy</p><h2><span>Read the full</span><em>privacy policy</em></h2></div><div class="shell reveal"><a class="compliance-card" href="https://www.helvetictech.ch/privacy" target="_blank" rel="noopener"><span>The complete privacy policy is published on helvetictech.ch.</span><i aria-hidden="true">↗</i></a></div></section>
   <section class="next-band" data-chapter="Request More Information"><a class="shell next-band__link reveal" href="https://t8d78.share.hsforms.com/2VJF0JmhFQgusDgsBs8zfNw"><span class="label">Request More Information</span><strong>Request More Information</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/privacy',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/',
-        'slug' => 'programs',
-        'parentRoute' => '',
-        'title' => 'Programs',
-        'description' => 'Explore dual Swiss and US Bachelor and Master programs in artificial intelligence, cybersecurity, and blockchain.',
-        'kind' => 'programs',
-        'mainClass' => '',
-        'content' => '<section class="page-hero hero-media dark">
+          'source' => 'https://www.helvetictech.ch/privacy',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/',
+          'slug' => 'programs',
+          'parentRoute' => '',
+          'title' => 'Programs',
+          'description' => 'Explore dual Swiss and US Bachelor and Master programs in artificial intelligence, cybersecurity, and blockchain.',
+          'kind' => 'programs',
+          'mainClass' => '',
+          'content' => '<section class="page-hero hero-media dark">
   <figure class="hero-media__bg"><img src="{{theme_url}}/assets/images/student-collaboration.webp" alt="Students collaborating at the Helvetic Institute of Technology" decoding="async" fetchpriority="high"></figure>
   <span class="hero-media__scrim" aria-hidden="true"></span>
   <div class="shell hero-media__inner">
@@ -368,18 +369,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="catalogue chapter"><div class="shell catalogue-head reveal"><div><p class="label">Program pathways</p><h2><span>Choose your</span><em>specialization.</em></h2><p class="catalogue-note">Programs are delivered in partnership between Helvetic Tech and Tiffin University, combining a Swiss qualification with an American degree.</p></div><div class="level-filter" role="group" aria-label="Filter programs"><button class="is-active" type="button" data-program-filter="all" aria-pressed="true">All</button><button type="button" data-program-filter="bachelor" aria-pressed="false">Bachelor</button><button type="button" data-program-filter="master" aria-pressed="false">Master</button></div></div><div class="program-list" data-program-grid><a class="program-row reveal" href="{{home_url}}/programs/bachelor-in-artificial-intelligence/" data-level="bachelor" data-preview="{{theme_url}}/assets/images/pathway-bachelor-ai.webp" data-cursor="View"><span class="program-row__number">/01</span><span class="program-row__level">Bachelor</span><strong>Bachelor in Artificial Intelligence</strong><span class="program-row__discipline">ai</span><span class="program-row__arrow" aria-hidden="true">↗</span></a><a class="program-row reveal" href="{{home_url}}/programs/bachelor-in-cybersecurity/" data-level="bachelor" data-preview="{{theme_url}}/assets/images/pathway-bachelor-cyber.webp" data-cursor="View"><span class="program-row__number">/02</span><span class="program-row__level">Bachelor</span><strong>Bachelor in Cybersecurity</strong><span class="program-row__discipline">cyber</span><span class="program-row__arrow" aria-hidden="true">↗</span></a><a class="program-row reveal" href="{{home_url}}/programs/bachelor-in-blockchain/" data-level="bachelor" data-preview="{{theme_url}}/assets/images/pathway-bachelor-blockchain.webp" data-cursor="View"><span class="program-row__number">/03</span><span class="program-row__level">Bachelor</span><strong>Bachelor in Blockchain</strong><span class="program-row__discipline">blockchain</span><span class="program-row__arrow" aria-hidden="true">↗</span></a><a class="program-row reveal" href="{{home_url}}/programs/master-in-artificial-intelligence/" data-level="master" data-preview="{{theme_url}}/assets/images/pathway-master-ai.webp" data-cursor="View"><span class="program-row__number">/04</span><span class="program-row__level">Master</span><strong>Master in Artificial Intelligence</strong><span class="program-row__discipline">ai</span><span class="program-row__arrow" aria-hidden="true">↗</span></a><a class="program-row reveal" href="{{home_url}}/programs/master-in-cybersecurity/" data-level="master" data-preview="{{theme_url}}/assets/images/pathway-master-cyber.webp" data-cursor="View"><span class="program-row__number">/05</span><span class="program-row__level">Master</span><strong>Master in Cybersecurity</strong><span class="program-row__discipline">cyber</span><span class="program-row__arrow" aria-hidden="true">↗</span></a><a class="program-row reveal" href="{{home_url}}/programs/master-in-blockchain/" data-level="master" data-preview="{{theme_url}}/assets/images/pathway-master-blockchain.webp" data-cursor="View"><span class="program-row__number">/06</span><span class="program-row__level">Master</span><strong>Master in Blockchain</strong><span class="program-row__discipline">blockchain</span><span class="program-row__arrow" aria-hidden="true">↗</span></a></div><div class="pathway-preview" data-pathway-preview aria-hidden="true"><span></span></div></section>
   <section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>
   <section class="next-band" data-chapter="Admissions"><a class="shell next-band__link reveal" href="{{home_url}}/admissions/"><span class="label">Admissions</span><strong>Admissions</strong><i aria-hidden="true">↗</i></a></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/bachelor-in-artificial-intelligence/',
-        'slug' => 'bachelor-in-artificial-intelligence',
-        'parentRoute' => 'programs/',
-        'title' => 'Bachelor of Science in Artificial Intelligence',
-        'description' => 'The Bachelor of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to go beyond simply using technology and learn how to build it.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-bachelors',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/bachelor-in-artificial-intelligence/',
+          'slug' => 'bachelor-in-artificial-intelligence',
+          'parentRoute' => 'programs/',
+          'title' => 'Bachelor of Science in Artificial Intelligence',
+          'description' => 'The Bachelor of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to go beyond simply using technology and learn how to build it.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="ai"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/coding-detail.webp" alt="" fetchpriority="high" decoding="async"><span>01 · AI</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Bachelor Degree program</p><h1 class="reveal"><span>Bachelor of Science in</span><em>Artificial Intelligence</em></h1><p class="reveal">The Bachelor of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to go beyond simply using technology and learn how to build it.</p><p class="program-hero__more reveal">The program provides a strong foundation in key areas such as machine learning, neural networks, and data-driven systems, while also introducing emerging topics like generative AI and large language models.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -393,18 +394,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">5 study stages across the bachelor program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Foundations of computing and data</h3><p>Programming and data science fundamentals · Data handling and analysis · Mathematical and logical foundations</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Core artificial intelligence topics</h3><p>Machine learning · Neural networks · Computer vision · Reinforcement learning · Ethical AI</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Advanced AI and emerging technologies</h3><p>Generative AI and advanced models · AI system deployment · AI applications in business and industry</p></div></article><article class="module reveal"><span class="module__index">04</span><div class="module__body"><h3>Applied learning and practical experience</h3><p>Practical workshops and labs · Hands-on projects · Real-world AI use cases</p></div></article><article class="module reveal"><span class="module__index">05</span><div class="module__body"><h3>Capstone project</h3><p>Research thesis or applied AI project · Focus on solving a real-world problem · Demonstration of technical and analytical skills</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this bachelor degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Artificial Intelligence (AI) Specialist</li><li class="career-chip reveal">Machine Learning Engineer</li><li class="career-chip reveal">Data Analyst or Data Scientist</li><li class="career-chip reveal">AI Solutions Consultant</li><li class="career-chip reveal">Business Intelligence Analyst</li><li class="career-chip reveal">AI Product or Project Coordinator</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-ai',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/bachelor-in-blockchain/',
-        'slug' => 'bachelor-in-blockchain',
-        'parentRoute' => 'programs/',
-        'title' => 'Bachelor of Science in Blockchain',
-        'description' => 'The Bachelor of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to understand and build the next generation of decentralized technologies.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-ai',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/bachelor-in-blockchain/',
+          'slug' => 'bachelor-in-blockchain',
+          'parentRoute' => 'programs/',
+          'title' => 'Bachelor of Science in Blockchain',
+          'description' => 'The Bachelor of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to understand and build the next generation of decentralized technologies.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="bc"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/infrastructure.webp" alt="" fetchpriority="high" decoding="async"><span>01 · BC</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Bachelor Degree program</p><h1 class="reveal"><span>Bachelor of Science in</span><em>Blockchain</em></h1><p class="reveal">The Bachelor of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to understand and build the next generation of decentralized technologies.</p><p class="program-hero__more reveal">Students develop both technical expertise and practical problem-solving skills through a hands-on learning approach.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -418,18 +419,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">3 study stages across the bachelor program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Foundations</h3><p>Programming fundamentals · Data structures and systems fundamentals · Introduction to distributed systems</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Blockchain technologies</h3><p>Blockchain architecture · Cryptographic principles · Consensus mechanisms</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Applied learning</h3><p>Core courses · Electives · Capstone project</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this bachelor degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Blockchain Developer</li><li class="career-chip reveal">Blockchain Analyst</li><li class="career-chip reveal">Distributed Systems Specialist</li><li class="career-chip reveal">Technology Consultant</li><li class="career-chip reveal">Digital Innovation Analyst</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-blockchain',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/bachelor-in-cybersecurity/',
-        'slug' => 'bachelor-in-cybersecurity',
-        'parentRoute' => 'programs/',
-        'title' => 'Bachelor of Science in Cybersecurity',
-        'description' => 'The Bachelor of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to build the knowledge and practical skills needed to protect digital systems, networks, and data in an increasingly connected world.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-blockchain',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/bachelor-in-cybersecurity/',
+          'slug' => 'bachelor-in-cybersecurity',
+          'parentRoute' => 'programs/',
+          'title' => 'Bachelor of Science in Cybersecurity',
+          'description' => 'The Bachelor of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to build the knowledge and practical skills needed to protect digital systems, networks, and data in an increasingly connected world.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="cy"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/cyber-code.webp" alt="" fetchpriority="high" decoding="async"><span>01 · CY</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Bachelor Degree program</p><h1 class="reveal"><span>Bachelor of Science in</span><em>Cybersecurity</em></h1><p class="reveal">The Bachelor of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to build the knowledge and practical skills needed to protect digital systems, networks, and data in an increasingly connected world.</p><p class="program-hero__more reveal">Through a hands-on, project-based approach, students engage with cybersecurity challenges such as threat analysis, forensic investigation, and cloud infrastructure security.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -443,18 +444,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">3 study stages across the bachelor program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Foundations</h3><p>Programming fundamentals · Networking basics · Systems and data fundamentals</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Cybersecurity</h3><p>Network security · Cyber defense · Threat detection and analysis</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Applied learning</h3><p>Core courses · Electives · Capstone project</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this bachelor degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Cybersecurity Analyst</li><li class="career-chip reveal">Information Security Specialist</li><li class="career-chip reveal">Network Security Engineer</li><li class="career-chip reveal">Cyber Risk Consultant</li><li class="career-chip reveal">Security Operations Analyst</li><li class="career-chip reveal">IT Security Administrator</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-cybersecurity',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/master-in-artificial-intelligence/',
-        'slug' => 'master-in-artificial-intelligence',
-        'parentRoute' => 'programs/',
-        'title' => 'Master of Science in Artificial Intelligence',
-        'description' => 'The Master of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to develop advanced knowledge and practical expertise in artificial intelligence and data-driven technologies.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-bachelors/bachelor-in-cybersecurity',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/master-in-artificial-intelligence/',
+          'slug' => 'master-in-artificial-intelligence',
+          'parentRoute' => 'programs/',
+          'title' => 'Master of Science in Artificial Intelligence',
+          'description' => 'The Master of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to develop advanced knowledge and practical expertise in artificial intelligence and data-driven technologies.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="ai"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/brand-master-ai.webp" alt="" fetchpriority="high" decoding="async"><span>02 · AI</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Master Degree program</p><h1 class="reveal"><span>Master of Science in</span><em>Artificial Intelligence</em></h1><p class="reveal">The Master of Science in Artificial Intelligence at the Helvetic Institute of Technology is designed for students who want to develop advanced knowledge and practical expertise in artificial intelligence and data-driven technologies.</p><p class="program-hero__more reveal">Students engage with key areas such as machine learning, neural networks, and data analysis, while developing the ability to design, evaluate, and implement AI-driven solutions.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -468,18 +469,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">3 study stages across the master program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Core concepts</h3><p>Data science · Statistical methods · System design principles</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Advanced AI</h3><p>Machine learning · Neural networks</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Applied learning</h3><p>Core courses · Electives · Final capstone project</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this master degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Machine Learning Engineer</li><li class="career-chip reveal">Data Scientist</li><li class="career-chip reveal">AI Engineer</li><li class="career-chip reveal">Computer Vision Engineer</li><li class="career-chip reveal">AI Consultant</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-masters/master-in-ai',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/master-in-blockchain/',
-        'slug' => 'master-in-blockchain',
-        'parentRoute' => 'programs/',
-        'title' => 'Master of Science in Blockchain',
-        'description' => 'The Master of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to deepen their understanding of decentralized technologies and develop advanced skills in blockchain systems.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-masters/master-in-ai',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/master-in-blockchain/',
+          'slug' => 'master-in-blockchain',
+          'parentRoute' => 'programs/',
+          'title' => 'Master of Science in Blockchain',
+          'description' => 'The Master of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to deepen their understanding of decentralized technologies and develop advanced skills in blockchain systems.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="bc"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/brand-master-blockchain.webp" alt="" fetchpriority="high" decoding="async"><span>02 · BC</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Master Degree program</p><h1 class="reveal"><span>Master of Science in</span><em>Blockchain</em></h1><p class="reveal">The Master of Science in Blockchain at the Helvetic Institute of Technology is designed for students who want to deepen their understanding of decentralized technologies and develop advanced skills in blockchain systems.</p><p class="program-hero__more reveal">Students engage with advanced topics such as blockchain architecture, cryptographic protocols, and decentralized applications, while developing the ability to analyze, design, and implement blockchain-based solutions.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -493,18 +494,18 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">3 study stages across the master program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Systems</h3><p>Distributed systems concepts · Advanced data structures · System design principles</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Advanced blockchain</h3><p>Blockchain architecture · Cryptographic principles</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Applied learning</h3><p>Core courses · Electives · Final capstone project</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this master degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Blockchain Developer</li><li class="career-chip reveal">Blockchain Architect</li><li class="career-chip reveal">Distributed Systems Specialist</li><li class="career-chip reveal">Blockchain Consultant</li><li class="career-chip reveal">Digital Innovation Manager</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-masters/master-in-blockchain',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'programs/master-in-cybersecurity/',
-        'slug' => 'master-in-cybersecurity',
-        'parentRoute' => 'programs/',
-        'title' => 'Master of Science in Cybersecurity',
-        'description' => 'The Master of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to develop advanced expertise in protecting digital systems, networks, and data in an increasingly complex threat landscape.',
-        'kind' => 'program',
-        'mainClass' => '',
-        'content' => '
+          'source' => 'https://www.helvetictech.ch/dual-masters/master-in-blockchain',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'programs/master-in-cybersecurity/',
+          'slug' => 'master-in-cybersecurity',
+          'parentRoute' => 'programs/',
+          'title' => 'Master of Science in Cybersecurity',
+          'description' => 'The Master of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to develop advanced expertise in protecting digital systems, networks, and data in an increasingly complex threat landscape.',
+          'kind' => 'program',
+          'mainClass' => '',
+          'content' => '
   <section class="program-hero" data-discipline="cy"><figure class="program-hero__visual" aria-hidden="true"><img src="{{theme_url}}/assets/images/brand-master-cyber.webp" alt="" fetchpriority="high" decoding="async"><span>02 · CY</span></figure>
     <div class="shell program-hero__content"><p class="label reveal">Dual Master Degree program</p><h1 class="reveal"><span>Master of Science in</span><em>Cybersecurity</em></h1><p class="reveal">The Master of Science in Cybersecurity at the Helvetic Institute of Technology is designed for students who want to develop advanced expertise in protecting digital systems, networks, and data in an increasingly complex threat landscape.</p><p class="program-hero__more reveal">Students engage with key areas such as network security, cryptography, and cyber defense, while developing the ability to analyze, prevent, and respond to security threats.</p><div class="hero-media__actions reveal"><a class="button-primary" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78">Start your application <span>↗</span></a><a class="button-secondary" href="{{home_url}}/admissions/">Admissions <span>↗</span></a></div></div>
   </section>
@@ -518,218 +519,221 @@ function hit_core_embedded_starter_data( $name ) {
   <section class="chapter program-curriculum" id="curriculum"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Curriculum outline</p><h2><span>Curriculum</span><em>outline</em></h2><p class="section-split__note">3 study stages across the master program.</p></div><div class="section-split__main"><div class="module-list"><article class="module reveal"><span class="module__index">01</span><div class="module__body"><h3>Systems</h3><p>Network systems · Security principles · Systems architecture</p></div></article><article class="module reveal"><span class="module__index">02</span><div class="module__body"><h3>Cyber defense</h3><p>Network security · Cryptography · Cyber defense</p></div></article><article class="module reveal"><span class="module__index">03</span><div class="module__body"><h3>Response and strategy</h3><p>Threat detection · Incident response · Security strategy</p></div></article></div></div></div></section>
   <section class="chapter program-careers" id="careers"><div class="shell section-split"><div class="section-split__aside reveal"><p class="label">Career opportunities</p><h2><span>Career</span><em>opportunities.</em></h2><p class="section-split__note">Roles graduates can target with this master degree.</p></div><div class="section-split__main"><ul class="career-chips"><li class="career-chip reveal">Cybersecurity Analyst</li><li class="career-chip reveal">Security Engineer</li><li class="career-chip reveal">Threat Intelligence Specialist</li><li class="career-chip reveal">Cyber Risk Consultant</li><li class="career-chip reveal">Security Operations Specialist</li></ul><a class="line-link" href="{{home_url}}/career-impact/">Explore career outcomes <span>↗</span></a></div></div></section>
   <section class="final-cta" data-chapter="Start your application"><span class="registration-mark" aria-hidden="true"></span><div class="shell"><p class="label reveal">Start your application</p><h2 class="reveal"><a href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply"><span>Start your</span><em>application.</em><i>↗</i></a></h2></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-masters/master-in-cybersecurity',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'student-services/',
-        'slug' => 'student-services',
-        'parentRoute' => '',
-        'title' => 'Student Services',
-        'description' => 'Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Student Services"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/student-support.webp" alt="Student support services at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Student Services</p><h1 class="reveal">Student Services</h1><p class="reveal">Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="Introduction"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Introduction</p><h2 class="reveal">Introduction</h2><p class="reveal">At the Helvetic Institute of Technology, we recognize that moving to a new country for your studies is both an exciting opportunity and a significant transition. Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom, allowing you to focus on your academic progress and personal development.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Our commitment to you</h2><p class="reveal">The Helvetic Institute of Technology is committed to providing comprehensive support that addresses the practical, administrative, and personal needs of an international student community.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Service areas</h2><ul class="source-ledger__list reveal"><li>Accommodation</li><li>Visa &amp; Immigration</li><li>Health Insurance</li><li>Academic Advising</li><li>Personal Well-being</li><li>Orientation</li><li>Student ID &amp; Benefits</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Accommodation services</h2><p class="reveal">A limited number of accommodation options are reserved for students and are allocated on a first-come, first-served basis. Early application is therefore strongly recommended.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Visa and immigration support</h2><p class="reveal">Student Services provides step-by-step guidance throughout the process, from the initial visa application to residence permit procedures during your studies.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Health insurance guidance</h2><p class="reveal">Health insurance is mandatory for all residents in Switzerland, including students. The Helvetic Institute of Technology assists students in understanding available options and selecting coverage that meets both legal requirements and individual needs.</p></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Academic advising</h2><p class="reveal">Students have access to academic advising throughout their studies. Advisors provide guidance on course selection, program structure, and academic progression.</p></div></article><article class="source-ledger__row reveal" id="section-8"><span>08</span><div><h2>Orientation and onboarding</h2><p class="reveal">Each intake begins with a structured orientation designed to introduce students to the campus, academic environment, and life in Switzerland.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/student-services',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'students/',
-        'slug' => 'students',
-        'parentRoute' => '',
-        'title' => 'Students',
-        'description' => 'At Helvetic Tech, students are at the center of the learning experience.',
-        'kind' => 'content',
-        'mainClass' => '',
-        'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Students"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/page-students.webp" alt="Students at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Students</p><h1 class="reveal">Students</h1><p class="reveal">At Helvetic Tech, students are at the center of the learning experience.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="Introduction"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Introduction</p><h2 class="reveal">Introduction</h2><p class="reveal">At Helvetic Tech, students are at the center of the learning experience. The environment is designed to bring together motivated individuals who share an interest in technology and innovation.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Who are Helvetic Tech students?</h2><p class="reveal">Helvetic Tech attracts individuals seeking a structured, technology-oriented education in an international context. Students come with different academic paths and experiences, but are united by a common objective: to develop relevant skills and prepare for evolving professional environments.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>A focused learning environment</h2><p class="reveal">Students are actively involved in discussions, group work, and projects, allowing them to engage directly with the material and with each other.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Student support</h2><ul class="source-ledger__list reveal"><li>Academic guidance and program support</li><li>Assistance with accommodation and administrative processes</li><li>Access to faculty for academic and practical questions</li><li>A collaborative student environment</li></ul></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Life beyond the classroom</h2><p class="reveal">Located on the shores of Lake Geneva, Helvetic Tech offers an environment that combines academic focus with quality of life.</p></div></article></div></section>',
-        'source' => 'https://www.helvetictech.ch/students',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'tools/program-matrix/',
-        'slug' => 'program-matrix',
-        'parentRoute' => 'tools/',
-        'title' => 'Program Matrix',
-        'description' => 'Compare up to three Helvetic Tech programs by study level, field, duration, credits, structure, tuition, and study format.',
-        'kind' => 'tool',
-        'mainClass' => 'decision-page decision-page--matrix',
-        'content' => '<section class="decision-hero" data-chapter="Program Matrix"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 02 · Program comparison</p><h1 class="reveal"><span>See the</span><em>Program Matrix.</em></h1><p class="reveal">Compare up to three Helvetic Tech programs by study level, field, duration, credits, structure, tuition, and study format.</p><small class="reveal">Select up to three programs. Differences are highlighted automatically.</small></div><div class="decision-visual decision-visual--matrix" aria-hidden="true"><span>PROGRAM / INPUT</span><div><b>AI</b><i style="--value:82%"></i><em>180</em></div><div><b>CY</b><i style="--value:68%"></i><em>120</em></div><div><b>BC</b><i style="--value:92%"></i><em>180</em></div><small>LIVE COMPARISON MATRIX</small></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/program-matrix/" aria-current="page"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">●</i></a><a href="{{home_url}}/tools/study-cost-model/"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">↗</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="matrix" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Select</strong><p>Choose one to three programs from the complete HIT catalogue.</p></div><div><span>02</span><strong>Compare</strong><p>Review level, duration, credits, format, tuition, and intakes.</p></div><div><span>03</span><strong>Continue</strong><p>Open the program page or carry your choice into the cost model.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'tools/program-signal/',
-        'slug' => 'program-signal',
-        'parentRoute' => 'tools/',
-        'title' => 'Program Signal',
-        'description' => 'Answer three focused questions to identify the Helvetic Tech Bachelor or Master programs that best align with your academic stage and technology interests.',
-        'kind' => 'tool',
-        'mainClass' => 'decision-page decision-page--signal',
-        'content' => '<section class="decision-hero" data-chapter="Program Signal"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 01 · Program matching</p><h1 class="reveal"><span>Read your</span><em>Program Signal.</em></h1><p class="reveal">Answer three focused questions to identify the Helvetic Tech Bachelor or Master programs that best align with your academic stage and technology interests.</p><small class="reveal">A guided starting point — not an admissions decision.</small></div><div class="decision-visual decision-visual--signal" aria-hidden="true"><div class="signal-core"><span>HIT</span><i></i><i></i><i></i></div><b class="signal-node signal-node--one">AI</b><b class="signal-node signal-node--two">CY</b><b class="signal-node signal-node--three">BC</b><small>CALIBRATING DIRECTION</small></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/" aria-current="page"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">●</i></a><a href="{{home_url}}/tools/program-matrix/"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/study-cost-model/"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">↗</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="signal" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Academic stage</strong><p>Start with the study level that fits your current qualification.</p></div><div><span>02</span><strong>Technology field</strong><p>Choose the subject area that holds your attention.</p></div><div><span>03</span><strong>Problem type</strong><p>Refine the signal through the work you want to explore.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
-        'source' => 'https://www.helvetictech.ch/dual-bachelors',
-        'frontPage' => false,
-      ),
-      array(
-        'route' => 'tools/study-cost-model/',
-        'slug' => 'study-cost-model',
-        'parentRoute' => 'tools/',
-        'title' => 'Study Cost Model',
-        'description' => 'Build an indicative CHF study budget using Helvetic Tech tuition fees and published living-cost guidance.',
-        'kind' => 'tool',
-        'mainClass' => 'decision-page decision-page--cost',
-        'content' => '<section class="decision-hero" data-chapter="Study Cost Model"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 03 · Study planning</p><h1 class="reveal"><span>Model your</span><em>Study costs.</em></h1><p class="reveal">Build an indicative CHF study budget using Helvetic Tech tuition fees and published living-cost guidance.</p><small class="reveal">Indicative planning only. Published fees and your own assumptions remain visible.</small></div><div class="decision-visual decision-visual--cost" aria-hidden="true"><span>PUBLISHED TUITION / TERM</span><div><small>BACHELOR</small><strong>6’850</strong><em>CHF</em></div><div><small>MASTER</small><strong>7’350</strong><em>CHF</em></div><i><b></b></i></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/program-matrix/"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/study-cost-model/" aria-current="page"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">●</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="cost" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Introduce your plan</strong><p>Share the program, intake, and contact details needed for your estimate.</p></div><div><span>02</span><strong>Shape living costs</strong><p>Adjust accommodation, insurance, food, transport, and personal costs.</p></div><div><span>03</span><strong>Receive the estimate</strong><p>Keep a finished PDF copy and continue the conversation with Admissions.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
-        'source' => 'https://www.helvetictech.ch/financing/fees-expenses',
-        'frontPage' => false,
-      ),
-    ),
-		'programs' => array(
-      array(
-        'id' => 'bachelor-ai',
-        'level' => 'Bachelor',
-        'discipline' => 'ai',
-        'field' => 'Artificial Intelligence',
-        'number' => '01',
-        'title' => 'Bachelor in Artificial Intelligence',
-        'award' => 'Bachelor of Science in Artificial Intelligence',
-        'href' => 'programs/bachelor-in-artificial-intelligence',
-        'local' => true,
-        'duration' => '3 years',
-        'years' => 3,
-        'credits' => '135 CH | 180 ECTS',
-        'terms' => '9 academic terms',
-        'tuitionTerm' => 6850,
-        'tuitionYear' => 20550,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Build and apply intelligent systems using machine learning, neural networks, and generative AI.',
-        'route' => 'programs/bachelor-in-artificial-intelligence/',
-      ),
-      array(
-        'id' => 'bachelor-cybersecurity',
-        'level' => 'Bachelor',
-        'discipline' => 'cyber',
-        'field' => 'Cybersecurity',
-        'number' => '02',
-        'title' => 'Bachelor in Cybersecurity',
-        'award' => 'Bachelor of Science in Cybersecurity',
-        'href' => 'programs/bachelor-in-cybersecurity',
-        'local' => true,
-        'duration' => '3 years',
-        'years' => 3,
-        'credits' => '135 CH | 180 ECTS',
-        'terms' => '9 academic terms',
-        'tuitionTerm' => 6850,
-        'tuitionYear' => 20550,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management.',
-        'route' => 'programs/bachelor-in-cybersecurity/',
-      ),
-      array(
-        'id' => 'bachelor-blockchain',
-        'level' => 'Bachelor',
-        'discipline' => 'blockchain',
-        'field' => 'Blockchain',
-        'number' => '03',
-        'title' => 'Bachelor in Blockchain',
-        'award' => 'Bachelor of Science in Blockchain',
-        'href' => 'programs/bachelor-in-blockchain',
-        'local' => true,
-        'duration' => '3 years',
-        'years' => 3,
-        'credits' => '135 CH | 180 ECTS',
-        'terms' => '9 academic terms',
-        'tuitionTerm' => 6850,
-        'tuitionYear' => 20550,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts.',
-        'route' => 'programs/bachelor-in-blockchain/',
-      ),
-      array(
-        'id' => 'master-ai',
-        'level' => 'Master',
-        'discipline' => 'ai',
-        'field' => 'Artificial Intelligence',
-        'number' => '04',
-        'title' => 'Master in Artificial Intelligence',
-        'award' => 'Master of Science in Artificial Intelligence',
-        'href' => 'programs/master-in-artificial-intelligence',
-        'local' => true,
-        'duration' => '2 years',
-        'years' => 2,
-        'credits' => '90 CH | 120 ECTS',
-        'terms' => '6 academic terms',
-        'tuitionTerm' => 7350,
-        'tuitionYear' => 22050,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Develop advanced knowledge and practical expertise in AI and data-driven technologies.',
-        'route' => 'programs/master-in-artificial-intelligence/',
-      ),
-      array(
-        'id' => 'master-cybersecurity',
-        'level' => 'Master',
-        'discipline' => 'cyber',
-        'field' => 'Cybersecurity',
-        'number' => '05',
-        'title' => 'Master in Cybersecurity',
-        'award' => 'Master of Science in Cybersecurity',
-        'href' => 'programs/master-in-cybersecurity',
-        'local' => true,
-        'duration' => '2 years',
-        'years' => 2,
-        'credits' => '90 CH | 120 ECTS',
-        'terms' => '6 academic terms',
-        'tuitionTerm' => 7350,
-        'tuitionYear' => 22050,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments.',
-        'route' => 'programs/master-in-cybersecurity/',
-      ),
-      array(
-        'id' => 'master-blockchain',
-        'level' => 'Master',
-        'discipline' => 'blockchain',
-        'field' => 'Blockchain',
-        'number' => '06',
-        'title' => 'Master in Blockchain',
-        'award' => 'Master of Science in Blockchain',
-        'href' => 'programs/master-in-blockchain',
-        'local' => true,
-        'duration' => '2 years',
-        'years' => 2,
-        'credits' => '90 CH | 120 ECTS',
-        'terms' => '6 academic terms',
-        'tuitionTerm' => 7350,
-        'tuitionYear' => 22050,
-        'intakes' => 'September · January · April',
-        'mode' => 'Blended (on campus + online)',
-        'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
-        'signal' => 'Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications.',
-        'route' => 'programs/master-in-blockchain/',
-      ),
-    ),
-		'intakes' => array(
-      array(
-        'title' => 'January',
-        'order' => 1,
-      ),
-      array(
-        'title' => 'April',
-        'order' => 2,
-      ),
-      array(
-        'title' => 'September',
-        'order' => 3,
-      ),
-    ),
-	);
-	return isset( $data[ $name ] ) ? $data[ $name ] : array();
+          'source' => 'https://www.helvetictech.ch/dual-masters/master-in-cybersecurity',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'student-services/',
+          'slug' => 'student-services',
+          'parentRoute' => '',
+          'title' => 'Student Services',
+          'description' => 'Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Student Services"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/student-support.webp" alt="Student support services at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Student Services</p><h1 class="reveal">Student Services</h1><p class="reveal">Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="Introduction"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Introduction</p><h2 class="reveal">Introduction</h2><p class="reveal">At the Helvetic Institute of Technology, we recognize that moving to a new country for your studies is both an exciting opportunity and a significant transition. Our Student Services team is dedicated to supporting every aspect of your experience beyond the classroom, allowing you to focus on your academic progress and personal development.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Our commitment to you</h2><p class="reveal">The Helvetic Institute of Technology is committed to providing comprehensive support that addresses the practical, administrative, and personal needs of an international student community.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>Service areas</h2><ul class="source-ledger__list reveal"><li>Accommodation</li><li>Visa &amp; Immigration</li><li>Health Insurance</li><li>Academic Advising</li><li>Personal Well-being</li><li>Orientation</li><li>Student ID &amp; Benefits</li></ul></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Accommodation services</h2><p class="reveal">A limited number of accommodation options are reserved for students and are allocated on a first-come, first-served basis. Early application is therefore strongly recommended.</p></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Visa and immigration support</h2><p class="reveal">Student Services provides step-by-step guidance throughout the process, from the initial visa application to residence permit procedures during your studies.</p></div></article><article class="source-ledger__row reveal" id="section-6"><span>06</span><div><h2>Health insurance guidance</h2><p class="reveal">Health insurance is mandatory for all residents in Switzerland, including students. The Helvetic Institute of Technology assists students in understanding available options and selecting coverage that meets both legal requirements and individual needs.</p></div></article><article class="source-ledger__row reveal" id="section-7"><span>07</span><div><h2>Academic advising</h2><p class="reveal">Students have access to academic advising throughout their studies. Advisors provide guidance on course selection, program structure, and academic progression.</p></div></article><article class="source-ledger__row reveal" id="section-8"><span>08</span><div><h2>Orientation and onboarding</h2><p class="reveal">Each intake begins with a structured orientation designed to introduce students to the campus, academic environment, and life in Switzerland.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/student-services',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'students/',
+          'slug' => 'students',
+          'parentRoute' => '',
+          'title' => 'Students',
+          'description' => 'At Helvetic Tech, students are at the center of the learning experience.',
+          'kind' => 'content',
+          'mainClass' => '',
+          'content' => '<section class="source-hero source-hero--community source-hero--visual" data-chapter="Students"><figure class="source-hero__bg"><img src="{{theme_url}}/assets/images/page-students.webp" alt="Students at the Helvetic Institute of Technology" fetchpriority="high" decoding="async"></figure><span class="source-hero__scrim" aria-hidden="true"></span><div class="shell source-hero__inner"><div class="source-hero__copy"><p class="label reveal">Students</p><h1 class="reveal">Students</h1><p class="reveal">At Helvetic Tech, students are at the center of the learning experience.</p></div></div></section><section class="source-feature source-feature--community" id="section-1" data-chapter="Introduction"><div class="shell source-feature__grid"><span class="source-feature__number">01</span><div><p class="label reveal">Introduction</p><h2 class="reveal">Introduction</h2><p class="reveal">At Helvetic Tech, students are at the center of the learning experience. The environment is designed to bring together motivated individuals who share an interest in technology and innovation.</p></div></div></section><section class="source-ledger chapter" data-chapter="Explore"><div class="shell"><article class="source-ledger__row reveal" id="section-2"><span>02</span><div><h2>Who are Helvetic Tech students?</h2><p class="reveal">Helvetic Tech attracts individuals seeking a structured, technology-oriented education in an international context. Students come with different academic paths and experiences, but are united by a common objective: to develop relevant skills and prepare for evolving professional environments.</p></div></article><article class="source-ledger__row reveal" id="section-3"><span>03</span><div><h2>A focused learning environment</h2><p class="reveal">Students are actively involved in discussions, group work, and projects, allowing them to engage directly with the material and with each other.</p></div></article><article class="source-ledger__row reveal" id="section-4"><span>04</span><div><h2>Student support</h2><ul class="source-ledger__list reveal"><li>Academic guidance and program support</li><li>Assistance with accommodation and administrative processes</li><li>Access to faculty for academic and practical questions</li><li>A collaborative student environment</li></ul></div></article><article class="source-ledger__row reveal" id="section-5"><span>05</span><div><h2>Life beyond the classroom</h2><p class="reveal">Located on the shores of Lake Geneva, Helvetic Tech offers an environment that combines academic focus with quality of life.</p></div></article></div></section>',
+          'source' => 'https://www.helvetictech.ch/students',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'tools/program-matrix/',
+          'slug' => 'program-matrix',
+          'parentRoute' => 'tools/',
+          'title' => 'Program Matrix',
+          'description' => 'Compare up to three Helvetic Tech programs by study level, field, duration, credits, structure, tuition, and study format.',
+          'kind' => 'tool',
+          'mainClass' => 'decision-page decision-page--matrix',
+          'content' => '<section class="decision-hero" data-chapter="Program Matrix"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 02 · Program comparison</p><h1 class="reveal"><span>See the</span><em>Program Matrix.</em></h1><p class="reveal">Compare up to three Helvetic Tech programs by study level, field, duration, credits, structure, tuition, and study format.</p><small class="reveal">Select up to three programs. Differences are highlighted automatically.</small></div><div class="decision-visual decision-visual--matrix" aria-hidden="true"><span>PROGRAM / INPUT</span><div><b>AI</b><i style="--value:82%"></i><em>180</em></div><div><b>CY</b><i style="--value:68%"></i><em>120</em></div><div><b>BC</b><i style="--value:92%"></i><em>180</em></div><small>LIVE COMPARISON MATRIX</small></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/program-matrix/" aria-current="page"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">●</i></a><a href="{{home_url}}/tools/study-cost-model/"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">↗</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="matrix" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Select</strong><p>Choose one to three programs from the complete HIT catalogue.</p></div><div><span>02</span><strong>Compare</strong><p>Review level, duration, credits, format, tuition, and intakes.</p></div><div><span>03</span><strong>Continue</strong><p>Open the program page or carry your choice into the cost model.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
+          'source' => 'https://www.helvetictech.ch/dual-bachelors',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'tools/program-signal/',
+          'slug' => 'program-signal',
+          'parentRoute' => 'tools/',
+          'title' => 'Program Signal',
+          'description' => 'Answer three focused questions to identify the Helvetic Tech Bachelor or Master programs that best align with your academic stage and technology interests.',
+          'kind' => 'tool',
+          'mainClass' => 'decision-page decision-page--signal',
+          'content' => '<section class="decision-hero" data-chapter="Program Signal"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 01 · Program matching</p><h1 class="reveal"><span>Read your</span><em>Program Signal.</em></h1><p class="reveal">Answer three focused questions to identify the Helvetic Tech Bachelor or Master programs that best align with your academic stage and technology interests.</p><small class="reveal">A guided starting point — not an admissions decision.</small></div><div class="decision-visual decision-visual--signal" aria-hidden="true"><div class="signal-core"><span>HIT</span><i></i><i></i><i></i></div><b class="signal-node signal-node--one">AI</b><b class="signal-node signal-node--two">CY</b><b class="signal-node signal-node--three">BC</b><small>CALIBRATING DIRECTION</small></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/" aria-current="page"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">●</i></a><a href="{{home_url}}/tools/program-matrix/"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/study-cost-model/"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">↗</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="signal" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Academic stage</strong><p>Start with the study level that fits your current qualification.</p></div><div><span>02</span><strong>Technology field</strong><p>Choose the subject area that holds your attention.</p></div><div><span>03</span><strong>Problem type</strong><p>Refine the signal through the work you want to explore.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
+          'source' => 'https://www.helvetictech.ch/dual-bachelors',
+          'frontPage' => false,
+        ),
+        array(
+          'route' => 'tools/study-cost-model/',
+          'slug' => 'study-cost-model',
+          'parentRoute' => 'tools/',
+          'title' => 'Study Cost Model',
+          'description' => 'Build an indicative CHF study budget using Helvetic Tech tuition fees and published living-cost guidance.',
+          'kind' => 'tool',
+          'mainClass' => 'decision-page decision-page--cost',
+          'content' => '<section class="decision-hero" data-chapter="Study Cost Model"><div class="shell decision-hero__grid"><div class="decision-hero__copy"><p class="label reveal">Decision tool 03 · Study planning</p><h1 class="reveal"><span>Model your</span><em>Study costs.</em></h1><p class="reveal">Build an indicative CHF study budget using Helvetic Tech tuition fees and published living-cost guidance.</p><small class="reveal">Indicative planning only. Published fees and your own assumptions remain visible.</small></div><div class="decision-visual decision-visual--cost" aria-hidden="true"><span>PUBLISHED TUITION / TERM</span><div><small>BACHELOR</small><strong>6’850</strong><em>CHF</em></div><div><small>MASTER</small><strong>7’350</strong><em>CHF</em></div><i><b></b></i></div></div></section><nav class="tool-switcher" aria-label="Program decision tools"><div class="shell"><a href="{{home_url}}/tools/program-signal/"><span>01</span><strong>Program Signal</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/program-matrix/"><span>02</span><strong>Program Matrix</strong><i aria-hidden="true">↗</i></a><a href="{{home_url}}/tools/study-cost-model/" aria-current="page"><span>03</span><strong>Study Cost Model</strong><i aria-hidden="true">●</i></a></div></nav><section class="tool-stage chapter" data-chapter="Interactive tool"><div class="shell"><div class="hit-tool" data-hit-tool="cost" data-base="{{home_url}}/"><noscript><p class="tool-alert">Please enable JavaScript to use this interactive planning tool.</p></noscript></div><script type="application/json" data-hit-programs>[{"id":"bachelor-ai","level":"Bachelor","discipline":"ai","field":"Artificial Intelligence","number":"01","title":"Bachelor in Artificial Intelligence","award":"Bachelor of Science in Artificial Intelligence","href":"programs/bachelor-in-artificial-intelligence","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Build and apply intelligent systems using machine learning, neural networks, and generative AI."},{"id":"bachelor-cybersecurity","level":"Bachelor","discipline":"cyber","field":"Cybersecurity","number":"02","title":"Bachelor in Cybersecurity","award":"Bachelor of Science in Cybersecurity","href":"programs/bachelor-in-cybersecurity","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management."},{"id":"bachelor-blockchain","level":"Bachelor","discipline":"blockchain","field":"Blockchain","number":"03","title":"Bachelor in Blockchain","award":"Bachelor of Science in Blockchain","href":"programs/bachelor-in-blockchain","local":true,"duration":"3 years","years":3,"credits":"135 CH | 180 ECTS","terms":"9 academic terms","tuitionTerm":6850,"tuitionYear":20550,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts."},{"id":"master-ai","level":"Master","discipline":"ai","field":"Artificial Intelligence","number":"04","title":"Master in Artificial Intelligence","award":"Master of Science in Artificial Intelligence","href":"programs/master-in-artificial-intelligence","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced knowledge and practical expertise in AI and data-driven technologies."},{"id":"master-cybersecurity","level":"Master","discipline":"cyber","field":"Cybersecurity","number":"05","title":"Master in Cybersecurity","award":"Master of Science in Cybersecurity","href":"programs/master-in-cybersecurity","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments."},{"id":"master-blockchain","level":"Master","discipline":"blockchain","field":"Blockchain","number":"06","title":"Master in Blockchain","award":"Master of Science in Blockchain","href":"programs/master-in-blockchain","local":true,"duration":"2 years","years":2,"credits":"90 CH | 120 ECTS","terms":"6 academic terms","tuitionTerm":7350,"tuitionYear":22050,"intakes":"September · January · April","mode":"Blended (on campus + online)","location":"La Tour-de-Peilz, Lake Geneva, Switzerland","signal":"Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications."}]</script></div></section><section class="tool-method chapter" data-chapter="How it works"><div class="shell"><div class="tool-method__head reveal"><p class="label">How it works</p><h2><span>Clear inputs.</span><em>Useful next steps.</em></h2></div><div class="tool-method__grid"><div><span>01</span><strong>Introduce your plan</strong><p>Share the program, intake, and contact details needed for your estimate.</p></div><div><span>02</span><strong>Shape living costs</strong><p>Adjust accommodation, insurance, food, transport, and personal costs.</p></div><div><span>03</span><strong>Receive the estimate</strong><p>Keep a finished PDF copy and continue the conversation with Admissions.</p></div></div><p class="tool-source-note">Program and fee information follows the published Helvetic Tech program and Fees &amp; Expenses pages. Confirm current figures with Admissions before making a financial commitment.</p></div></section><section class="decision-tools-band chapter" data-chapter="Decision tools"><div class="shell"><div class="decision-tools-band__head reveal"><p class="label">Decision tools</p><h2><span>Move from interest</span><em>to a clear plan.</em></h2><p>Match your direction, compare the details, then model the published study costs in CHF.</p></div><div class="decision-tools-grid"><a class="decision-tool-card decision-tool-card--signal reveal" href="{{home_url}}/tools/program-signal/"><span>01 · Match</span><strong>Program Signal</strong><p>Three focused questions produce a ranked HIT program shortlist.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--matrix reveal" href="{{home_url}}/tools/program-matrix/"><span>02 · Compare</span><strong>Program Matrix</strong><p>Place up to three programs side by side and expose the differences.</p><i aria-hidden="true">↗</i></a><a class="decision-tool-card decision-tool-card--cost reveal" href="{{home_url}}/tools/study-cost-model/"><span>03 · Plan</span><strong>Study Cost Model</strong><p>Build an indicative CHF scenario from published tuition and living costs.</p><i aria-hidden="true">↗</i></a></div></div></section>',
+          'source' => 'https://www.helvetictech.ch/financing/fees-expenses',
+          'frontPage' => false,
+        ),
+      );
+		case 'programs':
+			return array(
+        array(
+          'id' => 'bachelor-ai',
+          'level' => 'Bachelor',
+          'discipline' => 'ai',
+          'field' => 'Artificial Intelligence',
+          'number' => '01',
+          'title' => 'Bachelor in Artificial Intelligence',
+          'award' => 'Bachelor of Science in Artificial Intelligence',
+          'href' => 'programs/bachelor-in-artificial-intelligence',
+          'local' => true,
+          'duration' => '3 years',
+          'years' => 3,
+          'credits' => '135 CH | 180 ECTS',
+          'terms' => '9 academic terms',
+          'tuitionTerm' => 6850,
+          'tuitionYear' => 20550,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Build and apply intelligent systems using machine learning, neural networks, and generative AI.',
+          'route' => 'programs/bachelor-in-artificial-intelligence/',
+        ),
+        array(
+          'id' => 'bachelor-cybersecurity',
+          'level' => 'Bachelor',
+          'discipline' => 'cyber',
+          'field' => 'Cybersecurity',
+          'number' => '02',
+          'title' => 'Bachelor in Cybersecurity',
+          'award' => 'Bachelor of Science in Cybersecurity',
+          'href' => 'programs/bachelor-in-cybersecurity',
+          'local' => true,
+          'duration' => '3 years',
+          'years' => 3,
+          'credits' => '135 CH | 180 ECTS',
+          'terms' => '9 academic terms',
+          'tuitionTerm' => 6850,
+          'tuitionYear' => 20550,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Protect digital systems, networks, and data through threat analysis, cyber defence, and risk management.',
+          'route' => 'programs/bachelor-in-cybersecurity/',
+        ),
+        array(
+          'id' => 'bachelor-blockchain',
+          'level' => 'Bachelor',
+          'discipline' => 'blockchain',
+          'field' => 'Blockchain',
+          'number' => '03',
+          'title' => 'Bachelor in Blockchain',
+          'award' => 'Bachelor of Science in Blockchain',
+          'href' => 'programs/bachelor-in-blockchain',
+          'local' => true,
+          'duration' => '3 years',
+          'years' => 3,
+          'credits' => '135 CH | 180 ECTS',
+          'terms' => '9 academic terms',
+          'tuitionTerm' => 6850,
+          'tuitionYear' => 20550,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Design decentralized systems through blockchain architecture, cryptographic principles, and smart contracts.',
+          'route' => 'programs/bachelor-in-blockchain/',
+        ),
+        array(
+          'id' => 'master-ai',
+          'level' => 'Master',
+          'discipline' => 'ai',
+          'field' => 'Artificial Intelligence',
+          'number' => '04',
+          'title' => 'Master in Artificial Intelligence',
+          'award' => 'Master of Science in Artificial Intelligence',
+          'href' => 'programs/master-in-artificial-intelligence',
+          'local' => true,
+          'duration' => '2 years',
+          'years' => 2,
+          'credits' => '90 CH | 120 ECTS',
+          'terms' => '6 academic terms',
+          'tuitionTerm' => 7350,
+          'tuitionYear' => 22050,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Develop advanced knowledge and practical expertise in AI and data-driven technologies.',
+          'route' => 'programs/master-in-artificial-intelligence/',
+        ),
+        array(
+          'id' => 'master-cybersecurity',
+          'level' => 'Master',
+          'discipline' => 'cyber',
+          'field' => 'Cybersecurity',
+          'number' => '05',
+          'title' => 'Master in Cybersecurity',
+          'award' => 'Master of Science in Cybersecurity',
+          'href' => 'programs/master-in-cybersecurity',
+          'local' => true,
+          'duration' => '2 years',
+          'years' => 2,
+          'credits' => '90 CH | 120 ECTS',
+          'terms' => '6 academic terms',
+          'tuitionTerm' => 7350,
+          'tuitionYear' => 22050,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Develop advanced expertise in protecting digital systems, networks, and data in complex threat environments.',
+          'route' => 'programs/master-in-cybersecurity/',
+        ),
+        array(
+          'id' => 'master-blockchain',
+          'level' => 'Master',
+          'discipline' => 'blockchain',
+          'field' => 'Blockchain',
+          'number' => '06',
+          'title' => 'Master in Blockchain',
+          'award' => 'Master of Science in Blockchain',
+          'href' => 'programs/master-in-blockchain',
+          'local' => true,
+          'duration' => '2 years',
+          'years' => 2,
+          'credits' => '90 CH | 120 ECTS',
+          'terms' => '6 academic terms',
+          'tuitionTerm' => 7350,
+          'tuitionYear' => 22050,
+          'intakes' => 'September · January · April',
+          'mode' => 'Blended (on campus + online)',
+          'location' => 'La Tour-de-Peilz, Lake Geneva, Switzerland',
+          'signal' => 'Develop advanced skills in blockchain systems, cryptographic protocols, and decentralized applications.',
+          'route' => 'programs/master-in-blockchain/',
+        ),
+      );
+		case 'intakes':
+			return array(
+        array(
+          'title' => 'January',
+          'order' => 1,
+        ),
+        array(
+          'title' => 'April',
+          'order' => 2,
+        ),
+        array(
+          'title' => 'September',
+          'order' => 3,
+        ),
+      );
+		default:
+			return array();
+	}
 }

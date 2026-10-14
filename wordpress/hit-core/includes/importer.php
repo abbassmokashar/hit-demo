@@ -3,19 +3,22 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 function hit_core_starter_data( $name ) {
-	$name = sanitize_file_name( $name );
-	if ( function_exists( 'hit_core_embedded_starter_data' ) ) {
-		$data = hit_core_embedded_starter_data( $name );
-		if ( is_array( $data ) && $data ) return $data;
-	}
+	$name = (string) $name;
+	if ( ! in_array( $name, array( 'pages', 'programs', 'intakes' ), true ) ) return array();
 	$php_file = HIT_CORE_DIR . 'starter-data/' . $name . '.php';
-	if ( is_readable( $php_file ) ) {
+	if ( file_exists( $php_file ) ) {
 		$data = require $php_file;
-		if ( is_array( $data ) ) return $data;
+		if ( is_array( $data ) && ! empty( $data ) ) return $data;
+	}
+	if ( function_exists( 'hit_core_bundled_starter_data' ) ) {
+		$data = hit_core_bundled_starter_data( $name );
+		if ( is_array( $data ) && ! empty( $data ) ) return $data;
 	}
 	$json_file = HIT_CORE_DIR . 'starter-data/' . $name . '.json';
-	if ( ! is_readable( $json_file ) ) return array();
-	$data = json_decode( (string) file_get_contents( $json_file ), true );
+	if ( ! file_exists( $json_file ) ) return array();
+	$contents = file_get_contents( $json_file );
+	if ( false === $contents ) return array();
+	$data = json_decode( $contents, true );
 	return is_array( $data ) ? $data : array();
 }
 
@@ -39,7 +42,7 @@ function hit_core_import_starter_content( $refresh = false ) {
 	$route_ids = array();
 	$created = $updated = 0;
 	$errors = array();
-	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'The embedded HIT page data could not be loaded. Reinstall HIT Core 1.0.3 or later.' ) );
+	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'HIT Core ' . HIT_CORE_VERSION . ' loaded, but WordPress returned zero records from the native pages collection.' ) );
 	$public_routes = array_fill_keys( array_map( static function( $page ) { return (string) ( $page['route'] ?? '' ); }, $pages ), true );
 	foreach ( $pages as $page ) {
 		$parent_route = (string) ( $page['parentRoute'] ?? '' );
