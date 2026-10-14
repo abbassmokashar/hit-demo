@@ -3,9 +3,15 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 function hit_core_starter_data( $name ) {
-	$file = HIT_CORE_DIR . 'starter-data/' . sanitize_file_name( $name ) . '.json';
-	if ( ! is_readable( $file ) ) return array();
-	$data = json_decode( (string) file_get_contents( $file ), true );
+	$name = sanitize_file_name( $name );
+	$php_file = HIT_CORE_DIR . 'starter-data/' . $name . '.php';
+	if ( is_readable( $php_file ) ) {
+		$data = require $php_file;
+		if ( is_array( $data ) ) return $data;
+	}
+	$json_file = HIT_CORE_DIR . 'starter-data/' . $name . '.json';
+	if ( ! is_readable( $json_file ) ) return array();
+	$data = json_decode( (string) file_get_contents( $json_file ), true );
 	return is_array( $data ) ? $data : array();
 }
 
@@ -29,7 +35,7 @@ function hit_core_import_starter_content( $refresh = false ) {
 	$route_ids = array();
 	$created = $updated = 0;
 	$errors = array();
-	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'The bundled pages.json file could not be read or contained no pages.' ) );
+	if ( ! $pages ) return array( 'created' => 0, 'updated' => 0, 'pages' => 0, 'managed' => hit_core_managed_page_count(), 'programs' => hit_core_program_count(), 'errors' => array( 'The bundled PHP and JSON page data could not be loaded. Reinstall the complete HIT Core package.' ) );
 	$public_routes = array_fill_keys( array_map( static function( $page ) { return (string) ( $page['route'] ?? '' ); }, $pages ), true );
 	foreach ( $pages as $page ) {
 		$parent_route = (string) ( $page['parentRoute'] ?? '' );

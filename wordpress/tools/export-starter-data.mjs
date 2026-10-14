@@ -22,6 +22,27 @@ const decode = (value = '') => value
   .replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#039;', "'")
   .replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)));
 
+function phpValue(value, depth = 0) {
+  const indent = '  '.repeat(depth);
+  const next = '  '.repeat(depth + 1);
+  if (value === null) return 'null';
+  if (typeof value === 'boolean') return value ? 'true' : 'false';
+  if (typeof value === 'number') return Number.isFinite(value) ? String(value) : '0';
+  if (typeof value === 'string') return `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
+  if (Array.isArray(value)) {
+    if (!value.length) return 'array()';
+    return `array(\n${value.map(item => `${next}${phpValue(item, depth + 1)},`).join('\n')}\n${indent})`;
+  }
+  const entries = Object.entries(value);
+  if (!entries.length) return 'array()';
+  return `array(\n${entries.map(([key, item]) => `${next}${phpValue(key)} => ${phpValue(item, depth + 1)},`).join('\n')}\n${indent})`;
+}
+
+async function writeData(name, value) {
+  await writeFile(path.join(out, `${name}.json`), JSON.stringify(value, null, 2) + '\n');
+  await writeFile(path.join(out, `${name}.php`), `<?php\n/** Generated HIT starter data. */\nif ( ! defined( 'ABSPATH' ) ) exit;\nreturn ${phpValue(value)};\n`);
+}
+
 function localise(html, route) {
   return html.replace(/\b(href|src|data-preview)="([^"]+)"/g, (match, attr, value) => {
     if (/^(?:https?:|mailto:|tel:|#|data:|javascript:)/i.test(value)) return match;
@@ -56,8 +77,8 @@ pages.sort((a, b) => a.route.localeCompare(b.route));
 
 const programs = PROGRAMS.map(program => ({ ...program, route: `${program.href}/` }));
 const intakes = ['January', 'April', 'September'].map((title, index) => ({ title, order: index + 1 }));
-await writeFile(path.join(out, 'pages.json'), JSON.stringify(pages, null, 2) + '\n');
-await writeFile(path.join(out, 'programs.json'), JSON.stringify(programs, null, 2) + '\n');
-await writeFile(path.join(out, 'intakes.json'), JSON.stringify(intakes, null, 2) + '\n');
+await writeData('pages', pages);
+await writeData('programs', programs);
+await writeData('intakes', intakes);
 console.log(`Exported ${pages.length} pages, ${programs.length} programs and ${intakes.length} intakes.`);
 
