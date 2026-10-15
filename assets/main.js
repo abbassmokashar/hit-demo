@@ -379,6 +379,7 @@
     });
 
     onScroll(() => {
+	  nav.classList.toggle('is-mobile-visible', window.innerWidth > 760 || window.scrollY > 96);
       const line = window.innerHeight * 0.38;
       let active = 0;
       sections.forEach((section, index) => {

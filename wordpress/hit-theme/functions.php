@@ -2,7 +2,7 @@
 /** Theme bootstrap and WordPress integration. */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'HIT_THEME_VERSION', '1.0.1' );
+define( 'HIT_THEME_VERSION', '1.0.2' );
 require_once get_template_directory() . '/inc/class-hit-overlay-menu-walker.php';
 
 function hit_theme_setup() {
