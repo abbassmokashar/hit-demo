@@ -503,7 +503,7 @@ h1 em, h2 em {
 .card-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .card-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .card-grid--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.carousel { margin-bottom: clamp(40px, 5vw, 78px); }
+.carousel { margin-top: clamp(40px, 5vw, 72px); margin-bottom: clamp(40px, 5vw, 78px); }
 .carousel__head { display: flex; margin-bottom: 24px; align-items: flex-end; justify-content: space-between; gap: 30px; }
 .carousel__title { margin: 16px 0 0; font-size: clamp(1.6rem, 2.7vw, 2.8rem); }
 .carousel__nav { display: flex; gap: 8px; }
@@ -1295,6 +1295,10 @@ body[data-page="tool"] .chapter-rail { display: none; }
     padding-inline: 16px;
   }
   .home-facts__grid { grid-template-columns: 1fr; }
+	.carousel { margin-top: 46px; }
+	.carousel__head { display: grid; width: 100%; align-items: start; justify-content: stretch; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+	.carousel__head > div:first-child { min-width: 0; }
+	.carousel__nav { justify-self: end; }
   .home-fact,
   .home-fact:nth-child(2) { min-height: 96px; border-right: 0; border-bottom: 1px solid var(--line); }
   .home-fact:last-child { border-bottom: 0; }
