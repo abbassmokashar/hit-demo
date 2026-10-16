@@ -18,7 +18,7 @@
 	<div class="site-header__progress" aria-hidden="true"><span></span></div>
 	<div class="site-header__inner">
 		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="Helvetic Institute of Technology home"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/hit-logo.svg' ); ?>" width="150" height="60" alt="Helvetic Institute of Technology"></a>
-		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => 'nav', 'container_class' => 'desktop-nav', 'container_aria_label' => 'Primary navigation', 'items_wrap' => '<div>%3$s</div>', 'fallback_cb' => false, 'depth' => 1 ) ); ?>
+		<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => 'nav', 'container_class' => 'desktop-nav', 'container_aria_label' => 'Primary navigation', 'items_wrap' => '<ul>%3$s</ul>', 'fallback_cb' => false, 'depth' => 1 ) ); ?>
 		<div class="header-actions"><a class="header-brochure" href="https://t8d78.share.hsforms.com/2VJF0JmhFQgusDgsBs8zfNw">Request brochure</a><a class="header-cta" href="https://share.hsforms.com/1OGo_OEgxTdC1v8Kyd8_WtAt8d78" data-magnetic data-cursor="Apply">Apply <span aria-hidden="true">↗</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-open><span>Menu</span><b aria-hidden="true"><i></i><i></i></b></button></div>
 	</div>
 </header>

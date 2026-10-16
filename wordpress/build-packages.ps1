@@ -5,9 +5,9 @@ $PackageDist = Join-Path $PackageRoot 'dist'
 New-Item -ItemType Directory -Force -Path $PackageDist | Out-Null
 
 $packages = @(
-    @{ Folder = 'hit-theme'; Version = '1.0.3' },
-    @{ Folder = 'hit-child'; Version = '1.0.1' },
-    @{ Folder = 'hit-core'; Version = '1.0.5' }
+    @{ Folder = 'hit-theme'; Version = '1.0.4' },
+    @{ Folder = 'hit-child'; Version = '1.0.2' },
+    @{ Folder = 'hit-core'; Version = '1.0.6' }
 )
 
 function New-FileOnlyZip {

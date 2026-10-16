@@ -2,7 +2,7 @@
 /**
  * Plugin Name: HIT Core
  * Description: Content model, page sections, starter import, program tools and admissions enquiries for Helvetic Tech.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Requires at least: 6.6
  * Requires PHP: 8.1
  * Author: Helvetic Institute of Technology
@@ -11,7 +11,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'HIT_CORE_VERSION', '1.0.5' );
+define( 'HIT_CORE_VERSION', '1.0.6' );
 define( 'HIT_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HIT_CORE_URL', plugin_dir_url( __FILE__ ) );
 

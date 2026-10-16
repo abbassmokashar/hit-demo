@@ -45,11 +45,21 @@ async function writeData(name, value) {
 }
 
 function localise(html, route) {
+  const localUrl = (value) => {
+    if (/^(?:https?:|mailto:|tel:|#|data:|javascript:)/i.test(value)) return value;
+    const url = new URL(value, `https://hit.local/${route}`);
+    if (url.pathname.startsWith('/assets/')) return `{{theme_url}}${url.pathname}${url.search}${url.hash}`;
+    return `{{home_url}}${url.pathname}${url.search}${url.hash}`;
+  };
   return html.replace(/\b(href|src|data-preview)="([^"]+)"/g, (match, attr, value) => {
     if (/^(?:https?:|mailto:|tel:|#|data:|javascript:)/i.test(value)) return match;
-    const url = new URL(value, `https://hit.local/${route}`);
-    if (url.pathname.startsWith('/assets/')) return `${attr}="{{theme_url}}${url.pathname}${url.search}${url.hash}"`;
-    return `${attr}="{{home_url}}${url.pathname}${url.search}${url.hash}"`;
+    return `${attr}="${localUrl(value)}"`;
+  }).replace(/\bsrcset="([^"]+)"/g, (match, value) => {
+    const sources = value.split(',').map((source) => {
+      const [, url = '', descriptor = ''] = source.trim().match(/^(\S+)(?:\s+(.+))?$/) || [];
+      return `${localUrl(url)}${descriptor ? ` ${descriptor}` : ''}`;
+    });
+    return `srcset="${sources.join(', ')}"`;
   }).replace(/data-base="[^"]*"/g, 'data-base="{{home_url}}/"');
 }
 

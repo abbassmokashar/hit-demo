@@ -2,7 +2,7 @@
 /** Theme bootstrap and WordPress integration. */
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'HIT_THEME_VERSION', '1.0.3' );
+define( 'HIT_THEME_VERSION', '1.0.4' );
 require_once get_template_directory() . '/inc/class-hit-overlay-menu-walker.php';
 
 function hit_theme_setup() {
@@ -22,8 +22,7 @@ add_action( 'after_setup_theme', 'hit_theme_setup' );
 
 function hit_theme_assets() {
 	$uri = get_template_directory_uri();
-	wp_enqueue_style( 'hit-fonts', 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap', array(), null );
-	wp_enqueue_style( 'hit-main', $uri . '/assets/styles.css', array( 'hit-fonts' ), HIT_THEME_VERSION );
+	wp_enqueue_style( 'hit-main', $uri . '/assets/styles.css', array(), HIT_THEME_VERSION );
 	wp_enqueue_script( 'hit-main', $uri . '/assets/main.js', array(), HIT_THEME_VERSION, true );
 
 	$programs = function_exists( 'hit_core_programs_for_tools' ) ? hit_core_programs_for_tools() : array();
@@ -61,6 +60,36 @@ function hit_theme_content_tokens( $content ) {
 			$content
 		);
 	}
+
+	// Keep previously imported managed pages fast without requiring a destructive re-import.
+	$responsive_images = array(
+		'official-community' => array( 'width' => 2200, 'height' => 1238, 'variants' => array( 640, 960, 1280, 1600 ), 'sizes' => '100vw' ),
+		'discipline-ai' => array( 'width' => 1024, 'height' => 684, 'variants' => array( 480, 768 ), 'sizes' => '(max-width: 719px) calc(100vw - 36px), (max-width: 1100px) 62vw, 28vw' ),
+		'discipline-cyber' => array( 'width' => 1024, 'height' => 684, 'variants' => array( 480, 768 ), 'sizes' => '(max-width: 719px) calc(100vw - 36px), (max-width: 1100px) 62vw, 28vw' ),
+		'discipline-blockchain' => array( 'width' => 1024, 'height' => 768, 'variants' => array( 480, 768 ), 'sizes' => '(max-width: 719px) calc(100vw - 36px), (max-width: 1100px) 62vw, 28vw' ),
+	);
+	$content = preg_replace_callback(
+		'#<img\b[^>]*\bsrc=(["\'])([^"\']*/assets/images/([^/"\']+)\.webp)\1[^>]*>#i',
+		static function( $match ) use ( $responsive_images ) {
+			$name = $match[3];
+			if ( ! isset( $responsive_images[ $name ] ) || false !== stripos( $match[0], ' srcset=' ) ) return $match[0];
+			$image = $responsive_images[ $name ];
+			$base = untrailingslashit( get_template_directory_uri() ) . '/assets/images/';
+			$sources = array();
+			foreach ( $image['variants'] as $variant ) $sources[] = $base . $name . '-' . $variant . '.webp ' . $variant . 'w';
+			$sources[] = $base . $name . '.webp ' . $image['width'] . 'w';
+			$attributes = ' width="' . $image['width'] . '" height="' . $image['height'] . '" srcset="' . esc_attr( implode( ', ', $sources ) ) . '" sizes="' . esc_attr( $image['sizes'] ) . '"';
+			return preg_replace( '/\s*\/>$|>$/', $attributes . '>', $match[0] );
+		},
+		$content
+	);
+
+	// Lighthouse rejects tabpanel roles on article elements. Normalise legacy imports at render time.
+	$content = preg_replace_callback(
+		'#<article(\s+role="tabpanel"\s+data-panel="(?:housing|lake|lifestyle)"[^>]*)>([\s\S]*?)</article>#i',
+		static function( $match ) { return '<div class="location-panel"' . $match[1] . '>' . $match[2] . '</div>'; },
+		$content
+	);
 	return $content;
 }
 add_filter( 'the_content', 'hit_theme_content_tokens', 4 );
